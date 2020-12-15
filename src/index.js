@@ -28,6 +28,7 @@ import { SearchForm } from './components/pages/search';
 import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
+import CustomerDashboardContainer from './components/pages/CustomerDashboard/CustomerDashboardContainer';
 //import pet component
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -68,22 +69,28 @@ function App() {
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/register" component={Registration} />
-          <SecureRoute
-            path="/customer-dashboard/groomers/:id"
-            component={GroomerDisplay}
-          />
-          <SecureRoute
-            path="/customer-dashboard/groomers"
-            component={SearchForm}
-          />
-          <SecureRoute
-            path="/customer-dashboard/pets"
-            component={
-              {
-                /*PetCard*/
+          <CustomerDashboardContainer>
+            <SecureRoute
+              path="/customer-dashboard/groomers/:id"
+              component={GroomerDisplay}
+            />
+            <SecureRoute
+              path="/customer-dashboard/groomers"
+              component={SearchForm}
+            />
+            <SecureRoute
+              path="/customer-dashboard/pets"
+              component={
+                {
+                  /*PetCard*/
+                }
               }
-            }
-          />
+            />
+            <SecureRoute
+              path="/customer-dashboard"
+              component={CustomerDashboard}
+            />
+          </CustomerDashboardContainer>
           <SecureRoute
             path="/register/groomers"
             component={GroomerRegistration}
@@ -91,10 +98,6 @@ function App() {
           <SecureRoute
             path="/register/customers"
             component={CustomerRegistration}
-          />
-          <SecureRoute
-            path="/customer-dashboard"
-            component={CustomerDashboard}
           />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
           <Route path="/404" component={NotFoundPage} />
