@@ -64,7 +64,7 @@ const SearchForm = () => {
       {groomers &&
         groomers.length > 0 &&
         groomers.slice(minValue, maxValue).map(groomer => (
-          <Link to={`/groomers/${groomer.id}`}>
+          <Link to={`/customer-dashboard/groomers/${groomer.id}`}>
             <Card
               hoverable
               style={{
