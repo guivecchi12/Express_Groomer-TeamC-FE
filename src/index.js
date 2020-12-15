@@ -57,7 +57,6 @@ function App() {
   return (
     <div className="index-container">
       {/* Added features */}
-
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
