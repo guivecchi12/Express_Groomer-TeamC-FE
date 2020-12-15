@@ -28,6 +28,7 @@ import { SearchForm } from './components/pages/search';
 import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
+//import pet component
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -74,6 +75,14 @@ function App() {
           <SecureRoute
             path="/customer-dashboard/groomers"
             component={SearchForm}
+          />
+          <SecureRoute
+            path="/customer-dashboard/pets"
+            component={
+              {
+                /*PetCard*/
+              }
+            }
           />
           <SecureRoute
             path="/register/groomers"
