@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomerProfile } from '../../customers/CustomerProfile';
+import { CustomerProfile } from '../CustomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   PieChartOutlined,
