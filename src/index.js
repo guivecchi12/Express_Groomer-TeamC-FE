@@ -22,13 +22,13 @@ import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 // new imports
 import Registration from './components/pages/Registration/Registration';
-import GroomerRegistration from './components/pages/GroomerRegistration/GroomerRegistration';
-import CustomerRegistration from './components/pages/CustomerRegistration/CustomerRegistration';
-import CustomerDashboard from './components/pages/CustomerDashboard/CustomerDashboardContainer';
-import GroomerDashboard from './components/pages/GroomerDashboard/GroomerDashboardContainer';
+import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration';
+import CustomerRegistration from './components/customers/CustomerRegistration/CustomerRegistration';
+import CustomerDashboard from './components/customers/CustomerDashboard/CustomerDashboardContainer';
+import GroomerDashboard from './components/groomers/GroomerDashboard/GroomerDashboardContainer';
 import MyMap from './components/MyMap/MyMap';
 import { SearchForm } from './components/pages/search';
-import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
+import GroomerDisplay from './components/groomers/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
 
