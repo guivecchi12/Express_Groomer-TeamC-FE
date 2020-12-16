@@ -29,7 +29,10 @@ import GroomerDashboard from './components/pages/GroomerDashboard/GroomerDashboa
 import MyMap from './components/MyMap/MyMap';
 import { SearchForm } from './components/pages/search';
 import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
-import Home from './components/Home';
+import Footer from './components/Layouts/Footer';
+import Navigation from './components/Layouts/Navigation';
+// import Home from './components/Home';
+import RenderHomePage from './components/pages/Home/RenderHomePage';
 import './styles/UserProfile.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
@@ -57,11 +60,12 @@ function App() {
   return (
     <div className="index-container">
       {/* Added features */}
-
+      <Navigation />
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/home" component={Home} />
+          {/* <Route path="/home" component={Home} /> */}
+          <Route path="/home" component={RenderHomePage} />
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
@@ -86,6 +90,7 @@ function App() {
           <Redirect to="/404" />
         </Switch>
       </Security>
+      <Footer />
     </div>
   );
 }
