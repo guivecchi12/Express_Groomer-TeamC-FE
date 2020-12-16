@@ -1,5 +1,5 @@
 import React from 'react';
-import { GroomerProfile } from '../GroomerProfile';
+import { GroomerProfile } from '../../pages/GroomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   PieChartOutlined,
