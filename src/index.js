@@ -29,8 +29,8 @@ import GroomerDashboard from './components/pages/GroomerDashboard/GroomerDashboa
 import MyMap from './components/MyMap/MyMap';
 import { SearchForm } from './components/pages/search';
 import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
-import Footer from './components/Layouts/Footer';
-import Navigation from './components/Layouts/Navigation';
+// import Footer from './components/Layouts/Footer';
+// import Navigation from './components/Layouts/Navigation';
 // import Home from './components/Home';
 import RenderHomePage from './components/pages/Home/RenderHomePage';
 import './styles/UserProfile.css';
@@ -60,7 +60,7 @@ function App() {
   return (
     <div className="index-container">
       {/* Added features */}
-      <Navigation />
+      {/* <Navigation /> */}
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
@@ -90,7 +90,7 @@ function App() {
           <Redirect to="/404" />
         </Switch>
       </Security>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
