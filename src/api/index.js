@@ -21,7 +21,7 @@ import {
   UPDATE_GROOMER_START,
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
-} from './types';
+} from '../state/reducers/types';
 
 let groomersReq = `${process.env.REACT_APP_API_URI}/groomers`;
 let customersReq = `${process.env.REACT_APP_API_URI}/customers`;
