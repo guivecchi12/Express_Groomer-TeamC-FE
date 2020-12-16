@@ -167,6 +167,7 @@ const registerGroomer = (data, props) => dispatch => {
       props.history.push('/groomer-dashboard');
     })
     .catch(err => {
+      console.log(data);
       dispatch({ type: REGISTER_GROOMER_INFO_FAILURE, payload: err.message });
     });
 };

@@ -106,6 +106,7 @@ const SearchForm = () => {
   //   distance = (lngOut.abs)*(latOut.abs)/2;
   //   return distance;
   // }
+
   const filterDist = (lng, lat) => {
     groomers.map(groomer => {
       const groomLng = parseInt(groomer.longitude, 10);
@@ -116,6 +117,8 @@ const SearchForm = () => {
         (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
       );
       console.log(distance);
+      // check if dog and/or cat
+      // if not, filter to remove
       setGroomers(sorted);
     });
   };
@@ -212,6 +215,9 @@ const SearchForm = () => {
               ) : null;
             }}
           </Form.Item>
+
+          <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
+          <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
 
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
