@@ -8,7 +8,7 @@ import {
   UPDATE_GROOMER_START,
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
-} from '../../../api/types';
+} from '../types';
 
 const initialState = {
   groomer: {},

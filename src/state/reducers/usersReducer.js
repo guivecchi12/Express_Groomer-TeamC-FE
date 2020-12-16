@@ -2,7 +2,7 @@ import {
   GET_USER_INFO_START,
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_FAILURE,
-} from '../../api/types';
+} from './types';
 
 const initialState = {
   oktaUser: {},
