@@ -13,7 +13,6 @@ import SearchForm from '../search/SearchForm';
 const { Header, Content, Footer, Sider } = Layout;
 
 export const RenderCustomerDashboard = props => {
-  console.log(props);
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -26,19 +25,19 @@ export const RenderCustomerDashboard = props => {
           <Menu.Item
             key="1"
             icon={<PieChartOutlined />}
-            onClick={() => (props.viewHome, props.history.push('/test'))}
+            onClick={props.viewHome}
           >
-            Home
+            <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item
             key="2"
             icon={<UserOutlined />}
             onClick={props.viewGroomers}
           >
-            Search Groomers
+            <Link to="/customer-dashboard/groomers">Search Groomers</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<TeamOutlined />} onClick={props.viewPets}>
-            Pets
+            <Link to="/customer-dashboard/pets">Pets</Link>
           </Menu.Item>
           <Menu.Item
             key="4"

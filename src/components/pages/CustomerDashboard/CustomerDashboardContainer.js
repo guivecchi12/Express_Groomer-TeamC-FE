@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
 import { RenderCustomerDashboard } from './RenderCustomerDashboard';
 import { useOktaAuth } from '@okta/okta-react';
 
@@ -45,40 +44,19 @@ const CustomerDashboardContainer = () => {
   };
 
   return (
-    <>
-      <RenderCustomerDashboard
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-        home={home}
-        viewHome={viewHome}
-        profile={profile}
-        viewProfile={viewProfile}
-        groomers={groomers}
-        viewGroomers={viewGroomers}
-        pets={pets}
-        viewPets={viewPets}
-        authService={authService}
-      />
-      <Route
-        path="/test"
-        render={props => (
-          <RenderCustomerDashboard
-            collapsed={collapsed}
-            onCollapse={onCollapse}
-            home={home}
-            viewHome={viewHome}
-            profile={profile}
-            viewProfile={viewProfile}
-            groomers={groomers}
-            viewGroomers={viewGroomers}
-            pets={pets}
-            viewPets={viewPets}
-            authService={authService}
-            {...props}
-          />
-        )}
-      />
-    </>
+    <RenderCustomerDashboard
+      collapsed={collapsed}
+      onCollapse={onCollapse}
+      home={home}
+      viewHome={viewHome}
+      profile={profile}
+      viewProfile={viewProfile}
+      groomers={groomers}
+      viewGroomers={viewGroomers}
+      pets={pets}
+      viewPets={viewPets}
+      authService={authService}
+    />
   );
 };
 
