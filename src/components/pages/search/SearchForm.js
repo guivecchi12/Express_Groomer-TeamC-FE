@@ -3,7 +3,7 @@ import { Card, Pagination } from 'antd';
 import { getGroomerData } from '../../../api/index';
 import { Link } from 'react-router-dom';
 import GroomerDispaly from '../ProfileDisplay/GroomerDisplay';
-import GroomerDisplay from '../ProfileDisplay/GroomerDisplay';
+import GroomerDisplay from '../../groomers/GroomerDisplay';
 
 const cardDescription = {
   margin: '1px',
