@@ -13,6 +13,7 @@ import SearchForm from '../search/SearchForm';
 const { Header, Content, Footer, Sider } = Layout;
 
 export const RenderCustomerDashboard = props => {
+  console.log(props);
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
@@ -25,7 +26,7 @@ export const RenderCustomerDashboard = props => {
           <Menu.Item
             key="1"
             icon={<PieChartOutlined />}
-            onClick={props.viewHome}
+            onClick={() => (props.viewHome, props.history.push('/test'))}
           >
             Home
           </Menu.Item>

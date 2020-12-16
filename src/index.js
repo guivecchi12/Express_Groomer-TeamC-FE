@@ -88,7 +88,7 @@ function App() {
             />
             <SecureRoute
               path="/customer-dashboard"
-              component={CustomerDashboard}
+              render={props => <CustomerDashboard {...props} />}
             />
           </CustomerDashboardContainer>
           <SecureRoute
