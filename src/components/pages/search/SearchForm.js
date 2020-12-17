@@ -52,6 +52,28 @@ const tailLayoutForm = {
 };
 
 const { Meta } = Card;
+function distance(lat1, lon1, lat2, lon2, unit) {
+  var radlat1 = (Math.PI * lat1) / 180;
+  var radlat2 = (Math.PI * lat2) / 180;
+  var radlon1 = (Math.PI * lon1) / 180;
+  var radlon2 = (Math.PI * lon2) / 180;
+  var theta = lon1 - lon2;
+  var radtheta = (Math.PI * theta) / 180;
+  var dist =
+    Math.sin(radlat1) * Math.sin(radlat2) +
+    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  dist = Math.acos(dist);
+  dist = (dist * 180) / Math.PI;
+  dist = dist * 60 * 1.1515;
+  if (unit == 'K') {
+    dist = dist * 1.609344;
+  }
+  if (unit == 'N') {
+    dist = dist * 0.8684;
+  }
+  console.log('Distance function invoked', dist);
+  return dist;
+}
 
 const SearchForm = () => {
   const [name, setName] = useState('');
@@ -109,23 +131,46 @@ const SearchForm = () => {
 
   const filterDist = (lng, lat) => {
     console.log('LONG LAT?', lng, lat);
+    console.log('Groomer List', groomers);
+    let filtered = [];
     groomers.map(groomer => {
-      const groomLng = parseInt(groomer.longitude, 10);
-      const groomLat = parseInt(groomer.latitude, 10);
-      console.log(groomLat, groomLng);
-      const distance = (lng - groomLng + (lat - groomLat)) / 2;
-      groomer.distance = distance;
-      const sorted = [...groomers].sort(
-        (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
+      if (!groomer.latitude) {
+        groomer.latitude = -44.74325;
+        groomer.longitude = 168.550333;
+      }
+
+      // const groomLng = parseInt(groomer.longitude, 10);
+      // const groomLat = parseInt(groomer.latitude, 10);
+      const groomLng = parseFloat(groomer.longitude);
+      const groomLat = parseFloat(groomer.latitude);
+      console.log(
+        'Groomer Long/ Index',
+        typeof groomer.longitude,
+        groomers.indexOf(groomer)
       );
-      console.log('SORTED', sorted);
-      const filtered = sorted.slice(0, 3);
+      console.log('GroomLong and Lat', typeof groomLat, groomLng);
+      // const distance = (lng - groomLng + (lat - groomLat)) / 2;
+      // Is this the right forumlar for calculating distance?
+      let dist = distance(lng, lat, groomLng, groomLat, 'N');
+      groomer.distance = dist;
+      // const sorted = [...groomers].sort(
+      //   // (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
+      //   (a, b) => Math.abs(b.distance) - Math.abs(a.distance)
+      // );
+
+      filtered.push(groomer);
+      return filtered;
 
       // check if dog and/or cat
       // if not, filter to remove
-      setGroomers(filtered);
     });
-    console.log('groomers, updated?', groomers);
+    const sorted = filtered.sort(
+      // (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
+      (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
+    );
+    console.log('SORTED', sorted);
+    console.log('Filtered', filtered);
+    setGroomers(sorted.slice(0, 2));
   };
 
   const onFormFinish = values => {
@@ -156,7 +201,7 @@ const SearchForm = () => {
   };
   //for the form ^^^^
 
-  console.log(groomers);
+  // console.log(groomers);
 
   return (
     <div>
