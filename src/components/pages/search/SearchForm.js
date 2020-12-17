@@ -117,9 +117,11 @@ const SearchForm = () => {
         (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
       );
       console.log(distance);
+      const filtered = sorted.slice(0, 3);
+      console.log('FILTERED LOL', filtered);
       // check if dog and/or cat
       // if not, filter to remove
-      setGroomers(sorted);
+      setGroomers(filtered);
     });
   };
 
@@ -165,6 +167,10 @@ const SearchForm = () => {
           <Form.Item
             name="zip"
             label="Zip Code"
+            style={{
+              width: 720,
+              margin: 'auto',
+            }}
             rules={[
               {
                 required: true,
@@ -216,9 +222,6 @@ const SearchForm = () => {
             }}
           </Form.Item>
 
-          <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
-          <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
-
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               Submit
@@ -229,6 +232,8 @@ const SearchForm = () => {
             <Button type="link" htmlType="button" onClick={onFill}>
               Fill form
             </Button>
+            <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
+            <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
           </Form.Item>
         </Form>
       </div>
