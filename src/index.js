@@ -14,9 +14,7 @@ import {
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
 import { HomePage } from './components/pages/Home';
-import { ProfileListPage } from './components/pages/ProfileList';
 import { LoginPage } from './components/pages/Login';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
@@ -26,11 +24,12 @@ import GroomerRegistration from './components/pages/GroomerRegistration/GroomerR
 import CustomerRegistration from './components/pages/CustomerRegistration/CustomerRegistration';
 import CustomerDashboard from './components/pages/CustomerDashboard/CustomerDashboardContainer';
 import GroomerDashboard from './components/pages/GroomerDashboard/GroomerDashboardContainer';
-import MyMap from './components/MyMap/MyMap';
 import { SearchForm } from './components/pages/search';
 import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
+import CustomerDashboardContainer from './components/pages/CustomerDashboard/CustomerDashboardContainer';
+//import pet component
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -57,7 +56,6 @@ function App() {
   return (
     <div className="index-container">
       {/* Added features */}
-
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
@@ -70,18 +68,38 @@ function App() {
             exact
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
-          <SecureRoute path="/example-list" component={ExampleListPage} />{' '}
-          <SecureRoute path="/profile-list" component={ProfileListPage} />
           <SecureRoute path="/register" component={Registration} />
-          <SecureRoute path="/groomers/:id" component={GroomerDisplay} />
-          <SecureRoute path="/groomers" component={GroomerRegistration} />
-          <SecureRoute path="/customers" component={CustomerRegistration} />
+          <CustomerDashboardContainer>
+            <SecureRoute
+              path="/customer-dashboard/groomers/:id"
+              component={GroomerDisplay}
+            />
+            <SecureRoute
+              path="/customer-dashboard/groomers"
+              component={SearchForm}
+            />
+            <SecureRoute
+              path="/customer-dashboard/pets"
+              component={
+                {
+                  /*PetCard*/
+                }
+              }
+            />
+            <SecureRoute
+              path="/customer-dashboard"
+              render={props => <CustomerDashboard {...props} />}
+            />
+          </CustomerDashboardContainer>
           <SecureRoute
-            path="/customer-dashboard"
-            component={CustomerDashboard}
+            path="/register/groomers"
+            component={GroomerRegistration}
+          />
+          <SecureRoute
+            path="/register/customers"
+            component={CustomerRegistration}
           />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
-          <SecureRoute path="/googlemap-component" component={MyMap} />
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
         </Switch>

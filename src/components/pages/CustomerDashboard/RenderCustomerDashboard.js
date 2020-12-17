@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CustomerProfile } from '../CustomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -26,17 +27,17 @@ export const RenderCustomerDashboard = props => {
             icon={<PieChartOutlined />}
             onClick={props.viewHome}
           >
-            Home
+            <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item
             key="2"
             icon={<UserOutlined />}
             onClick={props.viewGroomers}
           >
-            Search Groomers
+            <Link to="/customer-dashboard/groomers">Search Groomers</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<TeamOutlined />} onClick={props.viewPets}>
-            Pets
+            <Link to="/customer-dashboard/pets">Pets</Link>
           </Menu.Item>
           <Menu.Item
             key="4"
