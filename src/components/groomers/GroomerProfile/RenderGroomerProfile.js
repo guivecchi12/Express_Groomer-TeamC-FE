@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Modal, Button, Breadcrumb, Form, Input } from 'antd';
-import MyMap from '../../../components/MyMap/MyMap';
+import MyMap from '../../MyMap/MyMap';
 import './style.css';
 
 const DemoBox = props => (
