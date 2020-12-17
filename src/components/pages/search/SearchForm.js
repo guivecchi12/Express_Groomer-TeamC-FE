@@ -108,31 +108,34 @@ const SearchForm = () => {
   // }
 
   const filterDist = (lng, lat) => {
+    console.log('LONG LAT?', lng, lat);
     groomers.map(groomer => {
       const groomLng = parseInt(groomer.longitude, 10);
       const groomLat = parseInt(groomer.latitude, 10);
       console.log(groomLat, groomLng);
       const distance = (lng - groomLng + (lat - groomLat)) / 2;
+      groomer.distance = distance;
       const sorted = [...groomers].sort(
         (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
       );
-      console.log(distance);
+      console.log('SORTED', sorted);
       const filtered = sorted.slice(0, 3);
-      console.log('FILTERED LOL', filtered);
+
       // check if dog and/or cat
       // if not, filter to remove
       setGroomers(filtered);
     });
+    console.log('groomers, updated?', groomers);
   };
 
   const onFormFinish = values => {
     setZipcode(values.zip);
-
+    console.log('On form Finish Fired');
     Geocode.fromAddress(values.zip).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         filterDist(lng, lat);
-        console.log(lat, lng, groomers);
+        console.log('LAT LONG AND THE GROOMERS?', lat, lng, groomers);
       },
       error => {
         console.error(error);
