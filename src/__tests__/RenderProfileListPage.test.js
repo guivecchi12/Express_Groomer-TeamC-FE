@@ -1,5 +1,5 @@
 import React from 'react';
-import RenderProfileListPage from '../components/pages/ProfileList/RenderProfileListPage';
+import RenderProfileListPage from '../components/ProfileList/RenderProfileListPage';
 import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 

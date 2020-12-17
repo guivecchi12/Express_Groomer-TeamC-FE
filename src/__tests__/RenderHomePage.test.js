@@ -1,4 +1,4 @@
-import RenderHomePage from '../components/pages/Home/RenderHomePage';
+import RenderHomePage from '../components/HomePage/RenderHomePage';
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from '@testing-library/react';

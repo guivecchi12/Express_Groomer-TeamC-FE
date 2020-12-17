@@ -8,7 +8,7 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 
-import SearchForm from '../../pages/search/SearchForm';
+import SearchForm from '../../search/SearchForm';
 const { Header, Content, Footer, Sider } = Layout;
 
 export const RenderCustomerDashboard = props => {

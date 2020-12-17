@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, waitFor } from '@testing-library/react';
-import { HomePage } from '../components/pages/Home';
+import { HomePage } from '../components/HomePage';
 import { LoadingComponent } from '../components/common';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
