@@ -238,7 +238,14 @@ const SearchForm = () => {
         </Form>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: '10px',
+          justifyContent: 'center',
+        }}
+      >
         {groomers.map(groomer => {
           return (
             <Card
