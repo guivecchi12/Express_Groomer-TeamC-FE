@@ -69,28 +69,32 @@ function App() {
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/register" component={Registration} />
-          <CustomerDashboardContainer>
-            <SecureRoute
-              path="/customer-dashboard/groomers/:id"
-              component={GroomerDisplay}
-            />
-            <SecureRoute
-              path="/customer-dashboard/groomers"
-              component={SearchForm}
-            />
-            <SecureRoute
-              path="/customer-dashboard/pets"
-              component={
-                {
-                  /*PetCard*/
-                }
-              }
-            />
-            <SecureRoute
-              path="/customer-dashboard"
-              render={props => <CustomerDashboard {...props} />}
-            />
-          </CustomerDashboardContainer>
+          <SecureRoute
+            path="/customer-dashboard/groomers/:id"
+            render={props => (
+              <CustomerDashboardContainer>
+                <GroomerDisplay />
+              </CustomerDashboardContainer>
+            )}
+          />
+          <SecureRoute
+            path="/customer-dashboard/groomers"
+            render={props => (
+              <CustomerDashboardContainer>
+                <SearchForm />
+              </CustomerDashboardContainer>
+            )}
+          />
+          <SecureRoute
+            path="/customer-dashboard/pets"
+            render={props => (
+              <CustomerDashboardContainer>"Pets"</CustomerDashboardContainer>
+            )}
+          />
+          <SecureRoute
+            path="/customer-dashboard"
+            render={props => <CustomerDashboard {...props} />}
+          />
           <SecureRoute
             path="/register/groomers"
             component={GroomerRegistration}
