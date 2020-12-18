@@ -74,7 +74,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   if (unit == 'N') {
     dist = dist * 0.8684;
   }
-  console.log('Distance function invoked', dist);
+
   return dist;
 }
 
@@ -125,8 +125,6 @@ const SearchForm = () => {
   // }
 
   const filterDist = (lng, lat) => {
-    console.log('LONG LAT?', lng, lat);
-    console.log('Groomer List', groomers);
     let filtered = [];
     groomers.map(groomer => {
       if (!groomer.latitude) {
@@ -134,25 +132,13 @@ const SearchForm = () => {
         groomer.longitude = 168.550333;
       }
 
-      // const groomLng = parseInt(groomer.longitude, 10);
-      // const groomLat = parseInt(groomer.latitude, 10);
       const groomLng = parseFloat(groomer.longitude);
       const groomLat = parseFloat(groomer.latitude);
-      console.log(
-        'Groomer Long/ Index',
-        typeof groomer.longitude,
-        groomers.indexOf(groomer)
-      );
-      console.log('GroomLong and Lat', typeof groomLat, groomLng);
+
       // const distance = (lng - groomLng + (lat - groomLat)) / 2;
-      // Is this the right forumlar for calculating distance?
+
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
-      // const sorted = [...groomers].sort(
-      //   // (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
-      //   (a, b) => Math.abs(b.distance) - Math.abs(a.distance)
-      // );
-
       filtered.push(groomer);
       return filtered;
 
@@ -160,29 +146,23 @@ const SearchForm = () => {
       // if not, filter to remove
     });
     const sorted = filtered.sort(
-      // (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
       (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
     );
-    console.log('SORTED', sorted);
-    console.log('Filtered', filtered);
-    setGroomers(sorted.slice(0, 2));
+
+    setGroomers(sorted.slice(0, 3));
   };
 
   const onFormFinish = values => {
     setZipcode(values.zip);
-    console.log('On form Finish Fired');
     Geocode.fromAddress(values.zip).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         filterDist(lng, lat);
-        console.log('LAT LONG AND THE GROOMERS?', lat, lng, groomers);
       },
       error => {
         console.error(error);
       }
     );
-
-    console.log(values.zip);
   };
 
   const onReset = e => {
