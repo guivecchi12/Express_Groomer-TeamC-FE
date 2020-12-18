@@ -52,6 +52,8 @@ const tailLayoutForm = {
 };
 
 const { Meta } = Card;
+
+// Haversine Algorithm for Distance Mapping via Long/Lat
 function distance(lat1, lon1, lat2, lon2, unit) {
   var radlat1 = (Math.PI * lat1) / 180;
   var radlat2 = (Math.PI * lat2) / 180;
@@ -96,19 +98,11 @@ const SearchForm = () => {
   };
 
   useEffect(() => {
-    getGroomerData().then(response => {
-      setGroomers(response);
-      // Geocode.fromAddress(groomers.zip).then(
-      //   response => {
-      //     const { lat, lng } = response.results[0].geometry.location;
-      //     // filterLocation(lat, lng, latInput, lngInput);
-      //     console.log(lat, lng);
-      //   },
-      //   error => {
-      //     console.error(error);
-      //   }
-      // );
-    });
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
   }, []);
 
   //for the form, use the below to add a toggle option
@@ -190,8 +184,15 @@ const SearchForm = () => {
     console.log(values.zip);
   };
 
-  const onReset = () => {
+  const onReset = e => {
     form.resetFields();
+    e.preventDefault();
+    // added function from original useEffect hook to reset the groomers list upon button reset
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
   };
 
   const onFill = () => {
@@ -247,6 +248,7 @@ const SearchForm = () => {
 
           {/* ^^^^^ this is to set an option, maybe for pet breeds or options for services? */}
 
+          {/* Can we remove this Form item entirely for cleanup? */}
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) =>
@@ -318,6 +320,14 @@ const SearchForm = () => {
                 </p>
                 <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
                 <p style={cardDescription}>Address: {groomer.address}</p>
+                {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                {groomer.distance ? (
+                  <p style={cardDescription}>
+                    Distance (Miles): {Math.floor(groomer.distance)}
+                  </p>
+                ) : (
+                  ''
+                )}
                 <p style={cardDescription}>
                   {groomer.city}, {groomer.state} {groomer.zip}
                 </p>
