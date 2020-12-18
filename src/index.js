@@ -74,11 +74,7 @@ function App() {
           <SecureRoute path="/register" component={Registration} />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
-            render={props => (
-              <CustomerDashboardContainer>
-                <GroomerDisplay />
-              </CustomerDashboardContainer>
-            )}
+            render={props => <GroomerDisplay />}
           />
           <SecureRoute
             path="/customer-dashboard/groomers"
