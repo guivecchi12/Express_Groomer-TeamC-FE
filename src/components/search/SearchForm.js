@@ -15,7 +15,7 @@ import SkeletonButton from 'antd/lib/skeleton/Button';
 import Geocode from 'react-geocode';
 import { getGroomerData } from '../../api/index';
 
-Geocode.setApiKey('AIzaSyDvbprCrQ-zJnjwdimEwzJHO5LULTR_vtg');
+Geocode.setApiKey(process.env.MAP_API_KEY);
 Geocode.setLanguage('en');
 Geocode.setRegion('us');
 
@@ -181,9 +181,6 @@ const SearchForm = () => {
       zip: '44101',
     });
   };
-  //for the form ^^^^
-
-  // console.log(groomers);
 
   return (
     <div>
@@ -209,25 +206,6 @@ const SearchForm = () => {
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item
-        name="Example"
-        label="Example"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          placeholder="Use this to add options later"
-          onChange={onOptionChange}
-          allowClear
-        >
-          <Option value="example">example</Option>
-        </Select>
-      </Form.Item> */}
-
-          {/* ^^^^^ this is to set an option, maybe for pet breeds or options for services? */}
 
           {/* Can we remove this Form item entirely for cleanup? */}
           <Form.Item
