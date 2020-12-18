@@ -111,12 +111,14 @@ const SearchForm = () => {
     groomers.map(groomer => {
       const groomLng = parseInt(groomer.longitude, 10);
       const groomLat = parseInt(groomer.latitude, 10);
-      console.log(groomLat, groomLng);
+      console.log(lng, lat, groomLat, groomLng);
       const distance = (lng - groomLng + (lat - groomLat)) / 2;
+      console.log('distance = ' + distance);
       const sorted = [...groomers].sort(
         (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
       );
-      console.log(distance);
+
+      console.log(sorted);
       // check if dog and/or cat
       // if not, filter to remove
       setGroomers(sorted);
@@ -216,9 +218,6 @@ const SearchForm = () => {
             }}
           </Form.Item>
 
-          <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
-          <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
-
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
               Submit
@@ -229,6 +228,8 @@ const SearchForm = () => {
             <Button type="link" htmlType="button" onClick={onFill}>
               Fill form
             </Button>
+            <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
+            <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
           </Form.Item>
         </Form>
       </div>
