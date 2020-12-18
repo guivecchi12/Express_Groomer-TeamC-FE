@@ -11,8 +11,9 @@ import {
 } from 'antd';
 import SkeletonButton from 'antd/lib/skeleton/Button';
 // import { SearchPagination } from './SearchPagination.js';
-import { getGroomerData } from '../../../api/index';
+
 import Geocode from 'react-geocode';
+import { getGroomerData } from '../../api/index';
 
 Geocode.setApiKey('AIzaSyDvbprCrQ-zJnjwdimEwzJHO5LULTR_vtg');
 Geocode.setLanguage('en');
