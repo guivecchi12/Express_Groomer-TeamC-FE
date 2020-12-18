@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Field,
   Form,
@@ -15,7 +16,7 @@ import SkeletonButton from 'antd/lib/skeleton/Button';
 import Geocode from 'react-geocode';
 import { getGroomerData } from '../../api/index';
 
-Geocode.setApiKey(process.env.MAP_API_KEY);
+Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
 Geocode.setLanguage('en');
 Geocode.setRegion('us');
 
@@ -257,42 +258,44 @@ const SearchForm = () => {
       >
         {groomers.map(groomer => {
           return (
-            <Card
-              hoverable
-              style={{
-                width: 240,
-                margin: '10px',
-              }}
-              cover={<img alt="example" src={groomer.photo_url} />}
-            >
-              <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
-              <div
+            <Link key={groomer.id} to={`/groomers/${groomer.id}`}>
+              <Card
+                hoverable
                 style={{
-                  marginBottom: '1px',
+                  width: 240,
+                  margin: '10px',
                 }}
+                cover={<img alt="example" src={groomer.photo_url} />}
               >
-                <p style={cardDescription}>
-                  Vet Visit Rate: ${groomer.vet_visit_rate}
-                </p>
-                <p style={cardDescription}>
-                  Day Care Rate: ${groomer.day_care_rate}
-                </p>
-                <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
-                <p style={cardDescription}>Address: {groomer.address}</p>
-                {/* Conditional Render - when Distance is calculated, show the distance in miles */}
-                {groomer.distance ? (
+                <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
+                <div
+                  style={{
+                    marginBottom: '1px',
+                  }}
+                >
                   <p style={cardDescription}>
-                    Distance (Miles): {Math.floor(groomer.distance)}
+                    Vet Visit Rate: ${groomer.vet_visit_rate}
                   </p>
-                ) : (
-                  ''
-                )}
-                <p style={cardDescription}>
-                  {groomer.city}, {groomer.state} {groomer.zip}
-                </p>
-                <p style={cardDescription}>{groomer.country}</p>
-              </div>
-            </Card>
+                  <p style={cardDescription}>
+                    Day Care Rate: ${groomer.day_care_rate}
+                  </p>
+                  <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
+                  <p style={cardDescription}>Address: {groomer.address}</p>
+                  {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                  {groomer.distance ? (
+                    <p style={cardDescription}>
+                      Distance (Miles): {Math.floor(groomer.distance)}
+                    </p>
+                  ) : (
+                    ''
+                  )}
+                  <p style={cardDescription}>
+                    {groomer.city}, {groomer.state} {groomer.zip}
+                  </p>
+                  <p style={cardDescription}>{groomer.country}</p>
+                </div>
+              </Card>
+            </Link>
           );
         })}
       </div>
