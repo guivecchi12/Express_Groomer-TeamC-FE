@@ -11,7 +11,7 @@ function Page2() {
           <div className="title-line" />
         </div>
         <h2>
-          About <span>Express Groomers</span>
+          About <span>Express Groomer</span>
         </h2>
         <OverPack>
           <QueueAnim
@@ -20,16 +20,15 @@ function Page2() {
             leaveReverse
             className="page2-content"
           >
-            <p key="p" className="page-content">
+            {/* <p key="p" className="page-content">
               This is the about page：
-            </p>
+            </p> */}
             <div key="code1" className="home-code">
-              <div>This is the about page</div>
+              {/* <div>This is the about page</div> */}
               <div>
-                Our pet stylists make sure your pet is relaxed and enjoys the
-                grooming process, making it an experience they’ll look forward
-                to every time. Trained in animal behavior and pet healthcare so
-                that no detail is overlooked while we pamper and treat your pets
+                Our mission is to help you find the perfect groomer for you!
+                Find groomers near you that fit the needs of you and your dogs!
+                Set up appointments and pay all through Express Groomer!
               </div>
             </div>
           </QueueAnim>

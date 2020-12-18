@@ -38,8 +38,8 @@ function Banner(props) {
             style={{ transform: 'translateX(-64px)' }}
           />
         </div>
-        <h1 key="h1">Groomers Express</h1>
-        <p key="content">Please log in</p>
+        <h1 key="h1">Express Groomer</h1>
+        {/* <p key="content">Please log in</p> */}
         <div key="button" className="button-wrapper">
           {/* <Link to={path="/login"} component={LoginPage}>{user.name}} /> */}
           <Button type="primary" onClick={routeChange}>

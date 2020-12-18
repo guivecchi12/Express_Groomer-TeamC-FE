@@ -9,47 +9,47 @@ const { TweenOneGroup } = TweenOne;
 
 const featuresCN = [
   {
-    title: 'Grooming',
-    content: 'Customer Grooming',
+    title: 'In-Shop Dog Grooming',
+    content: 'You go to the groomer',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
   },
   {
-    title: 'Dogs',
-    content: 'K-9 Friends',
+    title: 'In-Home Dog Grooming',
+    content: 'Groomers come to you!',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/smwQOoxCjXVbNAKMqvWk.svg',
     color: '#2F54EB',
     shadowColor: 'rgba(47,84,235,.12)',
   },
   {
-    title: 'Cats',
-    content: 'Feline Friends',
+    title: 'Groomers',
+    content: 'Find the perfect groomer for you!',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg',
     color: '#F5222D',
     shadowColor: 'rgba(245,34,45,.12)',
   },
-  {
-    title: 'Immunizations',
-    content: 'Annual Immunization Checkups',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg',
-    color: '#1AC44D',
-    shadowColor: 'rgba(26,196,77,.12)',
-  },
-  {
-    title: 'Dental Exams',
-    content: '5 Start Dental Exams',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg',
-    color: '#FAAD14',
-    shadowColor: 'rgba(250,173,20,.12)',
-  },
-  {
-    title: 'Universal Care',
-    content: 'Universal Pet Insurance Accepted',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg',
-    color: '#722ED1',
-    shadowColor: 'rgba(114,46,209,.12)',
-  },
+  // {
+  //   title: 'Immunizations',
+  //   content: 'Annual Immunization Checkups',
+  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg',
+  //   color: '#1AC44D',
+  //   shadowColor: 'rgba(26,196,77,.12)',
+  // },
+  // {
+  //   title: 'Dental Exams',
+  //   content: '5 Start Dental Exams',
+  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg',
+  //   color: '#FAAD14',
+  //   shadowColor: 'rgba(250,173,20,.12)',
+  // },
+  // {
+  //   title: 'Universal Care',
+  //   content: 'Universal Pet Insurance Accepted',
+  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg',
+  //   color: '#722ED1',
+  //   shadowColor: 'rgba(114,46,209,.12)',
+  // },
 ];
 
 const pointPos = [
@@ -199,7 +199,7 @@ class Page1 extends React.PureComponent {
             </Parallax>
           )}
           <h2>
-            What can <span>Groomers Express</span> do for you{' '}
+            What can <span>Express Groomers</span> do for you{' '}
           </h2>
           <div className="title-line-wrapper page1-line">
             <div className="title-line" />
