@@ -12,10 +12,11 @@ import {
 } from 'antd';
 import SkeletonButton from 'antd/lib/skeleton/Button';
 // import { SearchPagination } from './SearchPagination.js';
-import { getGroomerData } from '../../../api/index';
-import Geocode from 'react-geocode';
 
-Geocode.setApiKey('AIzaSyDvbprCrQ-zJnjwdimEwzJHO5LULTR_vtg');
+import Geocode from 'react-geocode';
+import { getGroomerData } from '../../api/index';
+
+Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
 Geocode.setLanguage('en');
 Geocode.setRegion('us');
 
@@ -54,6 +55,30 @@ const tailLayoutForm = {
 
 const { Meta } = Card;
 
+// Haversine Algorithm for Distance Mapping via Long/Lat
+function distance(lat1, lon1, lat2, lon2, unit) {
+  var radlat1 = (Math.PI * lat1) / 180;
+  var radlat2 = (Math.PI * lat2) / 180;
+  var radlon1 = (Math.PI * lon1) / 180;
+  var radlon2 = (Math.PI * lon2) / 180;
+  var theta = lon1 - lon2;
+  var radtheta = (Math.PI * theta) / 180;
+  var dist =
+    Math.sin(radlat1) * Math.sin(radlat2) +
+    Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  dist = Math.acos(dist);
+  dist = (dist * 180) / Math.PI;
+  dist = dist * 60 * 1.1515;
+  if (unit == 'K') {
+    dist = dist * 1.609344;
+  }
+  if (unit == 'N') {
+    dist = dist * 0.8684;
+  }
+
+  return dist;
+}
+
 const SearchForm = () => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
@@ -75,19 +100,11 @@ const SearchForm = () => {
   };
 
   useEffect(() => {
-    getGroomerData().then(response => {
-      setGroomers(response);
-      // Geocode.fromAddress(groomers.zip).then(
-      //   response => {
-      //     const { lat, lng } = response.results[0].geometry.location;
-      //     // filterLocation(lat, lng, latInput, lngInput);
-      //     console.log(lat, lng);
-      //   },
-      //   error => {
-      //     console.error(error);
-      //   }
-      // );
-    });
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
   }, []);
 
   //for the form, use the below to add a toggle option
@@ -109,42 +126,55 @@ const SearchForm = () => {
   // }
 
   const filterDist = (lng, lat) => {
+    let filtered = [];
     groomers.map(groomer => {
-      const groomLng = parseInt(groomer.longitude, 10);
-      const groomLat = parseInt(groomer.latitude, 10);
-      console.log(lng, lat, groomLat, groomLng);
-      const distance = (lng - groomLng + (lat - groomLat)) / 2;
-      console.log('distance = ' + distance);
-      const sorted = [...groomers].sort(
-        (a, b) => b[Math.abs(distance)] - a[Math.abs(distance)]
-      );
+      if (!groomer.latitude) {
+        groomer.latitude = -44.74325;
+        groomer.longitude = 168.550333;
+      }
 
-      console.log(sorted);
+      const groomLng = parseFloat(groomer.longitude);
+      const groomLat = parseFloat(groomer.latitude);
+
+      // const distance = (lng - groomLng + (lat - groomLat)) / 2;
+
+      let dist = distance(lng, lat, groomLng, groomLat, 'N');
+      groomer.distance = dist;
+      filtered.push(groomer);
+      return filtered;
+
       // check if dog and/or cat
       // if not, filter to remove
-      setGroomers(sorted);
     });
+    const sorted = filtered.sort(
+      (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
+    );
+
+    setGroomers(sorted.slice(0, 3));
   };
 
   const onFormFinish = values => {
     setZipcode(values.zip);
-
     Geocode.fromAddress(values.zip).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         filterDist(lng, lat);
-        console.log(lat, lng, groomers);
       },
       error => {
         console.error(error);
       }
     );
-
-    console.log(values.zip);
   };
 
-  const onReset = () => {
+  const onReset = e => {
     form.resetFields();
+    e.preventDefault();
+    // added function from original useEffect hook to reset the groomers list upon button reset
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
   };
 
   const onFill = () => {
@@ -152,9 +182,6 @@ const SearchForm = () => {
       zip: '44101',
     });
   };
-  //for the form ^^^^
-
-  console.log(groomers);
 
   return (
     <div>
@@ -168,6 +195,10 @@ const SearchForm = () => {
           <Form.Item
             name="zip"
             label="Zip Code"
+            style={{
+              width: 720,
+              margin: 'auto',
+            }}
             rules={[
               {
                 required: true,
@@ -176,26 +207,8 @@ const SearchForm = () => {
           >
             <Input />
           </Form.Item>
-          {/* <Form.Item
-        name="Example"
-        label="Example"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          placeholder="Use this to add options later"
-          onChange={onOptionChange}
-          allowClear
-        >
-          <Option value="example">example</Option>
-        </Select>
-      </Form.Item> */}
 
-          {/* ^^^^^ this is to set an option, maybe for pet breeds or options for services? */}
-
+          {/* Can we remove this Form item entirely for cleanup? */}
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) =>
@@ -235,7 +248,14 @@ const SearchForm = () => {
         </Form>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', margin: '10px' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: '10px',
+          justifyContent: 'center',
+        }}
+      >
         {groomers.map(groomer => {
           return (
             <Link key={groomer.id} to={`/groomers/${groomer.id}`}>
@@ -261,6 +281,14 @@ const SearchForm = () => {
                   </p>
                   <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
                   <p style={cardDescription}>Address: {groomer.address}</p>
+                  {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                  {groomer.distance ? (
+                    <p style={cardDescription}>
+                      Distance (Miles): {Math.floor(groomer.distance)}
+                    </p>
+                  ) : (
+                    ''
+                  )}
                   <p style={cardDescription}>
                     {groomer.city}, {groomer.state} {groomer.zip}
                   </p>

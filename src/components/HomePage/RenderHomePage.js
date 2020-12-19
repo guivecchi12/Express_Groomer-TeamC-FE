@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '../../common';
+import { Button } from '../common';
 import './RenderHomePage.css';
 
 function RenderHomePage(props) {

@@ -8,7 +8,7 @@ import {
   UPDATE_CUSTOMER_START,
   UPDATE_CUSTOMER_SUCCESS,
   UPDATE_CUSTOMER_FAILURE,
-} from '../../../api/types';
+} from '../types';
 
 const initialState = {
   customer: {},

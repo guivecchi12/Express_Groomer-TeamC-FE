@@ -2,8 +2,8 @@ import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
-import { getUserData } from '../../../api/index.js';
-import { RegistrationForm } from '../Registration/';
+import { getUserData } from '../../api/index.js';
+import { RegistrationForm } from '../Registration';
 
 function HomeContainer(props) {
   const { authState, authService } = useOktaAuth();

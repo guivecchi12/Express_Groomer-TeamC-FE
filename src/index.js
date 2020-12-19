@@ -13,22 +13,21 @@ import {
 } from 'react-router-dom';
 import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 import 'antd/dist/antd.less';
-import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
-import { HomePage } from './components/pages/Home';
-import { ProfileListPage } from './components/pages/ProfileList';
-import { LoginPage } from './components/pages/Login';
+import { NotFoundPage } from './components/NotFound';
+import { HomePage } from './components/HomePage';
+import { ProfileListPage } from './components/ProfileList';
+import { LoginPage } from './components/Login';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 // new imports
-import Registration from './components/pages/Registration/Registration';
-import GroomerRegistration from './components/pages/GroomerRegistration/GroomerRegistration';
-import CustomerRegistration from './components/pages/CustomerRegistration/CustomerRegistration';
-import CustomerDashboard from './components/pages/CustomerDashboard/CustomerDashboardContainer';
-import GroomerDashboard from './components/pages/GroomerDashboard/GroomerDashboardContainer';
+import Registration from './components/Registration/Registration';
+import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration';
+import CustomerRegistration from './components/customers/CustomerRegistration/CustomerRegistration';
+import CustomerDashboard from './components/customers/CustomerDashboard/CustomerDashboardContainer';
+import GroomerDashboard from './components/groomers/GroomerDashboard/GroomerDashboardContainer';
 import MyMap from './components/MyMap/MyMap';
-import { SearchForm } from './components/pages/search';
-import GroomerDisplay from './components/pages/ProfileDisplay/GroomerDisplay';
+import { SearchForm } from './components/search';
+import GroomerDisplay from './components/groomers/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
 
@@ -70,7 +69,6 @@ function App() {
             exact
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
-          <SecureRoute path="/example-list" component={ExampleListPage} />{' '}
           <SecureRoute path="/profile-list" component={ProfileListPage} />
           <SecureRoute path="/register" component={Registration} />
           <SecureRoute path="/groomers/:id" component={GroomerDisplay} />
