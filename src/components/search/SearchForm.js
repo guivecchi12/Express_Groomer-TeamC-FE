@@ -78,12 +78,23 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
   return dist;
 }
-
+const groomersPerPage = 3;
 const SearchForm = () => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [groomers, setGroomers] = useState([]);
   const [form] = Form.useForm();
+  const [pageVals, setpageVals] = useState({
+    minVal: 0,
+    maxVal: groomersPerPage,
+  });
+
+  // const setVals = (min, max) => {
+  //   {
+  //     minVal = min
+  //     maxVal = max
+  //   }
+  // }
 
   const onFinish = values => {
     console.log('Success: groomers displayed', values);
@@ -106,24 +117,6 @@ const SearchForm = () => {
       })
       .catch(error => console.log(error));
   }, []);
-
-  //for the form, use the below to add a toggle option
-  // const onOptionChange = (value) => {
-  //   switch (value) {
-  //     case 'example':
-  //       form.setFieldsValue({
-  //         note: 'Leave a message here',
-  //       });
-  //       return;
-  //   }
-  // };
-
-  // function filterLocation(lat, lng, latInput, lngInput){
-  //   var latOut = latInput-lat;
-  //   var lngOut = lngInput-lng;
-  //   distance = (lngOut.abs)*(latOut.abs)/2;
-  //   return distance;
-  // }
 
   const filterDist = (lng, lat) => {
     let filtered = [];
@@ -194,6 +187,17 @@ const SearchForm = () => {
   const onFill = () => {
     form.setFieldsValue({
       zip: '44101',
+    });
+  };
+
+  // Pagination handler and base settings
+  // Variables can be adjusted for more items per page, etc.
+  // const groomersPerPage = 2
+
+  const onPageChange = value => {
+    setpageVals({
+      minVal: (value - 1) * groomersPerPage,
+      maxVal: value * groomersPerPage,
     });
   };
 
@@ -270,7 +274,9 @@ const SearchForm = () => {
           justifyContent: 'center',
         }}
       >
-        {groomers.map(groomer => {
+        {/* Slice on initial state, Paginate onChange updates the state and shifts the slice based on the page */}
+
+        {groomers.slice(pageVals.minVal, pageVals.maxVal).map(groomer => {
           return (
             <Link key={groomer.id} to={`/groomers/${groomer.id}`}>
               <Card
@@ -313,6 +319,12 @@ const SearchForm = () => {
           );
         })}
       </div>
+      <Pagination
+        defaultCurrent={1}
+        total={groomers.length}
+        pageSize={groomersPerPage}
+        onChange={onPageChange}
+      />
     </div>
   );
 };

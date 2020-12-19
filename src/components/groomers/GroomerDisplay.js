@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getGroomerInfo } from '../../../api/index';
+import { getGroomerInfo } from '../../api/index';
 import axios from 'axios';
 
 const GroomerDisplay = props => {
