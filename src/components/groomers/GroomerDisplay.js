@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getGroomerInfo } from '../../../api/index';
+import axios from 'axios';
 
 const GroomerDisplay = props => {
+  const [groomers, setGroomers] = useState([]);
+  const groomId = window.location.pathname.split('/groomers/').pop();
+
+  // const getGroomerProfile = (id) => {
+  //   return axios
+  //     .get(`${process.env.REACT_APP_API_URI}/groomers/${id}`)
+  //     .then(response => response.data)
+  //     .catch(err => console.log(err));
+  // };
+
+  // useEffect(() => {
+  //   getGroomerInfo(groomId).then(response => {
+  //     setGroomers(response);
+
+  //   });
+  // }, []);
+  console.log(getGroomerInfo(groomId));
+  console.log(groomId);
   return (
     // name, location, phone#, schedule
     <div className="profile-page">
