@@ -166,6 +166,20 @@ const SearchForm = () => {
     );
   };
 
+  // Function for Geolocation based on browser location API
+  const gelocateme = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        filterDist(long, lat);
+      });
+    } else {
+      document.getElementById('geoavail').textContent =
+        'Your current location is unavailable';
+    }
+  };
+
   const onReset = e => {
     form.resetFields();
     e.preventDefault();
@@ -239,8 +253,8 @@ const SearchForm = () => {
             <Button htmlType="button" onClick={onReset}>
               Reset
             </Button>
-            <Button type="link" htmlType="button" onClick={onFill}>
-              Fill form
+            <Button type="button" htmlType="button" onClick={gelocateme}>
+              Use My Location
             </Button>
             <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
             <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
