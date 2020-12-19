@@ -5,6 +5,11 @@ import Parallax from 'rc-scroll-anim/lib/ScrollParallax';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
 
+// import SearchForm
+import { SearchForm } from '../search';
+// import FormInput as a test to see if it will render on the page correctly
+import { FormInput } from '../common';
+
 const { TweenOneGroup } = TweenOne;
 
 const featuresCN = [
@@ -205,6 +210,10 @@ class Page1 extends React.PureComponent {
             <div className="title-line" />
           </div>
           <OverPack>{children}</OverPack>
+          {/* render SearchForm - it just renders groomer cards right now */}
+          {/* <SearchForm /> */}
+          {/* render FormInput as a test to see if it will render correctly */}
+          <FormInput />
         </div>
       </div>
     );
