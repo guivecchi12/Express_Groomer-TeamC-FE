@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
-// import Autocomplete from 'react-google-autocomplete';
 import { registerCustomer } from '../../../api/index';
 
 import './CustomerRegistration.css';
@@ -29,24 +28,21 @@ const CustomerRegistration = props => {
 
   const handleInputChange = event => {
     event.preventDefault();
-    //   getting name of input and value
+
     setUser({
       ...user,
-      // seting key to key-value pair
+
       [event.target.name]: event.target.value,
     });
   };
 
   return (
-    //   change user.state based on whats coming in input
-
     <div className="registration-container">
       <h1>Customer Registration</h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">Name: </label>
 
-        {/* use aria-invalid to indicate field contain error for screen reader users*/}
         <input
           type="text"
           id="name"
@@ -57,7 +53,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.name && errors.name.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -76,7 +71,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.lastname && errors.lastname.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -96,7 +90,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.phone && errors.phone.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -116,22 +109,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* todo maybe I can use this for the inputs as a stretch goal
-         <Autocomplete        
-          apiKey={process.env.REACT_APP_API_KEY}
-          style={{ width: '90%' }}
-          id="address"
-          onChange={handleInputChange}
-          aria-invalid={errors.address ? 'true' : 'false'}
-          ref={register({ required: true, maxLength: 30 })}
-          onPlaceSelected={(place) => {
-            console.log(place);
-          }}
-          types={['(regions)']}
-          componentRestrictions={{ address: user.address }}
-        /> */}
-
-        {/* use role="alert" to announce the error message */}
         {errors.address && errors.address.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -151,7 +128,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.city && errors.city.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -171,7 +147,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.state && errors.state.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -190,7 +165,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.country && errors.country.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -210,7 +184,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.zipcode && errors.zipcode.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -230,7 +203,6 @@ const CustomerRegistration = props => {
           ref={register({ required: true, maxLength: 300 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.description && errors.description.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -249,7 +221,6 @@ const CustomerRegistration = props => {
           ref={register({ required: false, maxLength: 300 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.photoUrl && errors.photoUrl.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
