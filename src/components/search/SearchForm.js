@@ -79,7 +79,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   return dist;
 }
 const groomersPerPage = 3;
-const SearchForm = () => {
+const SearchForm = props => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [groomers, setGroomers] = useState([]);
@@ -88,13 +88,6 @@ const SearchForm = () => {
     minVal: 0,
     maxVal: groomersPerPage,
   });
-
-  // const setVals = (min, max) => {
-  //   {
-  //     minVal = min
-  //     maxVal = max
-  //   }
-  // }
 
   const onFinish = values => {
     console.log('Success: groomers displayed', values);
@@ -192,7 +185,6 @@ const SearchForm = () => {
 
   // Pagination handler and base settings
   // Variables can be adjusted for more items per page, etc.
-  // const groomersPerPage = 2
 
   const onPageChange = value => {
     setpageVals({
