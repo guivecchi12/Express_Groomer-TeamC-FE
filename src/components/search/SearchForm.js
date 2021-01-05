@@ -25,7 +25,7 @@ const tailLayout = {
 
 const { Meta } = Card;
 
-const SearchForm = () => {
+const SearchForm = props => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
   const [groomers, setGroomers] = useState([]);
@@ -64,8 +64,12 @@ const SearchForm = () => {
       {groomers &&
         groomers.length > 0 &&
         groomers.slice(minValue, maxValue).map(groomer => (
-          <Link to={`/groomers/${groomer.id}`}>
+          <Link
+            onClick={props.viewGroomer}
+            to={`/customer-dashboard/groomers/${groomer.id}`}
+          >
             <Card
+              onClick={props.viewGroomer}
               hoverable
               style={{
                 width: 240,
