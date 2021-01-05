@@ -26,7 +26,8 @@ const GroomerDisplay = props => {
     <div className="profile-page">
       <h3>Groomer's Name</h3>
       <div className="profile-description">
-        <h4>About Me</h4>
+        <h4>About Me </h4>
+        <h4>User Id: {groomId}</h4>
         <p>This is where the description will go...</p>
         <ul>
           <h4>Contact: </h4>
