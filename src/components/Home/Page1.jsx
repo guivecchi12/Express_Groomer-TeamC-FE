@@ -206,9 +206,6 @@ class Page1 extends React.PureComponent {
           <h2>
             What can <span>Express Groomers</span> do for you{' '}
           </h2>
-          <div className="title-line-wrapper page1-line">
-            <div className="title-line" />
-          </div>
           <OverPack>{children}</OverPack>
           {/* render SearchForm - it just renders groomer cards right now */}
           {/* <SearchForm /> */}

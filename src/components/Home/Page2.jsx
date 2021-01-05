@@ -7,9 +7,6 @@ function Page2() {
   return (
     <div className="home-page page2">
       <div className="home-page-wrapper">
-        <div className="title-line-wrapper page2-line">
-          <div className="title-line" />
-        </div>
         <h2>
           About <span>Express Groomer</span>
         </h2>
