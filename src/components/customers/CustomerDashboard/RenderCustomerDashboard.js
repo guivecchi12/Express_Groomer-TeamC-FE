@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CustomerProfile } from '../CustomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import GroomerDisplay from '../../groomers/GroomerDisplay';
 import {
   PieChartOutlined,
   FileOutlined,
@@ -90,7 +91,7 @@ export const RenderCustomerDashboard = props => {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              <SearchForm />
+              <SearchForm viewGroomer={props.viewGroomer} />
             </div>
           </Content>
         </Layout>
@@ -112,6 +113,7 @@ export const RenderCustomerDashboard = props => {
           </Content>
         </Layout>
       )}
+      {props.groomer && <GroomerDisplay />}
     </Layout>
   );
 };

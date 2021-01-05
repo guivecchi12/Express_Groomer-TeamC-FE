@@ -7,6 +7,7 @@ const CustomerDashboardContainer = () => {
   const [home, setHome] = useState(true);
   const [profile, setProfile] = useState(false);
   const [groomers, setGroomers] = useState(false);
+  const [groomer, setGroomer] = useState(false);
   const [pets, setPets] = useState(false);
   const [groomer, setGroomer] = useState(false);
 
@@ -20,6 +21,7 @@ const CustomerDashboardContainer = () => {
     setProfile(false);
     setGroomers(false);
     setPets(false);
+    setGroomer(false);
     setHome(true);
     setGroomer(false);
   };
@@ -28,6 +30,7 @@ const CustomerDashboardContainer = () => {
     setHome(false);
     setGroomers(false);
     setPets(false);
+    setGroomer(false);
     setProfile(true);
     setGroomer(false);
   };
@@ -36,8 +39,17 @@ const CustomerDashboardContainer = () => {
     setHome(false);
     setProfile(false);
     setPets(false);
+    setGroomer(false);
     setGroomers(true);
     setGroomer(false);
+  };
+
+  const viewGroomer = () => {
+    setHome(false);
+    setProfile(false);
+    setPets(false);
+    setGroomers(false);
+    setGroomer(true);
   };
 
   const viewGroomer = () => {
@@ -67,6 +79,8 @@ const CustomerDashboardContainer = () => {
       groomers={groomers}
       groomer={groomer}
       viewGroomers={viewGroomers}
+      groomer={groomer}
+      viewGroomer={viewGroomer}
       pets={pets}
       viewPets={viewPets}
       authService={authService}
