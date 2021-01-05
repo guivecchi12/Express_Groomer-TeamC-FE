@@ -17,10 +17,27 @@ function Banner(props) {
 
   return (
     <div className="banner-wrapper">
+      {/* {props.isMobile && (
+        <TweenOne animation={{ opacity: 1 }} className="banner-image-wrapper">
+          <div className="home-banner-image">
+            <img
+              alt="banner"
+              src="https://gw.alipayobjects.com/zos/rmsportal/rqKQOpnMxeJKngVvulsF.svg"
+              width="100%"
+            />
+          </div>
+        </TweenOne>
+      )} */}
       <div
         className="banner-title-wrapper"
         type={props.isMobile ? 'bottom' : 'right'}
       >
+        {/* <div key="line" className="title-line-wrapper">
+          <div
+            className="title-line"
+            style={{ transform: 'translateX(-64px)' }}
+          />
+        </div> */}
         <h1 key="h1">Express Groomer</h1>
         {/* <p key="content">Please log in</p> */}
         <div key="button" className="button-wrapper">
@@ -30,7 +47,9 @@ function Banner(props) {
           </Button>
         </div>
       </div>
-      {!props.isMobile && <div className="banner-image-wrapper"></div>}
+      {!props.isMobile && (
+        <div className="banner-image-wrapper">{/* <BannerSVGAnim /> */}</div>
+      )}
     </div>
   );
 }
