@@ -75,7 +75,7 @@ const SearchForm = () => {
             >
               <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
               <div style={{ marginBottom: '1px' }}>
-                {GroomerDisplay(groomer)}# pass
+                {/* <GroomerDisplay groomer = {groomer}/> */}
                 <p style={cardDescription}>
                   Vet Visit Rate: ${groomer.vet_visit_rate}
                 </p>

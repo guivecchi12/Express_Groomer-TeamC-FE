@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomerDashboardContainer from '../customers/CustomerDashboard/CustomerDashboardContainer';
 const GroomerDisplay = props => {
-  // console.log(props)
+  console.log(props);
   return (
     // name, location, phone#, schedule
     <div className="profile-page">

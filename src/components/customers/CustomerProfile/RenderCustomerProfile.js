@@ -145,6 +145,13 @@ export const RenderCustomerProfile = props => {
               placeholder={props.customer.photo_url}
             />
           </Form.Item>
+          <Form.Item label="About" name="about">
+            <Input
+              name="description"
+              onChange={handleChange}
+              placeholder={props.customer.description}
+            />
+          </Form.Item>
         </form>
       </Modal>
       <Breadcrumb style={{ margin: '16px 0', marginBottom: '24px' }}>

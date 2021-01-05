@@ -8,6 +8,7 @@ const CustomerDashboardContainer = () => {
   const [profile, setProfile] = useState(false);
   const [groomers, setGroomers] = useState(false);
   const [pets, setPets] = useState(false);
+  const [groomer, setGroomer] = useState(false);
 
   const { authService } = useOktaAuth();
 
@@ -20,6 +21,7 @@ const CustomerDashboardContainer = () => {
     setGroomers(false);
     setPets(false);
     setHome(true);
+    setGroomer(false);
   };
 
   const viewProfile = () => {
@@ -27,6 +29,7 @@ const CustomerDashboardContainer = () => {
     setGroomers(false);
     setPets(false);
     setProfile(true);
+    setGroomer(false);
   };
 
   const viewGroomers = () => {
@@ -34,12 +37,22 @@ const CustomerDashboardContainer = () => {
     setProfile(false);
     setPets(false);
     setGroomers(true);
+    setGroomer(false);
+  };
+
+  const viewGroomer = () => {
+    setHome(false);
+    setProfile(false);
+    setPets(false);
+    setGroomers(false);
+    setGroomer(true);
   };
 
   const viewPets = () => {
     setHome(false);
     setProfile(false);
     setGroomers(false);
+    setGroomer(false);
     setPets(true);
   };
 
@@ -52,6 +65,7 @@ const CustomerDashboardContainer = () => {
       profile={profile}
       viewProfile={viewProfile}
       groomers={groomers}
+      groomer={groomer}
       viewGroomers={viewGroomers}
       pets={pets}
       viewPets={viewPets}
