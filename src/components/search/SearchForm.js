@@ -270,8 +270,12 @@ const SearchForm = props => {
 
         {groomers.slice(pageVals.minVal, pageVals.maxVal).map(groomer => {
           return (
-            <Link key={groomer.id} to={`/groomers/${groomer.id}`}>
+            <Link
+              key={groomer.id}
+              to={`/customer-dashboard/groomers/${groomer.id}`}
+            >
               <Card
+                onClick={props.viewGroomer}
                 hoverable
                 style={{
                   width: 240,
