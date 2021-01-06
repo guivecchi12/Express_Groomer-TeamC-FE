@@ -23,9 +23,10 @@ function Page2() {
             <div key="code1" className="home-code">
               {/* <div>This is the about page</div> */}
               <div>
-                Our mission is to help you find the perfect groomer for you!
-                Find groomers near you that fit the needs of you and your dogs!
-                Set up appointments and pay all through Express Groomer!
+                Our mission is to connect pet owners to pet groomers. We help
+                owners find the perfect groomers for their pets, and we help
+                groomers advertise their services. Whether you're a pet owner or
+                a pet groomer, this is the perfect place for you!
               </div>
             </div>
           </QueueAnim>

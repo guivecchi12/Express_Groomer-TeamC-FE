@@ -15,7 +15,7 @@ const { TweenOneGroup } = TweenOne;
 const featuresCN = [
   {
     title: 'In-Shop Dog Grooming',
-    content: 'You go to the groomer',
+    content: 'Drop your dog off at the groomer!',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg',
     color: '#13C2C2',
     shadowColor: 'rgba(19,194,194,.12)',
@@ -28,33 +28,33 @@ const featuresCN = [
     shadowColor: 'rgba(47,84,235,.12)',
   },
   {
-    title: 'Groomers',
+    title: 'Search Groomers',
     content: 'Find the perfect groomer for you!',
     src: 'https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg',
     color: '#F5222D',
     shadowColor: 'rgba(245,34,45,.12)',
   },
-  // {
-  //   title: 'Immunizations',
-  //   content: 'Annual Immunization Checkups',
-  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg',
-  //   color: '#1AC44D',
-  //   shadowColor: 'rgba(26,196,77,.12)',
-  // },
-  // {
-  //   title: 'Dental Exams',
-  //   content: '5 Start Dental Exams',
-  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg',
-  //   color: '#FAAD14',
-  //   shadowColor: 'rgba(250,173,20,.12)',
-  // },
-  // {
-  //   title: 'Universal Care',
-  //   content: 'Universal Pet Insurance Accepted',
-  //   src: 'https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg',
-  //   color: '#722ED1',
-  //   shadowColor: 'rgba(114,46,209,.12)',
-  // },
+  {
+    title: 'Appointment Scheduling',
+    content: 'Make appointments that fit your schedule!',
+    src: 'https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg',
+    color: '#1AC44D',
+    shadowColor: 'rgba(26,196,77,.12)',
+  },
+  {
+    title: 'Secure Checkout',
+    content: 'Pay securely through the app!',
+    src: 'https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg',
+    color: '#FAAD14',
+    shadowColor: 'rgba(250,173,20,.12)',
+  },
+  {
+    title: 'Grow your Business',
+    content: 'Advertise your grooming expertise!',
+    src: 'https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg',
+    color: '#722ED1',
+    shadowColor: 'rgba(114,46,209,.12)',
+  },
 ];
 
 const pointPos = [
