@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { GroomerProfile } from '../GroomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -24,14 +25,14 @@ export const RenderGroomerDashboard = props => {
             icon={<PieChartOutlined />}
             onClick={props.viewHome}
           >
-            Home
+            <Link to="/">Home</Link>
           </Menu.Item>
           <Menu.Item
             key="2"
             icon={<UserOutlined />}
             onClick={props.viewGroomers}
           >
-            Appointments
+            <Link to="/groomer-dashboard/appointments">Appointments</Link>
           </Menu.Item>
           <Menu.Item
             key="3"

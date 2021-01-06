@@ -30,6 +30,8 @@ import { SearchForm } from './components/search';
 import GroomerDisplay from './components/groomers/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
+import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
+//import pet component
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
@@ -56,7 +58,6 @@ function App() {
   return (
     <div className="index-container">
       {/* Added features */}
-
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
@@ -71,15 +72,41 @@ function App() {
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
           <SecureRoute path="/register" component={Registration} />
-          <SecureRoute path="/groomers/:id" component={GroomerDisplay} />
-          <SecureRoute path="/groomers" component={GroomerRegistration} />
-          <SecureRoute path="/customers" component={CustomerRegistration} />
+          <SecureRoute
+            path="/customer-dashboard/groomers/:id"
+            render={props => (
+              <CustomerDashboardContainer>
+                <GroomerDisplay />
+              </CustomerDashboardContainer>
+            )}
+          />
+          <SecureRoute
+            path="/customer-dashboard/groomers"
+            render={props => (
+              <CustomerDashboardContainer>
+                <SearchForm />
+              </CustomerDashboardContainer>
+            )}
+          />
+          <SecureRoute
+            path="/customer-dashboard/pets"
+            render={props => (
+              <CustomerDashboardContainer>"Pets"</CustomerDashboardContainer>
+            )}
+          />
           <SecureRoute
             path="/customer-dashboard"
-            component={CustomerDashboard}
+            render={props => <CustomerDashboard {...props} />}
+          />
+          <SecureRoute
+            path="/register/groomers"
+            component={GroomerRegistration}
+          />
+          <SecureRoute
+            path="/register/customers"
+            component={CustomerRegistration}
           />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
-          <SecureRoute path="/googlemap-component" component={MyMap} />
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
         </Switch>
