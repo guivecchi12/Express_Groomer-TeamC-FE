@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Modal, Button, Breadcrumb, Form, Input } from 'antd';
+import { Row, Col, Modal, Button, Breadcrumb, Form, Input, Card } from 'antd';
+import { getGroomerData } from '../../../api/index';
 
+const { Meta } = Card;
+const cardDescription = {
+  margin: '1px',
+};
 const DemoBox = props => (
   <p className={`height-${props.value}`}>{props.children}</p>
 );
@@ -8,6 +13,7 @@ const DemoBox = props => (
 export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
+  const [groomers, setGroomers] = useState([]);
 
   const handleChange = e => {
     setProfileInfo({
@@ -38,6 +44,12 @@ export const RenderCustomerProfile = props => {
   };
 
   useEffect(() => {
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
+
     if (props.status === 'success') {
       props.handleProfileModalClose();
     }
@@ -206,6 +218,57 @@ export const RenderCustomerProfile = props => {
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
+
+      <div className="favorite-groomers">
+        <h2>Favorite Groomers</h2>
+        <Row>
+          {groomers.map(groomer => {
+            return (
+              <Col>
+                <Card
+                  onClick={props.viewGroomer}
+                  hoverable
+                  style={{
+                    width: 240,
+                    margin: '10px',
+                  }}
+                  cover={<img alt="example" src={groomer.photo_url} />}
+                >
+                  <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
+                  <div
+                    style={{
+                      marginBottom: '1px',
+                    }}
+                  >
+                    <p style={cardDescription}>
+                      Vet Visit Rate: ${groomer.vet_visit_rate}
+                    </p>
+                    <p style={cardDescription}>
+                      Day Care Rate: ${groomer.day_care_rate}
+                    </p>
+                    <p style={cardDescription}>
+                      Walk Rate: ${groomer.walk_rate}
+                    </p>
+                    <p style={cardDescription}>Address: {groomer.address}</p>
+                    {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                    {groomer.distance ? (
+                      <p style={cardDescription}>
+                        Distance (Miles): {Math.floor(groomer.distance)}
+                      </p>
+                    ) : (
+                      ''
+                    )}
+                    <p style={cardDescription}>
+                      {groomer.city}, {groomer.state} {groomer.zip}
+                    </p>
+                    <p style={cardDescription}>{groomer.country}</p>
+                  </div>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </div>
     </>
   );
 };
