@@ -71,7 +71,7 @@ function App() {
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
-          <SecureRoute path="/register" component={Registration} />
+          <SecureRoute exact path="/register" component={Registration} />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
             render={props => (
@@ -100,14 +100,8 @@ function App() {
             path="/customer-dashboard"
             render={props => <CustomerDashboard {...props} />}
           />
-          <SecureRoute
-            path="/register/groomers"
-            component={GroomerRegistration}
-          />
-          <SecureRoute
-            path="/register/customers"
-            component={CustomerRegistration}
-          />
+          <Route path="/register/groomers" component={GroomerRegistration} />
+          <Route path="/register/customers" component={CustomerRegistration} />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />
