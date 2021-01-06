@@ -8,7 +8,9 @@ const GroomerRegistration = props => {
   const defaultUser = {
     name: '',
     lastname: '',
-    email: props.location.state.email,
+    email: '',
+    latitude: '',
+    longitude: '',
     phone: '',
     zip: '',
     address: '',
@@ -75,6 +77,39 @@ const GroomerRegistration = props => {
           placeholder="Last Name"
           onChange={handleInputChange}
           aria-invalid={errors.lastname ? 'true' : 'false'}
+          ref={register({ required: true, maxLength: 30 })}
+        />
+
+        <label htmlFor="email">Email: </label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="email"
+          onChange={handleInputChange}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          ref={register({ required: true, maxLength: 30 })}
+        />
+
+        <label htmlFor="latitude">latitude: </label>
+        <input
+          type="text"
+          id="latitude"
+          name="latitude"
+          placeholder="latitude"
+          onChange={handleInputChange}
+          aria-invalid={errors.latitude ? 'true' : 'false'}
+          ref={register({ required: true, maxLength: 30 })}
+        />
+
+        <label htmlFor="longitude">longitude: </label>
+        <input
+          type="text"
+          id="longitude"
+          name="longitude"
+          placeholder="longitude"
+          onChange={handleInputChange}
+          aria-invalid={errors.longitude ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
         />
 
