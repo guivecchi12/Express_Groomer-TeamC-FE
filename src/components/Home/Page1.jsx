@@ -199,9 +199,7 @@ class Page1 extends React.PureComponent {
                 playScale: [0, 1.65],
               }}
               location="page1-wrapper"
-            >
-              Feature
-            </Parallax>
+            ></Parallax>
           )}
           <h2>
             What can <span>Express Groomers</span> do for you{' '}

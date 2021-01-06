@@ -26,15 +26,18 @@ a {
 
 .home-wrapper {
   width: 100%;
-  color: #697b8c;
+  color: @site-text-color;
   .ant-btn {
     min-width: 110px;
     height: 40px;
     border-radius: 20px;
     font-size: 16px;
+    background-color: #3E5C76;
+    border-color: #3E5C76;
+    color: #F0F9F9;
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(24, 144, 255, .4);
+      box-shadow: 0 4px 12px #3E5C76;
     }
   }
 }
@@ -45,9 +48,8 @@ svg g {
 }
 
 .banner-wrapper {
-  // adding my code
   background-image: url("../component/pauline-loroy-U3aF7hgUSrk-unsplash.jpg");
-  // end my code
+  background-size: cover;
   height: 526px;
   width: 100%;
   max-width: 1500px;
@@ -150,7 +152,7 @@ svg g {
     text-align: center;
     font-weight: 300;
     font-size: 28px;
-    color: #314659;
+    color: @site-heading-color;
     letter-spacing: 0.6px;
     span {
       font-weight: 600;
@@ -179,7 +181,7 @@ svg g {
 
 .page1-bg {
   font-size: 320px;
-  color: #ebedf0;
+  color: @background-color;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -218,7 +220,7 @@ svg g {
         transform: translateY(-5px);
       }
       h3 {
-        color: #0d1a26;
+        color: @site-heading-color;
         font-size: 16px;
         margin: 8px auto;
       }
@@ -288,16 +290,16 @@ svg g {
   width: 90%;
   max-width: 840px;
   border-radius: 4px;
-  background: #f2f4f5;
+  background: @background-color;
   line-height: 28px;
   margin: 16px auto;
-  color: #151e26;
+  color: @site-text-color;
   font-size: 16px;
   font-family: @code-family;
   text-align: left;
   padding: 20px 50px;
   span {
-    color: #f5222d;
+    color: #0D1321;
   }
 }
 
