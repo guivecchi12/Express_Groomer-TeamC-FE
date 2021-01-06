@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Field,
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Radio,
-  Card,
-  Pagination,
-} from 'antd';
-import SkeletonButton from 'antd/lib/skeleton/Button';
-// import { SearchPagination } from './SearchPagination.js';
+import { Form, Input, Button, Checkbox, Card, Pagination } from 'antd';
 
 import Geocode from 'react-geocode';
 import { getGroomerData } from '../../api/index';
@@ -22,6 +11,10 @@ Geocode.setRegion('us');
 
 const cardDescription = {
   margin: '1px',
+};
+const submitButtons = {
+  margin: '10px',
+  //Gotta decide if we want the buttons together or apart, have them apart rn and I personally like it
 };
 const demo = {
   labelCol: {
@@ -88,14 +81,7 @@ const SearchForm = () => {
     minVal: 0,
     maxVal: groomersPerPage,
   });
-
-  // const setVals = (min, max) => {
-  //   {
-  //     minVal = min
-  //     maxVal = max
-  //   }
-  // }
-
+  // Are these needed or can we remove? VVVVV
   const onFinish = values => {
     console.log('Success: groomers displayed', values);
   };
@@ -251,13 +237,18 @@ const SearchForm = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={submitButtons}>
               Submit
             </Button>
-            <Button htmlType="button" onClick={onReset}>
+            <Button htmlType="button" onClick={onReset} style={submitButtons}>
               Reset
             </Button>
-            <Button type="button" htmlType="button" onClick={gelocateme}>
+            <Button
+              type="button"
+              htmlType="button"
+              onClick={gelocateme}
+              style={submitButtons}
+            >
               Use My Location
             </Button>
             <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
