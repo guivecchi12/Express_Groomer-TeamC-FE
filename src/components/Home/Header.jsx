@@ -1,6 +1,9 @@
 import React from 'react';
 import { Row, Col, Menu, Button, Popover } from 'antd';
 
+// import icon for logo
+import { FaPaw } from 'react-icons/fa';
+
 import { enquireScreen } from 'enquire-js';
 
 const LOGO_URL =
@@ -67,8 +70,23 @@ class Header extends React.Component {
         ) : null}
         <Row>
           <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-            <div id="logo" to="/">
-              <img src={LOGO_URL} alt="logo" />
+            <div
+              id="logo"
+              to="/"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+              }}
+            >
+              {/* <img src={LOGO_URL} alt="logo" /> */}
+              <FaPaw
+                style={{
+                  color: '#AFE9E5',
+                  fontSize: '3em',
+                  paddingRight: '10px',
+                }}
+              />
               <span>Express Groomer</span>
             </div>
           </Col>
