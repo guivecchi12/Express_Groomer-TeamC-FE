@@ -107,7 +107,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.lastname && errors.lastname.type === 'required' && (
           <span role="alert">This is required</span>
         )}
