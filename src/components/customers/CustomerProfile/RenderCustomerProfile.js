@@ -69,10 +69,25 @@ export const RenderCustomerProfile = props => {
           <Button key="back" onClick={props.handleContactModalClose}>
             Close
           </Button>,
+          <Button key="submit" type="primary" onClick={handleSubmit}>
+            Update
+          </Button>,
         ]}
       >
-        <p>Phone number: {props.customer.phone}</p>
-        <p>Email: {props.customer.email}</p>
+        <Form.Item label="Phone Number" name="phone">
+          <Input
+            name="phone"
+            onChange={handleChange}
+            placeholder={props.customer.phone}
+          />
+        </Form.Item>
+        <Form.Item label="Phone Number" name="email">
+          <Input
+            name="email"
+            onChange={handleChange}
+            placeholder={props.customer.email}
+          />
+        </Form.Item>
       </Modal>
       <Modal
         title="Edit profile"
@@ -141,13 +156,6 @@ export const RenderCustomerProfile = props => {
               name="country"
               onChange={handleChange}
               placeholder={props.customer.country}
-            />
-          </Form.Item>
-          <Form.Item label="Phone Number" name="phone">
-            <Input
-              name="phone"
-              onChange={handleChange}
-              placeholder={props.customer.phone}
             />
           </Form.Item>
           <Form.Item label="Profile Picture" name="photo_url">
