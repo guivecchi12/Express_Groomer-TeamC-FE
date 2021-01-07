@@ -1,9 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
 import { getUserData } from '../../api/index.js';
 import { RegistrationForm } from '../Registration';
+
+import { Button } from 'antd';
+
+import Home from '../Home/index';
 
 function HomeContainer(props) {
   const { authState, authService } = useOktaAuth();
@@ -14,6 +18,12 @@ function HomeContainer(props) {
     props.getUserData(memoAuthService);
     // eslint-disable-next-line
   }, [memoAuthService]);
+
+  // return (
+  //   <>
+  //     <Home />
+  //   </>
+  // )
 
   // user is authenticated but fetching api response
   if (authState.isAuthenticated && props.isFetching) {
@@ -27,7 +37,15 @@ function HomeContainer(props) {
     props.groomer.length === 1
   ) {
     localStorage.setItem('groomerId', props.groomer[0].id);
-    return <Redirect to={'/groomer-dashboard'} />;
+    return (
+      <>
+        <Button>
+          <Link to={'/groomer-dashboard'}>My Dashboard</Link>
+        </Button>
+        <Home />
+        {/* <Redirect to={'/groomer-dashboard'} /> */}
+      </>
+    );
   }
 
   // okta user has been found and has a customer profile
@@ -37,12 +55,28 @@ function HomeContainer(props) {
     props.customer.length === 1
   ) {
     localStorage.setItem('customerId', props.customer[0].id);
-    return <Redirect to={'/customer-dashboard'} />;
+    return (
+      <>
+        <Button>
+          <Link to={'/customer-dashboard'}>My Dashboard</Link>
+        </Button>
+        <Home />
+        {/* <Redirect to={'/customer-dashboard'} /> */}
+      </>
+    );
   }
 
   // okta user found but has not created a profile
   else if (props.oktaUser) {
-    return <RegistrationForm email={props.oktaUser.email} />;
+    return (
+      <>
+        <Button>
+          <Link to="/register">Sign Up</Link>
+        </Button>
+        <Home />
+        {/* <RegistrationForm email={props.oktaUser.email} /> */}
+      </>
+    );
   }
 
   // server error
