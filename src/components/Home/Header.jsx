@@ -24,10 +24,10 @@ class Header extends React.Component {
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
         <Menu.Item key="home">
-          <a>Home</a>
+          <a href="#page1-wrapper">Home</a>
         </Menu.Item>
         <Menu.Item key="docs">
-          <a>
+          <a href="#page2-wrapper">
             <span>About</span>
           </a>
         </Menu.Item>

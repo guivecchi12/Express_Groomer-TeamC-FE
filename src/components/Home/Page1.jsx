@@ -206,7 +206,7 @@ class Page1 extends React.PureComponent {
           {/* render SearchForm - it just renders groomer cards right now */}
           {/* <SearchForm /> */}
           {/* render FormInput as a test to see if it will render correctly */}
-          <FormInput />
+          {/* <FormInput /> */}
         </div>
       </div>
     );

@@ -6,7 +6,7 @@ import QueueAnim from 'rc-queue-anim';
 function Page2() {
   return (
     <div className="home-page page2">
-      <div className="home-page-wrapper">
+      <div className="home-page-wrapper" id="page2-wrapper">
         <h2>
           About <span>Express Groomer</span>
         </h2>

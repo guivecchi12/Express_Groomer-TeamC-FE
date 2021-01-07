@@ -7,6 +7,11 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 // import BannerSVGAnim from './component/BannerSVGAnim';
 
+// import SearchForm
+import { SearchForm } from '../search';
+// import FormInput as a test to see if it will render on the page correctly
+import { FormInput } from '../common';
+
 function Banner(props) {
   const history = useHistory();
 
@@ -28,6 +33,7 @@ function Banner(props) {
           </div>
         </TweenOne>
       )} */}
+      {/* SEARCH FORM HERE */}
       <div
         className="banner-title-wrapper"
         type={props.isMobile ? 'bottom' : 'right'}
@@ -47,9 +53,9 @@ function Banner(props) {
           </Button>
         </div>
       </div>
-      {!props.isMobile && (
-        <div className="banner-image-wrapper">{/* <BannerSVGAnim /> */}</div>
-      )}
+      {/* {!props.isMobile && (
+        <div className="banner-image-wrapper"><BannerSVGAnim /></div>
+      )} */}
     </div>
   );
 }
