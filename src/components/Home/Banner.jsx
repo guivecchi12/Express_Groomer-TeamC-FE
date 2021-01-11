@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 // import GitHubButton from 'react-github-button';
 // import QueueAnim from 'rc-queue-anim';
 // import TweenOne from 'rc-tween-one';
-import { Button } from 'antd';
+import { Form, Input, Button, Checkbox } from 'antd';
 // import BannerSVGAnim from './component/BannerSVGAnim';
 
 // import SearchForm
-import { SearchForm } from '../search';
+// import { SearchForm } from '../search';
 // import FormInput as a test to see if it will render on the page correctly
-import { FormInput } from '../common';
+// import { FormInput } from '../common';
 
 function Banner(props) {
   const history = useHistory();
@@ -33,7 +33,6 @@ function Banner(props) {
           </div>
         </TweenOne>
       )} */}
-      {/* SEARCH FORM HERE */}
       <div
         className="banner-title-wrapper"
         type={props.isMobile ? 'bottom' : 'right'}
@@ -52,6 +51,22 @@ function Banner(props) {
             Login
           </Button>
         </div>
+      </div>
+      {/* SEARCH FORM HERE */}
+      <div className="banner-search-form">
+        <h2>Find groomers near you!</h2>
+        <Form>
+          <div className="banner-search-zipcode-wrapper">
+            <label>Zipcode:</label>
+            <Input />
+          </div>
+          <div className="banner-checkboxes">
+            <Checkbox>Dog</Checkbox>
+            <Checkbox>Cat</Checkbox>
+            <Checkbox>Will come to you</Checkbox>
+          </div>
+          <Button>Search</Button>
+        </Form>
       </div>
       {/* {!props.isMobile && (
         <div className="banner-image-wrapper"><BannerSVGAnim /></div>
