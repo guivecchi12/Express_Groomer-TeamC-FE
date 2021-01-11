@@ -5,8 +5,6 @@ import { useOktaAuth } from '@okta/okta-react';
 import { getUserData } from '../../api/index.js';
 import { RegistrationForm } from '../Registration';
 
-import { Button } from 'antd';
-
 import Home from '../Home/index';
 
 function HomeContainer(props) {
@@ -20,12 +18,6 @@ function HomeContainer(props) {
     props.getUserData(memoAuthService);
     // eslint-disable-next-line
   }, [memoAuthService]);
-
-  // return (
-  //   <>
-  //     <Home />
-  //   </>
-  // )
 
   // user is authenticated but fetching api response
   if (authState.isAuthenticated && props.isFetching) {
@@ -43,11 +35,7 @@ function HomeContainer(props) {
     console.log('props.groomer', props.groomer);
     return (
       <>
-        <Button>
-          <Link to={'/groomer-dashboard'}>My Dashboard</Link>
-        </Button>
-        <Home />
-        {/* <Redirect to={'/groomer-dashboard'} /> */}
+        <Home authButton="groomer" />
       </>
     );
   }
@@ -63,11 +51,7 @@ function HomeContainer(props) {
     console.log('props.customer', props.customer);
     return (
       <>
-        <Button>
-          <Link to={'/customer-dashboard'}>My Dashboard</Link>
-        </Button>
-        <Home />
-        {/* <Redirect to={'/customer-dashboard'} /> */}
+        <Home authButton="customer" />
       </>
     );
   }
@@ -77,11 +61,7 @@ function HomeContainer(props) {
     console.log('oktaUser', props.oktaUser);
     return (
       <>
-        <Button>
-          <Link to="/register">Sign Up</Link>
-        </Button>
-        <Home />
-        {/* <RegistrationForm email={props.oktaUser.email} /> */}
+        <Home authButton="register" />
       </>
     );
   }

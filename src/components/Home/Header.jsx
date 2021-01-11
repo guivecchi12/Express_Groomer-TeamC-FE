@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Menu, Button, Popover } from 'antd';
+import { Link } from 'react-router-dom';
 
 // import icon for logo
 import { FaPaw } from 'react-icons/fa';
@@ -26,6 +27,15 @@ class Header extends React.Component {
 
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
+        <Menu.Item key="dashboard">
+          {this.props.authButton === 'customer' ? (
+            <Link to={'/customer-dashboard'}>My Dashboard</Link>
+          ) : this.props.authButton === 'groomer' ? (
+            <Link to={'/groomer-dashboard'}>My Dashboard</Link>
+          ) : (
+            <Link to={'/register'}>Sign Up</Link>
+          )}
+        </Menu.Item>
         <Menu.Item key="home">
           <a href="#page1-wrapper">Home</a>
         </Menu.Item>
