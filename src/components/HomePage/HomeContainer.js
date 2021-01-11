@@ -14,6 +14,8 @@ function HomeContainer(props) {
   // eslint-disable-next-line
   const [memoAuthService] = useMemo(() => [authService], []);
 
+  console.log('auth state', authState);
+
   useEffect(() => {
     props.getUserData(memoAuthService);
     // eslint-disable-next-line
@@ -37,6 +39,8 @@ function HomeContainer(props) {
     props.groomer.length === 1
   ) {
     localStorage.setItem('groomerId', props.groomer[0].id);
+    console.log('oktaUser', props.oktaUser);
+    console.log('props.groomer', props.groomer);
     return (
       <>
         <Button>
@@ -55,6 +59,8 @@ function HomeContainer(props) {
     props.customer.length === 1
   ) {
     localStorage.setItem('customerId', props.customer[0].id);
+    console.log('oktaUser', props.oktaUser);
+    console.log('props.customer', props.customer);
     return (
       <>
         <Button>
@@ -68,6 +74,7 @@ function HomeContainer(props) {
 
   // okta user found but has not created a profile
   else if (props.oktaUser) {
+    console.log('oktaUser', props.oktaUser);
     return (
       <>
         <Button>
@@ -81,7 +88,12 @@ function HomeContainer(props) {
 
   // server error
   else {
-    return <h1>Something went wrong</h1>;
+    return (
+      <>
+        <h1>Something went wrong</h1>
+        <Home />
+      </>
+    );
   }
 }
 

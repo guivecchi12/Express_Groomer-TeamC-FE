@@ -66,7 +66,7 @@ function App() {
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* <Route path="/" exact component={Home} /> */}
           {/* any of the routes you need secured should be registered as SecureRoutes */}
-          <SecureRoute
+          <Route
             path="/"
             exact
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
