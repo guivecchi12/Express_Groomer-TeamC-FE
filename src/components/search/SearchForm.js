@@ -71,6 +71,19 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 
   return dist;
 }
+
+// Filter variables for animal checkbox
+let dogFilter = false;
+let catFilter = false;
+
+const changeDogFilter = () => {
+  dogFilter = !dogFilter;
+};
+
+const changeCatFilter = () => {
+  catFilter = !catFilter;
+};
+
 const groomersPerPage = 3;
 const SearchForm = props => {
   const [name, setName] = useState('');
@@ -115,10 +128,23 @@ const SearchForm = props => {
       const groomLng = parseFloat(groomer.longitude);
       const groomLat = parseFloat(groomer.latitude);
 
+      let dist = distance(lng, lat, groomLng, groomLat, 'N');
+      groomer.distance = dist;
+      filtered.push(groomer);
+      return filtered;
       // if dogFilter === true
       // if catFilter === true
 
+      // if the animal filter is in place
+      // need to verify if the resulting groomer list has groomers that match
+      // and filter out the ones that don't
+      // probably after sorting the results, but before slicing ?
+
       // switch(expression) {
+      // case dogFilter === true and catFilter === true:
+      // if groomer.cats === true and groomer.dogs === true
+      // filtered.push(groomer)
+      // break
       //   case dogFilter === true:
       //     if (groomer.dogs) === true {
       // filtered.push ? here
@@ -130,20 +156,12 @@ const SearchForm = props => {
       //   default:
       //     // code block
       // }
-
-      let dist = distance(lng, lat, groomLng, groomLat, 'N');
-      groomer.distance = dist;
-      filtered.push(groomer);
-      return filtered;
-
-      // check if dog and/or cat
-      // if not, filter to remove
     });
     const sorted = filtered.sort(
       (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
     );
 
-    setGroomers(sorted.slice(0, 3));
+    setGroomers(sorted);
   };
 
   const onFormFinish = values => {
@@ -264,8 +282,8 @@ const SearchForm = props => {
             >
               Use My Location
             </Button>
-            <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
-            <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
+            <Checkbox onChange={changeDogFilter}>Dog</Checkbox>
+            <Checkbox onChange={changeCatFilter}>Cat</Checkbox>
           </Form.Item>
         </Form>
       </div>
