@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import petOwnerPic from './images/female-dog-groomer-brushing.jpg';
+import groomerPic from './images/petowner.jpg';
 
 const StyledDiv = styled.div`
   width: 100%;
@@ -23,7 +25,7 @@ const StyledDiv2 = styled.div`
 const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
-  padding: 20% 15%;
+  padding: 25% 15%;
   font-size: 3em;
   color: #f0f9f9;
 `;
@@ -34,9 +36,19 @@ const StyledH2 = styled.h2`
   color: #f0f9f9;
 `;
 
+const StyledGroomerImg = styled.img`
+  float: left;
+`;
+
+const StyledCustImg = styled.img`
+  float: right;
+`;
+
 const Registration = props => {
   return (
     <StyledDiv>
+      <StyledGroomerImg src={groomerPic} />
+      <StyledCustImg src={petOwnerPic} />
       <StyledH2>Are you a...</StyledH2>
       <StyledDiv2>
         <StyledLink
