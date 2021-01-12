@@ -21,6 +21,7 @@ import {
   UPDATE_GROOMER_START,
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
+  GET_CUSTOMER_PETS,
 } from '../state/reducers/types';
 
 let groomersReq = `${process.env.REACT_APP_API_URI}/groomers`;
@@ -197,6 +198,20 @@ const updateCustomer = (data, id) => dispatch => {
     });
 };
 
+const getPets = id => dispatch => {
+  axios
+    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
+    .then(pets => {
+      dispatch({
+        type: GET_CUSTOMER_PETS,
+        payload: pets.data,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 export {
   sleep,
   getExampleData,
@@ -210,4 +225,5 @@ export {
   registerGroomer,
   updateCustomer,
   updateGroomer,
+  getPets,
 };
