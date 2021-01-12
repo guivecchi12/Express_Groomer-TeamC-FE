@@ -6,7 +6,7 @@ function Footer() {
     <footer id="footer" className="dark">
       <div className="footer-wrap">
         <Row>
-          <Col lg={6} sm={24} xs={24}>
+          <Col lg={8} sm={24} xs={24}>
             <div className="footer-center">
               <h2>Groomer Express</h2>
               <div>
@@ -47,7 +47,7 @@ function Footer() {
               </div>
             </div>
           </Col>
-          <Col lg={6} sm={24} xs={24}>
+          <Col lg={8} sm={24} xs={24}>
             <div className="footer-center">
               <h2>Groomer Express</h2>
               <div>
@@ -73,6 +73,11 @@ function Footer() {
                   Groomer Express
                 </a>
               </div>
+            </div>
+          </Col>
+          <Col lg={8} sm={24} xs={24}>
+            <div className="footer-center">
+              <p>Photo by Pauline Loroy on Unsplash</p>
             </div>
           </Col>
         </Row>
