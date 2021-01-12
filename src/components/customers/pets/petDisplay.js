@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Modal } from 'antd';
+import { Button, Card, Modal, Form, Input } from 'antd';
 
 const AddPet = {
   margin: '10px',
@@ -42,6 +42,7 @@ const pets = [
 
 const PetDisplay = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [petInfo, setPetInfo] = useState({});
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -53,6 +54,13 @@ const PetDisplay = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleChange = e => {
+    setPetInfo({
+      ...petInfo,
+      [e.target.name]: e.target.value,
+    });
   };
   return (
     <div className="pet-display">
@@ -71,9 +79,57 @@ const PetDisplay = () => {
           onOk={handleOk}
           onCancel={handleCancel}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <form>
+            <Form.Item label="First Name" name="name">
+              <Input
+                name="name"
+                onChange={handleChange}
+                placeholder={pets[0].name}
+              />
+            </Form.Item>
+            <Form.Item label="animal" name="animal">
+              <Input
+                name="animal"
+                onChange={handleChange}
+                placeholder={pets[0].animal}
+              />
+            </Form.Item>
+            <Form.Item label="breed" name="breed">
+              <Input
+                name="breed"
+                onChange={handleChange}
+                placeholder={pets[0].breed}
+              />
+            </Form.Item>
+            <Form.Item label="age" name="age">
+              <Input
+                name="age"
+                onChange={handleChange}
+                placeholder={pets[0].age}
+              />
+            </Form.Item>
+            <Form.Item label="weight" name="weight">
+              <Input
+                name="weight"
+                onChange={handleChange}
+                placeholder={pets[0].weight}
+              />
+            </Form.Item>
+            <Form.Item label="personality" name="personality">
+              <Input
+                name="personality"
+                onChange={handleChange}
+                placeholder={pets[0].personality}
+              />
+            </Form.Item>
+            <Form.Item label="vaccinations" name="vaccinations">
+              <Input
+                name="vaccinations"
+                onChange={handleChange}
+                placeholder={pets[0].vaccinations}
+              />
+            </Form.Item>
+          </form>
         </Modal>
       </>
       {pets.map(pet => {
