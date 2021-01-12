@@ -111,11 +111,25 @@ const SearchForm = props => {
         groomer.latitude = -44.74325;
         groomer.longitude = 168.550333;
       }
-
+      // This sets the long and lat for the given groomer from the backend
       const groomLng = parseFloat(groomer.longitude);
       const groomLat = parseFloat(groomer.latitude);
 
-      // const distance = (lng - groomLng + (lat - groomLat)) / 2;
+      // if dogFilter === true
+      // if catFilter === true
+
+      // switch(expression) {
+      //   case dogFilter === true:
+      //     if (groomer.dogs) === true {
+      // filtered.push ? here
+      // }
+      //     continue
+      //   case catFilter === true:
+      //     // code block
+      //     continue;
+      //   default:
+      //     // code block
+      // }
 
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
