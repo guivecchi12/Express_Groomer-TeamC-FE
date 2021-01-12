@@ -131,8 +131,8 @@ const SearchForm = props => {
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
       filtered.push(groomer);
-      return filtered;
       // if dogFilter === true
+
       // if catFilter === true
 
       // if the animal filter is in place
@@ -141,21 +141,23 @@ const SearchForm = props => {
       // probably after sorting the results, but before slicing ?
 
       // switch(expression) {
-      // case dogFilter === true and catFilter === true:
-      // if groomer.cats === true and groomer.dogs === true
-      // filtered.push(groomer)
-      // break
-      //   case dogFilter === true:
-      //     if (groomer.dogs) === true {
-      // filtered.push ? here
-      // }
-      //     continue
-      //   case catFilter === true:
-      //     // code block
-      //     continue;
-      //   default:
-      //     // code block
-      // }
+      //   case dogFilter === true && catFilter === true:
+      //     if (groomer.cats === true && groomer.dogs === true)
+      //  {   filtered.push(groomer)}
+
+      //     case dogFilter === true:
+      //       if (groomer.dogs === true) {
+      //     filtered.push(groomer)
+      //     }
+
+      //       case catFilter === true:
+      //         filtered.push(groomer)
+
+      //       default:
+      //        break
+      //     }
+
+      return filtered;
     });
     const sorted = filtered.sort(
       (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
