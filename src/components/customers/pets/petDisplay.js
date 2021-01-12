@@ -13,7 +13,6 @@ const CardStyle = {
 const pets = [
   {
     name: 'name',
-    image: 'image',
     animal: 'animal',
     breed: 'breed',
     age: 'age',
@@ -23,7 +22,6 @@ const pets = [
   },
   {
     name: 'name',
-    image: 'image',
     animal: 'animal',
     breed: 'breed',
     age: 'age',
@@ -33,7 +31,6 @@ const pets = [
   },
   {
     name: 'name',
-    image: 'image',
     animal: 'animal',
     breed: 'breed',
     age: 'age',
@@ -83,7 +80,6 @@ const PetDisplay = () => {
         return (
           <Card style={CardStyle}>
             <h1>{pet.name}</h1>
-            <p>{pet.image}</p>
             <p>{pet.animal}</p>
             <p>{pet.breed}</p>
             <p>{pet.age}</p>
