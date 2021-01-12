@@ -70,7 +70,7 @@ const pointPos = [
 
 class Page1 extends React.PureComponent {
   static propTypes = {
-    isMobile: PropTypes.bool.isRequired,
+    isMobile: PropTypes.bool /* .isRequired */,
   };
   constructor(props) {
     super(props);
