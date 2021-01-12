@@ -15,6 +15,11 @@ const StyledDiv = styled.div`
   background-color: #1d2d44;
 `;
 
+const ImgContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
 const StyledDiv2 = styled.div`
   display: flex;
   flex-direction: row;
@@ -36,19 +41,23 @@ const StyledH2 = styled.h2`
   color: #f0f9f9;
 `;
 
-const StyledGroomerImg = styled.img`
+const StyledGroomerImg = styled.div`
   float: left;
+  background-image: url(${groomerPic});
 `;
 
-const StyledCustImg = styled.img`
+const StyledCustImg = styled.div`
   float: right;
+  background-image: url(${petOwnerPic});
 `;
 
 const Registration = props => {
   return (
     <StyledDiv>
-      <StyledGroomerImg src={groomerPic} />
-      <StyledCustImg src={petOwnerPic} />
+      {/* <ImgContainer> */}
+      <StyledGroomerImg />
+      {/* <StyledCustImg /> */}
+      {/* </ImgContainer> */}
       <StyledH2>Are you a...</StyledH2>
       <StyledDiv2>
         <StyledLink
