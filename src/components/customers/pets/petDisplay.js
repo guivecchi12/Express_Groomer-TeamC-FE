@@ -13,28 +13,28 @@ const CardStyle = {
 const pets = [
   {
     name: 'name',
-    animal: 'animal',
+    species: 'species',
     breed: 'breed',
     age: 'age',
-    weight: 'weight',
+    weight: 'lbs',
     personality: 'personality',
     vaccinations: 'vaccinations',
   },
   {
     name: 'name',
-    animal: 'animal',
+    species: 'species',
     breed: 'breed',
     age: 'age',
-    weight: 'weight',
+    weight: 'lbs',
     personality: 'personality',
     vaccinations: 'vaccinations',
   },
   {
     name: 'name',
-    animal: 'animal',
+    species: 'species',
     breed: 'breed',
     age: 'age',
-    weight: 'weight',
+    weight: 'lbs',
     personality: 'personality',
     vaccinations: 'vaccinations',
   },
@@ -87,35 +87,35 @@ const PetDisplay = () => {
                 placeholder={pets[0].name}
               />
             </Form.Item>
-            <Form.Item label="animal" name="animal">
+            <Form.Item label="Species" name="species">
               <Input
-                name="animal"
+                name="species"
                 onChange={handleChange}
-                placeholder={pets[0].animal}
+                placeholder={pets[0].species}
               />
             </Form.Item>
-            <Form.Item label="breed" name="breed">
+            <Form.Item label="Breed" name="breed">
               <Input
                 name="breed"
                 onChange={handleChange}
                 placeholder={pets[0].breed}
               />
             </Form.Item>
-            <Form.Item label="age" name="age">
+            <Form.Item label="Age" name="age">
               <Input
                 name="age"
                 onChange={handleChange}
                 placeholder={pets[0].age}
               />
             </Form.Item>
-            <Form.Item label="weight" name="weight">
+            <Form.Item label="Weight" name="weight">
               <Input
                 name="weight"
                 onChange={handleChange}
                 placeholder={pets[0].weight}
               />
             </Form.Item>
-            <Form.Item label="personality" name="personality">
+            <Form.Item label="Personality or quirks" name="personality">
               <Input
                 name="personality"
                 onChange={handleChange}
