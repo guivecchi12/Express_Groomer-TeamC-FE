@@ -1,9 +1,47 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Card } from 'antd';
 
 const AddPet = {
   margin: '10px',
 };
+
+const CardStyle = {
+  width: 240,
+  margin: '10px',
+};
+
+const pets = [
+  {
+    name: 'name',
+    image: 'image',
+    animal: 'animal',
+    breed: 'breed',
+    age: 'age',
+    weight: 'weight',
+    personality: 'personality',
+    vaccinations: 'vaccinations',
+  },
+  {
+    name: 'name',
+    image: 'image',
+    animal: 'animal',
+    breed: 'breed',
+    age: 'age',
+    weight: 'weight',
+    personality: 'personality',
+    vaccinations: 'vaccinations',
+  },
+  {
+    name: 'name',
+    image: 'image',
+    animal: 'animal',
+    breed: 'breed',
+    age: 'age',
+    weight: 'weight',
+    personality: 'personality',
+    vaccinations: 'vaccinations',
+  },
+];
 
 const PetDisplay = () => {
   return (
@@ -11,14 +49,20 @@ const PetDisplay = () => {
       <Button type="primary" htmlType="submit" style={AddPet}>
         Add a new pet
       </Button>
-      <div>Name</div>
-      <div>*image of pet*</div>
-      <div>Animal</div>
-      <div>Breed</div>
-      <div>Age</div>
-      <div>Weight</div>
-      <div>Personality / quirks</div>
-      <div>Vaccinations</div>
+      {pets.map(pet => {
+        return (
+          <Card style={CardStyle}>
+            <h1>{pet.name}</h1>
+            <p>{pet.image}</p>
+            <p>{pet.animal}</p>
+            <p>{pet.breed}</p>
+            <p>{pet.age}</p>
+            <p>{pet.weight}</p>
+            <p>{pet.personality}</p>
+            <p>{pet.vaccinations}</p>
+          </Card>
+        );
+      })}
     </div>
   );
 };
