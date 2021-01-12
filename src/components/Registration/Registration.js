@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: navy;
+  background-color: #1d2d44;
 `;
 
 const StyledDiv2 = styled.div`
@@ -23,15 +23,15 @@ const StyledDiv2 = styled.div`
 const StyledLink = styled(Link)`
   display: flex;
   flex-direction: row;
-  padding: 15%;
+  padding: 20% 15%;
   font-size: 3em;
-  color: white;
+  color: #f0f9f9;
 `;
 
 const StyledH2 = styled.h2`
-  padding: 10%;
+  padding-top: 10%;
   font-size: 2.5em;
-  color: white;
+  color: #f0f9f9;
 `;
 
 const Registration = props => {
