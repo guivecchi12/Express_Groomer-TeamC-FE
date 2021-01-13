@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Modal, Button, Breadcrumb, Form, Input } from 'antd';
+import {
+  Row,
+  Col,
+  Modal,
+  Button,
+  Breadcrumb,
+  Form,
+  Input,
+  Checkbox,
+} from 'antd';
 import MyMap from '../../MyMap/MyMap';
 import './style.css';
 
@@ -162,11 +171,26 @@ export const RenderGroomerProfile = props => {
           {/* Then add places to display that information in profile */}
           {/* Make sure the backend has tables for the information */}
           {/* Set up backend locally */}
+          <p>Services Offered:</p>
+          <Form.Item label="Day Care" name="day_care">
+            <Checkbox
+              name="day_care"
+              onChange={handleChange}
+              placeholder={props.groomer.day_care}
+            />
+          </Form.Item>
           <Form.Item label="Day Care Rate" name="day_care_rate">
             <Input
               name="day_care_rate"
               onChange={handleChange}
               placeholder={props.groomer.day_care_rate}
+            />
+          </Form.Item>
+          <Form.Item label="Walks" name="walks">
+            <Checkbox
+              name="walks"
+              onChange={handleChange}
+              placeholder={props.groomer.walks}
             />
           </Form.Item>
           <Form.Item label="Walk Rate" name="walk_rate">
@@ -176,11 +200,33 @@ export const RenderGroomerProfile = props => {
               placeholder={props.groomer.walk_rate}
             />
           </Form.Item>
+          <Form.Item label="Vet Visits" name="vet_visits">
+            <Checkbox
+              name="vet_visits"
+              onChange={handleChange}
+              placeholder={props.groomer.vet_visits}
+            />
+          </Form.Item>
           <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
             <Input
               name="vet_visit_rate"
               onChange={handleChange}
               placeholder={props.groomer.vet_visit_rate}
+            />
+          </Form.Item>
+          <p>Animals you groom:</p>
+          <Form.Item label="Dogs" name="dogs">
+            <Checkbox
+              name="dogs"
+              onChange={handleChange}
+              placeholder={props.groomer.dogs}
+            />
+          </Form.Item>
+          <Form.Item label="Cats" name="cats">
+            <Checkbox
+              name="cats"
+              onChange={handleChange}
+              placeholder={props.groomer.cats}
             />
           </Form.Item>
           <Form.Item label="About Me" name="description">
