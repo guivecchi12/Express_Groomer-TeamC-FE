@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { registerCustomer } from '../../../api/index';
-
+import styled from 'styled-components';
 import './CustomerRegistration.css';
+
+const StyledRegDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d2d44;
+  color: #f0f9f9;
+`;
 
 const CustomerRegistration = props => {
   const defaultUser = {
@@ -37,7 +47,7 @@ const CustomerRegistration = props => {
   };
 
   return (
-    <div className="registration-container">
+    <StyledRegDiv className="registration-container">
       <h1>Customer Registration</h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -227,7 +237,7 @@ const CustomerRegistration = props => {
 
         <button type="submit">Submit</button>
       </form>
-    </div>
+    </StyledRegDiv>
   );
 };
 

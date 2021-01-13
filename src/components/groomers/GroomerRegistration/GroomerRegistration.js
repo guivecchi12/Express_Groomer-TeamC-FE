@@ -2,7 +2,18 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { registerGroomer } from '../../../api/index';
+import styled from 'styled-components';
 import './GroomerRegistration.css';
+
+const StyledRegDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1d2d44;
+  color: #f0f9f9;
+`;
 
 const GroomerRegistration = props => {
   const defaultUser = {
@@ -40,7 +51,7 @@ const GroomerRegistration = props => {
   };
 
   return (
-    <div className="registration-container">
+    <StyledRegDiv className="registration-container">
       <h1>Groomer Registration</h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -333,7 +344,7 @@ const GroomerRegistration = props => {
 
         <button type="submit">Submit</button>
       </form>
-    </div>
+    </StyledRegDiv>
   );
 };
 
