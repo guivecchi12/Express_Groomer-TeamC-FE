@@ -255,6 +255,27 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
+        <p>Do you groom: </p>
+        <div>
+          <input
+            type="checkbox"
+            id="grooms_dogs"
+            name="grooms_dogs"
+            value="Dogs"
+          />
+          <label htmlFor="grooms_dogs"> Dogs </label>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            id="grooms_cats"
+            name="grooms_cats"
+            value="Cats"
+          />
+          <label htmlFor="grooms_cats"> Cats </label>
+        </div>
+
         <label htmlFor="walk_rate">Walk rate: </label>
         <input
           type="text"
