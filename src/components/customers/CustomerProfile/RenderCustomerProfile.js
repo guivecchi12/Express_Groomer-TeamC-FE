@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Modal, Button, Breadcrumb, Form, Input, Card } from 'antd';
+import {
+  Row,
+  Col,
+  Modal,
+  Button,
+  Breadcrumb,
+  Form,
+  Input,
+  Card,
+  Calendar,
+} from 'antd';
 import { getGroomerData } from '../../../api/index';
 
 const { Meta } = Card;
@@ -7,7 +17,7 @@ const cardDescription = {
   margin: '1px',
 };
 const DemoBox = props => (
-  <p className={`height-${props.value}`}>{props.children}</p>
+  <div className={`height-${props.value}`}>{props.children}</div>
 );
 
 export const RenderCustomerProfile = props => {
@@ -57,6 +67,10 @@ export const RenderCustomerProfile = props => {
       setMessage(props.error);
     }
   }, [props.customer, props.error, props.status]);
+
+  function onPanelChange(value, mode) {
+    console.log(value, mode);
+  }
 
   return (
     <>
@@ -158,6 +172,7 @@ export const RenderCustomerProfile = props => {
               placeholder={props.customer.country}
             />
           </Form.Item>
+
           <Form.Item label="Profile Picture" name="photo_url">
             <Input
               name="photo_url"
@@ -222,7 +237,9 @@ export const RenderCustomerProfile = props => {
         </Col>
         <Col xs={20} sm={16} md={12} lg={8} xl={4} />
         <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-          <DemoBox value={50}>Calendar Here</DemoBox>
+          <div className="site-calendar-demo-card">
+            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+          </div>
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
@@ -232,7 +249,7 @@ export const RenderCustomerProfile = props => {
         <Row>
           {groomers.map(groomer => {
             return (
-              <Col>
+              <Col key={groomer.id}>
                 <Card
                   onClick={props.viewGroomer}
                   hoverable
