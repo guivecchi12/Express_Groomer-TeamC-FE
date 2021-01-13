@@ -13,8 +13,19 @@ const cardDescription = {
   margin: '1px',
 };
 const submitButtons = {
-  margin: '10px',
+  margin: '1px',
   //Gotta decide if we want the buttons together or apart, have them apart rn and I personally like it
+};
+const submitButtonsParent = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-around',
+};
+const cardPag = {
+  position: 'absolute',
+  bottom: 0,
+  left: '44%',
+  margin: 20,
 };
 const demo = {
   labelCol: {
@@ -235,7 +246,7 @@ const SearchForm = props => {
             }}
           </Form.Item>
 
-          <Form.Item {...tailLayout}>
+          <Form.Item {...tailLayout} style={submitButtonsParent}>
             <Button type="primary" htmlType="submit" style={submitButtons}>
               Submit
             </Button>
@@ -314,6 +325,7 @@ const SearchForm = props => {
         })}
       </div>
       <Pagination
+        style={cardPag}
         defaultCurrent={1}
         total={groomers.length}
         pageSize={groomersPerPage}
