@@ -12,6 +12,10 @@ const StyledRegDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #1d2d44;
+  color: #c5e8e8;
+`;
+
+const StyledH1 = styled.h1`
   color: #f0f9f9;
 `;
 
@@ -52,11 +56,9 @@ const GroomerRegistration = props => {
 
   return (
     <StyledRegDiv className="registration-container">
-      <h1>Groomer Registration</h1>
+      <StyledH1>Groomer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Name: </label>
-
         <input
           type="text"
           id="name"
@@ -74,7 +76,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="lastname">Last Name: </label>
         <input
           type="text"
           id="lastname"
@@ -85,7 +86,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <label htmlFor="email">Email: </label>
         <input
           type="text"
           id="email"
@@ -96,23 +96,21 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <label htmlFor="latitude">latitude: </label>
         <input
           type="text"
           id="latitude"
           name="latitude"
-          placeholder="latitude"
+          placeholder="Latitude"
           onChange={handleInputChange}
           aria-invalid={errors.latitude ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <label htmlFor="longitude">longitude: </label>
         <input
           type="text"
           id="longitude"
           name="longitude"
-          placeholder="longitude"
+          placeholder="Longitude"
           onChange={handleInputChange}
           aria-invalid={errors.longitude ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
@@ -125,7 +123,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="phone">Phone: </label>
         <input
           type="text"
           id="phone"
@@ -143,7 +140,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="address">Address: </label>
         <input
           type="text"
           id="address"
@@ -161,7 +157,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="city">City: </label>
         <input
           type="text"
           id="city"
@@ -179,7 +174,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="state">State: </label>
         <input
           type="text"
           id="state"
@@ -197,7 +191,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="country">Country: </label>
         <input
           type="text"
           id="country"
@@ -215,12 +208,11 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="zipcode">ZIP Code: </label>
         <input
           type="text"
           id="zipcode"
           name="zip"
-          placeholder="zipcode"
+          placeholder="Zip code"
           onChange={handleInputChange}
           aria-invalid={errors.zipcode ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
@@ -233,12 +225,11 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="description">Description: </label>
         <input
           type="text"
           id="description"
           name="description"
-          placeholder="description"
+          placeholder="Description"
           onChange={handleInputChange}
           aria-invalid={errors.description ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 300 })}
@@ -251,7 +242,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="photoUrl">Photo URL: </label>
         <input
           type="text"
           id="photoUrl"
@@ -287,7 +277,6 @@ const GroomerRegistration = props => {
           <label htmlFor="grooms_cats"> Cats </label>
         </div>
 
-        <label htmlFor="walk_rate">Walk rate: </label>
         <input
           type="text"
           id="walk_rate"
@@ -305,7 +294,6 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="day_care_rate">Day care rate: </label>
         <input
           type="text"
           id="day_care_rate"
@@ -322,7 +310,6 @@ const GroomerRegistration = props => {
         {errors.day_care_rate && errors.day_care_rate.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-        <label htmlFor="vet_visit_rate">Vet visit rate: </label>
 
         <input
           type="text"
