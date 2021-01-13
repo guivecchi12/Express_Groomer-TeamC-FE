@@ -11,6 +11,10 @@ export const RenderGroomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
 
+  console.log('RenderGroomerProfile props', props);
+  console.log('RenderGroomerProfile state profileInfo', profileInfo);
+  console.log('RenderGroomerProfile state message', message);
+
   const handleChange = e => {
     setProfileInfo({
       ...profileInfo,
@@ -139,11 +143,51 @@ export const RenderGroomerProfile = props => {
               placeholder={props.groomer.phone}
             />
           </Form.Item>
+          {/* don't update the email, it causes issues */}
+          {/* <Form.Item label="Email" name="email">
+            <Input
+              name="email"
+              onChange={handleChange}
+              placeholder={props.groomer.email}
+            />
+          </Form.Item> */}
           <Form.Item label="Profile Picture" name="photo_url">
             <Input
               name="photo_url"
               onChange={handleChange}
               placeholder={props.groomer.photo_url}
+            />
+          </Form.Item>
+          {/* Need inputs for availability, which animals, bio, experience, etc */}
+          {/* Then add places to display that information in profile */}
+          {/* Make sure the backend has tables for the information */}
+          {/* Set up backend locally */}
+          <Form.Item label="Day Care Rate" name="day_care_rate">
+            <Input
+              name="day_care_rate"
+              onChange={handleChange}
+              placeholder={props.groomer.day_care_rate}
+            />
+          </Form.Item>
+          <Form.Item label="Walk Rate" name="walk_rate">
+            <Input
+              name="walk_rate"
+              onChange={handleChange}
+              placeholder={props.groomer.walk_rate}
+            />
+          </Form.Item>
+          <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
+            <Input
+              name="vet_visit_rate"
+              onChange={handleChange}
+              placeholder={props.groomer.vet_visit_rate}
+            />
+          </Form.Item>
+          <Form.Item label="About Me" name="description">
+            <Input
+              name="description"
+              onChange={handleChange}
+              placeholder={props.groomer.description}
             />
           </Form.Item>
         </form>
