@@ -241,4 +241,5 @@ export {
   updateCustomer,
   updateGroomer,
   getPets,
+  getFavoriteGroomers,
 };

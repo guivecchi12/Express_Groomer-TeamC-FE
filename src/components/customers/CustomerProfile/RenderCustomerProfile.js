@@ -72,6 +72,61 @@ export const RenderCustomerProfile = props => {
     console.log(value, mode);
   }
 
+  console.log(props.customer);
+  const getFavGroomers = () => {
+    const favs = props.customer.favorite_groomers;
+    console.log('My favs: ', favs);
+    if (favs == null) {
+      return <h5>You have not saved any Groomers yet</h5>;
+    } else {
+      groomers.forEach(groomer => {
+        if (favs.includes(groomer.id)) {
+          return (
+            <Col key={groomer.id}>
+              <Card
+                onClick={props.viewGroomer}
+                hoverable
+                style={{
+                  width: 240,
+                  margin: '10px',
+                }}
+                cover={<img alt="example" src={groomer.photo_url} />}
+              >
+                <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
+                <div
+                  style={{
+                    marginBottom: '1px',
+                  }}
+                >
+                  <p style={cardDescription}>
+                    Vet Visit Rate: ${groomer.vet_visit_rate}
+                  </p>
+                  <p style={cardDescription}>
+                    Day Care Rate: ${groomer.day_care_rate}
+                  </p>
+                  <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
+                  <p style={cardDescription}>Address: {groomer.address}</p>
+                  {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                  {groomer.distance ? (
+                    <p style={cardDescription}>
+                      Distance (Miles): {Math.floor(groomer.distance)}
+                    </p>
+                  ) : (
+                    ''
+                  )}
+                  <p style={cardDescription}>
+                    {groomer.city}, {groomer.state} {groomer.zip}
+                  </p>
+                  <p style={cardDescription}>{groomer.country}</p>
+                </div>
+              </Card>
+            </Col>
+          );
+        }
+      });
+    }
+  };
+
   return (
     <>
       <Modal
@@ -246,53 +301,7 @@ export const RenderCustomerProfile = props => {
 
       <div className="favorite-groomers">
         <h2>Favorite Groomers</h2>
-        <Row>
-          {groomers.map(groomer => {
-            return (
-              <Col key={groomer.id}>
-                <Card
-                  onClick={props.viewGroomer}
-                  hoverable
-                  style={{
-                    width: 240,
-                    margin: '10px',
-                  }}
-                  cover={<img alt="example" src={groomer.photo_url} />}
-                >
-                  <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
-                  <div
-                    style={{
-                      marginBottom: '1px',
-                    }}
-                  >
-                    <p style={cardDescription}>
-                      Vet Visit Rate: ${groomer.vet_visit_rate}
-                    </p>
-                    <p style={cardDescription}>
-                      Day Care Rate: ${groomer.day_care_rate}
-                    </p>
-                    <p style={cardDescription}>
-                      Walk Rate: ${groomer.walk_rate}
-                    </p>
-                    <p style={cardDescription}>Address: {groomer.address}</p>
-                    {/* Conditional Render - when Distance is calculated, show the distance in miles */}
-                    {groomer.distance ? (
-                      <p style={cardDescription}>
-                        Distance (Miles): {Math.floor(groomer.distance)}
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                    <p style={cardDescription}>
-                      {groomer.city}, {groomer.state} {groomer.zip}
-                    </p>
-                    <p style={cardDescription}>{groomer.country}</p>
-                  </div>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
+        <Row>{getFavGroomers()}</Row>
       </div>
     </>
   );

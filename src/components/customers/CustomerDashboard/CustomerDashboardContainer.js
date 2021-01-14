@@ -70,6 +70,7 @@ const CustomerDashboardContainer = () => {
       groomers={groomers}
       groomer={groomer}
       viewGroomers={viewGroomers}
+      viewGroomer={viewGroomer}
       pets={pets}
       viewPets={viewPets}
       authService={authService}
