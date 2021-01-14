@@ -6,22 +6,24 @@ const Registration = props => {
     <div>
       <h2>Are you a...</h2>
       <Link
-        to={{
-          pathname: 'groomers',
-          state: {
-            email: props.email,
-          },
-        }}
+        to="/register/groomers"
+        // to={{
+        //   pathname: 'groomers',
+        //   state: {
+        //     email: props.email,
+        //   },
+        // }}
       >
         Groomer
       </Link>
       <Link
-        to={{
-          pathname: 'customers',
-          state: {
-            email: props.email,
-          },
-        }}
+        to="/register/customers"
+        // to={{
+        //   pathname: 'customers',
+        //   state: {
+        //     email: props.email,
+        //   },
+        // }}
       >
         Customer
       </Link>

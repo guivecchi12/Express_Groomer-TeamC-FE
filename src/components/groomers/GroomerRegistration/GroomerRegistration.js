@@ -340,6 +340,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { registerGroomer })(
-  GroomerRegistration
-);
+export default GroomerRegistration;
+
+// export default connect(mapStateToProps, { registerGroomer })(
+//   GroomerRegistration
+// );

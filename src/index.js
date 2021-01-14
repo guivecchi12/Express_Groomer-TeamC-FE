@@ -21,7 +21,7 @@ import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 // new imports
 import Registration from './components/Registration/Registration';
-import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration';
+import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration.js';
 import CustomerRegistration from './components/customers/CustomerRegistration/CustomerRegistration';
 import CustomerDashboard from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 import GroomerDashboard from './components/groomers/GroomerDashboard/GroomerDashboardContainer';
@@ -60,18 +60,30 @@ function App() {
       {/* Added features */}
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
+          {/* <Route
+            exact path="/register/customers"
+            component={CustomerRegistration}
+          /> */}
           <Route path="/login" component={LoginPage} />
           <Route path="/home" component={Home} />
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <SecureRoute
-            path="/"
             exact
+            path="/"
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
-          <SecureRoute path="/register" component={Registration} />
+          <SecureRoute exact path="/register" component={Registration} />
+          <SecureRoute
+            path="/register/groomers"
+            component={GroomerRegistration}
+          />
+          <SecureRoute
+            path="/register/customers"
+            component={CustomerRegistration}
+          />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
             render={props => (
@@ -97,14 +109,6 @@ function App() {
           <SecureRoute
             path="/customer-dashboard"
             render={props => <CustomerDashboard {...props} />}
-          />
-          <SecureRoute
-            path="/register/groomers"
-            component={GroomerRegistration}
-          />
-          <SecureRoute
-            path="/register/customers"
-            component={CustomerRegistration}
           />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
           <Route path="/404" component={NotFoundPage} />
