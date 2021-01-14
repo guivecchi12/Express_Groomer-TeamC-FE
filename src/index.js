@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './state/reducers/rootReducer';
@@ -33,7 +33,13 @@ import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 //import pet component
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -65,11 +71,13 @@ function App() {
             component={CustomerRegistration}
           /> */}
           <Route path="/login" component={LoginPage} />
-          <Route path="/home" component={Home} />
+          {/* <Route path="/home" component={Home} /> */}
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
+          {/* <Route path="/" exact component={Home} /> */}
           {/* any of the routes you need secured should be registered as SecureRoutes */}
-          <SecureRoute
+          <Route
+            path="/"
             exact
             path="/"
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
@@ -93,6 +101,7 @@ function App() {
             )}
           />
           <SecureRoute
+            exact
             path="/customer-dashboard/groomers"
             render={props => (
               <CustomerDashboardContainer>

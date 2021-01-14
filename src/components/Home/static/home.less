@@ -26,15 +26,18 @@ a {
 
 .home-wrapper {
   width: 100%;
-  color: #697b8c;
+  color: @site-text-color;
   .ant-btn {
     min-width: 110px;
     height: 40px;
     border-radius: 20px;
     font-size: 16px;
+    background-color: #3E5C76;
+    border-color: #3E5C76;
+    color: #F0F9F9;
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(24, 144, 255, .4);
+      box-shadow: 0 4px 12px #3E5C76;
     }
   }
 }
@@ -45,7 +48,12 @@ svg g {
 }
 
 .banner-wrapper {
-  height: 526px;
+  background-image: url("../component/pauline-loroy-U3aF7hgUSrk-unsplash.jpg");
+  background-size: cover;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-position: 0rem -6rem;
+  height: 95vh;
   width: 100%;
   max-width: 1500px;
   margin: auto;
@@ -112,17 +120,57 @@ svg g {
       animation: bannerTitleLine 3s ease-in-out 0s infinite;
     }
   }
-  .banner-image-wrapper {
-    width: 45%;
-    max-width: 598px;
-    height: 324px;
+  .banner-search-form {
+    padding: 10px;
+    width: 15%;
+    height: 300px;
+    color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(243, 243, 243, 0.3);
+    max-width: 480px;
     position: absolute;
-    right: 8%;
-    margin: auto;
     top: 0;
     bottom: 0;
-    opacity: 0;
+    right: 8%;
+    margin: auto;
+
+    h2 {
+      text-align: center;
+    }
+
+    .ant-form {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding: 10px;
+
+      div {
+        padding: 10px;
+
+        label {
+          padding-right: 10px;
+        }
+      }
+
+      .ant-checkbox-wrapper {
+        margin-left: 4px;
+        margin-bottom: 10px;
+      }
+      .ant-input {
+        width: 50%;
+      }
+    }
   }
+  // .banner-image-wrapper {
+  //   width: 45%;
+  //   max-width: 598px;
+  //   height: 324px;
+  //   position: absolute;
+  //   right: 8%;
+  //   margin: auto;
+  //   top: 0;
+  //   bottom: 0;
+  //   opacity: 0;
+  // }
 }
 
 .home-banner-image {
@@ -147,7 +195,7 @@ svg g {
     text-align: center;
     font-weight: 300;
     font-size: 28px;
-    color: #314659;
+    color: @site-heading-color;
     letter-spacing: 0.6px;
     span {
       font-weight: 600;
@@ -176,7 +224,7 @@ svg g {
 
 .page1-bg {
   font-size: 320px;
-  color: #ebedf0;
+  color: @background-color;
   position: absolute;
   width: 100%;
   text-align: center;
@@ -215,7 +263,7 @@ svg g {
         transform: translateY(-5px);
       }
       h3 {
-        color: #0d1a26;
+        color: @site-heading-color;
         font-size: 16px;
         margin: 8px auto;
       }
@@ -285,16 +333,16 @@ svg g {
   width: 90%;
   max-width: 840px;
   border-radius: 4px;
-  background: #f2f4f5;
+  background: @background-color;
   line-height: 28px;
   margin: 16px auto;
-  color: #151e26;
+  color: @site-text-color;
   font-size: 16px;
-  font-family: @code-family;
+  font-family: @font-family;
   text-align: left;
   padding: 20px 50px;
   span {
-    color: #f5222d;
+    color: #0D1321;
   }
 }
 

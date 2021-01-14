@@ -1,13 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Modal, Button, Breadcrumb, Form, Input } from 'antd';
+import {
+  Row,
+  Col,
+  Modal,
+  Button,
+  Breadcrumb,
+  Form,
+  Input,
+  Card,
+  Calendar,
+} from 'antd';
+import { getGroomerData } from '../../../api/index';
 
+const { Meta } = Card;
+const cardDescription = {
+  margin: '1px',
+};
 const DemoBox = props => (
-  <p className={`height-${props.value}`}>{props.children}</p>
+  <div className={`height-${props.value}`}>{props.children}</div>
 );
 
 export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
+  const [groomers, setGroomers] = useState([]);
 
   const handleChange = e => {
     setProfileInfo({
@@ -38,6 +54,12 @@ export const RenderCustomerProfile = props => {
   };
 
   useEffect(() => {
+    getGroomerData()
+      .then(response => {
+        setGroomers(response);
+      })
+      .catch(error => console.log(error));
+
     if (props.status === 'success') {
       props.handleProfileModalClose();
     }
@@ -45,6 +67,10 @@ export const RenderCustomerProfile = props => {
       setMessage(props.error);
     }
   }, [props.customer, props.error, props.status]);
+
+  function onPanelChange(value, mode) {
+    console.log(value, mode);
+  }
 
   return (
     <>
@@ -57,10 +83,25 @@ export const RenderCustomerProfile = props => {
           <Button key="back" onClick={props.handleContactModalClose}>
             Close
           </Button>,
+          <Button key="submit" type="primary" onClick={handleSubmit}>
+            Update
+          </Button>,
         ]}
       >
-        <p>Phone number: {props.customer.phone}</p>
-        <p>Email: {props.customer.email}</p>
+        <Form.Item label="Phone Number" name="phone">
+          <Input
+            name="phone"
+            onChange={handleChange}
+            placeholder={props.customer.phone}
+          />
+        </Form.Item>
+        <Form.Item label="Phone Number" name="email">
+          <Input
+            name="email"
+            onChange={handleChange}
+            placeholder={props.customer.email}
+          />
+        </Form.Item>
       </Modal>
       <Modal
         title="Edit profile"
@@ -131,18 +172,19 @@ export const RenderCustomerProfile = props => {
               placeholder={props.customer.country}
             />
           </Form.Item>
-          <Form.Item label="Phone Number" name="phone">
-            <Input
-              name="phone"
-              onChange={handleChange}
-              placeholder={props.customer.phone}
-            />
-          </Form.Item>
+
           <Form.Item label="Profile Picture" name="photo_url">
             <Input
               name="photo_url"
               onChange={handleChange}
               placeholder={props.customer.photo_url}
+            />
+          </Form.Item>
+          <Form.Item label="About" name="about">
+            <Input
+              name="description"
+              onChange={handleChange}
+              placeholder={props.customer.description}
             />
           </Form.Item>
         </form>
@@ -195,10 +237,63 @@ export const RenderCustomerProfile = props => {
         </Col>
         <Col xs={20} sm={16} md={12} lg={8} xl={4} />
         <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-          <DemoBox value={50}>Calendar Here</DemoBox>
+          <div className="site-calendar-demo-card">
+            <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+          </div>
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
+
+      <div className="favorite-groomers">
+        <h2>Favorite Groomers</h2>
+        <Row>
+          {groomers.map(groomer => {
+            return (
+              <Col key={groomer.id}>
+                <Card
+                  onClick={props.viewGroomer}
+                  hoverable
+                  style={{
+                    width: 240,
+                    margin: '10px',
+                  }}
+                  cover={<img alt="example" src={groomer.photo_url} />}
+                >
+                  <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
+                  <div
+                    style={{
+                      marginBottom: '1px',
+                    }}
+                  >
+                    <p style={cardDescription}>
+                      Vet Visit Rate: ${groomer.vet_visit_rate}
+                    </p>
+                    <p style={cardDescription}>
+                      Day Care Rate: ${groomer.day_care_rate}
+                    </p>
+                    <p style={cardDescription}>
+                      Walk Rate: ${groomer.walk_rate}
+                    </p>
+                    <p style={cardDescription}>Address: {groomer.address}</p>
+                    {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+                    {groomer.distance ? (
+                      <p style={cardDescription}>
+                        Distance (Miles): {Math.floor(groomer.distance)}
+                      </p>
+                    ) : (
+                      ''
+                    )}
+                    <p style={cardDescription}>
+                      {groomer.city}, {groomer.state} {groomer.zip}
+                    </p>
+                    <p style={cardDescription}>{groomer.country}</p>
+                  </div>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </div>
     </>
   );
 };

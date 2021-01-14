@@ -2,9 +2,11 @@
 @import "~antd/lib/style/mixins/clearfix.less";
 
 @header-height: 80px;
+@secondary-color: #F0F9F9;
+@hover-color: #C5E8E8;
 
 #header {
-  background-color: #fff;
+  background-color: #1D2D44;
   position: relative;
   z-index: 10;
   height: 64px;
@@ -24,7 +26,7 @@
     width: 32px;
   }
   span {
-    color: @primary-color;
+    color: @secondary-color;
     outline: none;
     font-size: 14px;
     line-height: 28px;
@@ -42,21 +44,30 @@
   height: 64px;
   .ant-menu {
     line-height: 60px;
+    background-color: #1D2D44;
+  }
+  .ant-menu-item {
+    a {
+      color: @secondary-color;
+    }
   }
   .ant-menu-horizontal {
     border-bottom: none;
     & > .ant-menu-item {
       border-top: 2px solid transparent;
       &:hover {
-        border-top: 2px solid @primary-color;
+        border-top: 2px solid @hover-color;
         border-bottom: 2px solid transparent;
+        a {
+          color: @hover-color;
+        }
       }
     }
     & > .ant-menu-item-selected {
-      border-top: 2px solid @primary-color;
+      border-top: 2px solid @secondary-color;
       border-bottom: 2px solid transparent;
       a {
-        color: @primary-color;
+        color: @secondary-color;
       }
     }
   }
