@@ -24,8 +24,6 @@ const GroomerRegistration = props => {
     name: '',
     lastname: '',
     email: '',
-    latitude: '',
-    longitude: '',
     phone: '',
     zip: '',
     address: '',
@@ -93,26 +91,6 @@ const GroomerRegistration = props => {
           placeholder="email"
           onChange={handleInputChange}
           aria-invalid={errors.email ? 'true' : 'false'}
-          ref={register({ required: true, maxLength: 30 })}
-        />
-
-        <input
-          type="text"
-          id="latitude"
-          name="latitude"
-          placeholder="Latitude"
-          onChange={handleInputChange}
-          aria-invalid={errors.latitude ? 'true' : 'false'}
-          ref={register({ required: true, maxLength: 30 })}
-        />
-
-        <input
-          type="text"
-          id="longitude"
-          name="longitude"
-          placeholder="Longitude"
-          onChange={handleInputChange}
-          aria-invalid={errors.longitude ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
         />
 
