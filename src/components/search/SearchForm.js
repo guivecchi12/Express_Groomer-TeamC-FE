@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Card, Pagination } from 'antd';
-
 import Geocode from 'react-geocode';
 import { getGroomerData } from '../../api/index';
-
 Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
 Geocode.setLanguage('en');
 Geocode.setRegion('us');
-
 const cardDescription = {
   margin: '1px',
 };
@@ -30,7 +27,6 @@ const tailLayout = {
     span: 16,
   },
 };
-
 const layoutForm = {
   labelCol: {
     span: 8,
@@ -45,9 +41,7 @@ const tailLayoutForm = {
     span: 16,
   },
 };
-
 const { Meta } = Card;
-
 // Haversine Algorithm for Distance Mapping via Long/Lat
 function distance(lat1, lon1, lat2, lon2, unit) {
   var radlat1 = (Math.PI * lat1) / 180;
@@ -68,7 +62,6 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   if (unit == 'N') {
     dist = dist * 0.8684;
   }
-
   return dist;
 }
 
@@ -98,7 +91,6 @@ const SearchForm = props => {
   const onFinish = values => {
     console.log('Success: groomers displayed', values);
   };
-
   const onFinishFailed = errorInfo => {
     console.log('Unable to retrieve data:', errorInfo);
   };
@@ -108,7 +100,6 @@ const SearchForm = props => {
     e.preventDefault();
     console.log(name, zipcode);
   };
-
   useEffect(() => {
     getGroomerData()
       .then(response => {
@@ -116,7 +107,6 @@ const SearchForm = props => {
       })
       .catch(error => console.log(error));
   }, []);
-
   const filterDist = (lng, lat) => {
     let filtered = [];
     groomers.map(groomer => {
@@ -165,7 +155,6 @@ const SearchForm = props => {
 
     setGroomers(sorted);
   };
-
   const onFormFinish = values => {
     setZipcode(values.zip);
     Geocode.fromAddress(values.zip).then(
@@ -178,7 +167,6 @@ const SearchForm = props => {
       }
     );
   };
-
   // Function for Geolocation based on browser location API
   const gelocateme = () => {
     if ('geolocation' in navigator) {
@@ -192,7 +180,6 @@ const SearchForm = props => {
         'Your current location is unavailable';
     }
   };
-
   const onReset = e => {
     form.resetFields();
     e.preventDefault();
@@ -203,23 +190,19 @@ const SearchForm = props => {
       })
       .catch(error => console.log(error));
   };
-
   const onFill = () => {
     form.setFieldsValue({
       zip: '44101',
     });
   };
-
   // Pagination handler and base settings
   // Variables can be adjusted for more items per page, etc.
-
   const onPageChange = value => {
     setpageVals({
       minVal: (value - 1) * groomersPerPage,
       maxVal: value * groomersPerPage,
     });
   };
-
   return (
     <div>
       <div>
@@ -244,7 +227,6 @@ const SearchForm = props => {
           >
             <Input />
           </Form.Item>
-
           {/* Can we remove this Form item entirely for cleanup? */}
           <Form.Item
             noStyle
@@ -268,7 +250,6 @@ const SearchForm = props => {
               ) : null;
             }}
           </Form.Item>
-
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit" style={submitButtons}>
               Submit
@@ -289,7 +270,6 @@ const SearchForm = props => {
           </Form.Item>
         </Form>
       </div>
-
       <div
         style={{
           display: 'flex',
@@ -299,7 +279,6 @@ const SearchForm = props => {
         }}
       >
         {/* Slice on initial state, Paginate onChange updates the state and shifts the slice based on the page */}
-
         {groomers.slice(pageVals.minVal, pageVals.maxVal).map(groomer => {
           return (
             <Link

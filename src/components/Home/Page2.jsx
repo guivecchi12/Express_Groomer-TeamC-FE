@@ -6,12 +6,9 @@ import QueueAnim from 'rc-queue-anim';
 function Page2() {
   return (
     <div className="home-page page2">
-      <div className="home-page-wrapper">
-        <div className="title-line-wrapper page2-line">
-          <div className="title-line" />
-        </div>
+      <div className="home-page-wrapper" id="page2-wrapper">
         <h2>
-          About <span>Express Groomers</span>
+          About <span>Express Groomer</span>
         </h2>
         <OverPack>
           <QueueAnim
@@ -20,16 +17,16 @@ function Page2() {
             leaveReverse
             className="page2-content"
           >
-            <p key="p" className="page-content">
+            {/* <p key="p" className="page-content">
               This is the about page：
-            </p>
+            </p> */}
             <div key="code1" className="home-code">
-              <div>This is the about page</div>
+              {/* <div>This is the about page</div> */}
               <div>
-                Our pet stylists make sure your pet is relaxed and enjoys the
-                grooming process, making it an experience they’ll look forward
-                to every time. Trained in animal behavior and pet healthcare so
-                that no detail is overlooked while we pamper and treat your pets
+                Our mission is to connect pet owners to pet groomers. We help
+                owners find the perfect groomers for their pets, and we help
+                groomers advertise their services. Whether you're a pet owner or
+                a pet groomer, this is the perfect place for you!
               </div>
             </div>
           </QueueAnim>

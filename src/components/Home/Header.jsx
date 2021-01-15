@@ -1,5 +1,9 @@
 import React from 'react';
 import { Row, Col, Menu, Button, Popover } from 'antd';
+import { Link } from 'react-router-dom';
+
+// import icon for logo
+import { FaPaw } from 'react-icons/fa';
 
 import { enquireScreen } from 'enquire-js';
 
@@ -23,11 +27,20 @@ class Header extends React.Component {
 
     const menu = (
       <Menu mode={menuMode} id="nav" key="nav">
+        <Menu.Item key="dashboard">
+          {this.props.authButton === 'customer' ? (
+            <Link to={'/customer-dashboard'}>My Dashboard</Link>
+          ) : this.props.authButton === 'groomer' ? (
+            <Link to={'/groomer-dashboard'}>My Dashboard</Link>
+          ) : (
+            <Link to={'/register'}>Sign Up</Link>
+          )}
+        </Menu.Item>
         <Menu.Item key="home">
-          <a>Home</a>
+          <a href="#page1-wrapper">Home</a>
         </Menu.Item>
         <Menu.Item key="docs">
-          <a>
+          <a href="#page2-wrapper">
             <span>About</span>
           </a>
         </Menu.Item>
@@ -67,9 +80,24 @@ class Header extends React.Component {
         ) : null}
         <Row>
           <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-            <div id="logo" to="/">
-              <img src={LOGO_URL} alt="logo" />
-              <span>Groomers Express</span>
+            <div
+              id="logo"
+              to="/"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+              }}
+            >
+              {/* <img src={LOGO_URL} alt="logo" /> */}
+              <FaPaw
+                style={{
+                  color: '#AFE9E5',
+                  fontSize: '3em',
+                  paddingRight: '10px',
+                }}
+              />
+              <span>Express Groomer</span>
             </div>
           </Col>
           <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
