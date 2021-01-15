@@ -17,12 +17,47 @@ const DemoBox = props => (
 );
 
 export const RenderGroomerProfile = props => {
+  // const [groomerProfileInfo, setGroomerProfileInfo] = useState({
+  //   address: "",
+  //   city: "",
+  //   country: "",
+  //   created_at: "",
+  //   day_care_rate: 0,
+  //   description: "",
+  //   email: "",
+  //   id: null,
+  //   lastname: "",
+  //   latitude: "",
+  //   longitude: "",
+  //   name: "",
+  //   oktaId: null,
+  //   phone: "",
+  //   photo_url: "",
+  //   state: "",
+  //   updated_at: "",
+  //   vet_visit_rate: 0,
+  //   walk_rate: 0,
+  //   zip: "",
+  //   walks: false,
+  //   day_care: false,
+  //   vet_visits: false,
+  //   cats: false,
+  //   dogs: false,
+  // });
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
 
   console.log('RenderGroomerProfile props', props);
   console.log('RenderGroomerProfile state profileInfo', profileInfo);
   console.log('RenderGroomerProfile state message', message);
+  // console.log("groomerProfileInfo", groomerProfileInfo)
+
+  // useEffect(() => {
+  //   setGroomerProfileInfo({
+  //     ...props.groomer,
+  //     groomerProfileInfo
+  //   })
+  // }, [props.groomer])
 
   const handleChange = e => {
     setProfileInfo({
@@ -47,6 +82,10 @@ export const RenderGroomerProfile = props => {
   const handleSubmit = () => {
     if (validateForm()) {
       props.updateProfile(profileInfo);
+      // setGroomerProfileInfo({
+      //   groomerProfileInfo,
+      //   profileInfo
+      // })
     } else {
       setMessage('This field is required');
     }
@@ -176,7 +215,8 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="day_care"
               onChange={handleChange}
-              placeholder={props.groomer.day_care}
+              // placeholder={groomerProfileInfo.day_care}
+              value="true"
             />
           </Form.Item>
           <Form.Item label="Day Care Rate" name="day_care_rate">
@@ -190,7 +230,8 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="walks"
               onChange={handleChange}
-              placeholder={props.groomer.walks}
+              // placeholder={groomerProfileInfo.walks}
+              value="true"
             />
           </Form.Item>
           <Form.Item label="Walk Rate" name="walk_rate">
@@ -204,7 +245,8 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="vet_visits"
               onChange={handleChange}
-              placeholder={props.groomer.vet_visits}
+              // placeholder={groomerProfileInfo.vet_visits}
+              value="true"
             />
           </Form.Item>
           <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
@@ -219,14 +261,16 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="dogs"
               onChange={handleChange}
-              placeholder={props.groomer.dogs}
+              // placeholder={groomerProfileInfo.dogs}
+              value="true"
             />
           </Form.Item>
           <Form.Item label="Cats" name="cats">
             <Checkbox
               name="cats"
               onChange={handleChange}
-              placeholder={props.groomer.cats}
+              // placeholder={groomerProfileInfo.cats}
+              value="true"
             />
           </Form.Item>
           <Form.Item label="About Me" name="description">
@@ -288,6 +332,13 @@ export const RenderGroomerProfile = props => {
         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
           <div id="calendar">
             <DemoBox value={50}>Calendar Here</DemoBox>
+          </div>
+          <div className="groomer-animal-section">
+            <h2>Animals I Groom</h2>
+            <h2>Service Rates</h2>
+            <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
+            <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
+            <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
           </div>
         </Col>
       </Row>
