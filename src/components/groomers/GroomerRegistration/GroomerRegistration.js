@@ -7,16 +7,26 @@ import './GroomerRegistration.css';
 
 const StyledRegDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  padding-bottom: 2%;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: #1d2d44;
   color: #c5e8e8;
 `;
 
 const StyledH1 = styled.h1`
+  margin: 0% 0% 2% 0%;
+  padding: 4% 0% 1% 0%;
+  font-size: 2.5em;
   color: #f0f9f9;
+  width: 100%;
+  background-color: #3e5c76;
+  text-align: center;
+`;
+
+const StyledSubmit = styled.button`
+  background-color: #3e5c76;
 `;
 
 const GroomerRegistration = props => {
@@ -307,7 +317,7 @@ const GroomerRegistration = props => {
             <span role="alert">Max length exceeded</span>
           )}
 
-        <button type="submit">Submit</button>
+        <StyledSubmit type="submit">Submit</StyledSubmit>
       </form>
     </StyledRegDiv>
   );
