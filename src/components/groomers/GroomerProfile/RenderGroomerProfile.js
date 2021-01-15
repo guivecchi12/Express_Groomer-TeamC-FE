@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   Checkbox,
+  Rate,
 } from 'antd';
 import MyMap from '../../MyMap/MyMap';
 import './style.css';
@@ -306,6 +307,7 @@ export const RenderGroomerProfile = props => {
             <h2 style={{ textTransform: 'capitalize' }}>
               {props.groomer.name} {props.groomer.lastname}
             </h2>
+            <Rate />
             <div style={{ display: 'flex' }}>
               <p style={{ textTransform: 'capitalize' }}>
                 {props.groomer.city}, {props.groomer.state},{' '}
@@ -327,18 +329,23 @@ export const RenderGroomerProfile = props => {
             <h2>About</h2>
             <p>{props.groomer.description}</p>
           </div>
+          <div className="groomer-animal-section">
+            <h2>Animals I Groom</h2>
+          </div>
+          <div className="groomer-services-section">
+            <h2>Service Rates</h2>
+            <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
+            <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
+            <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
+          </div>
+          <div className="groomer-licenses-section">
+            <h2>My Grooming Licenses:</h2>
+          </div>
         </Col>
 
         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
           <div id="calendar">
             <DemoBox value={50}>Calendar Here</DemoBox>
-          </div>
-          <div className="groomer-animal-section">
-            <h2>Animals I Groom</h2>
-            <h2>Service Rates</h2>
-            <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
-            <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
-            <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
           </div>
         </Col>
       </Row>
