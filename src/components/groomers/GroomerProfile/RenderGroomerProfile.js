@@ -45,7 +45,13 @@ export const RenderGroomerProfile = props => {
   //   cats: false,
   //   dogs: false,
   // });
-  const [profileInfo, setProfileInfo] = useState({});
+  const [profileInfo, setProfileInfo] = useState({
+    day_care: false,
+    walks: false,
+    vet_visits: false,
+    dogs: false,
+    cats: false,
+  });
   const [message, setMessage] = useState('');
 
   console.log('RenderGroomerProfile props', props);
@@ -64,6 +70,13 @@ export const RenderGroomerProfile = props => {
     setProfileInfo({
       ...profileInfo,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = e => {
+    setProfileInfo({
+      ...profileInfo,
+      [e.target.name]: !e.target.value,
     });
   };
 
@@ -193,13 +206,13 @@ export const RenderGroomerProfile = props => {
             />
           </Form.Item>
           {/* don't update the email, it causes issues */}
-          {/* <Form.Item label="Email" name="email">
+          <Form.Item label="Email" name="email">
             <Input
               name="email"
               onChange={handleChange}
               placeholder={props.groomer.email}
             />
-          </Form.Item> */}
+          </Form.Item>
           <Form.Item label="Profile Picture" name="photo_url">
             <Input
               name="photo_url"
@@ -215,9 +228,9 @@ export const RenderGroomerProfile = props => {
           <Form.Item label="Day Care" name="day_care">
             <Checkbox
               name="day_care"
-              onChange={handleChange}
+              onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.day_care}
-              value="true"
+              value={profileInfo.day_care}
             />
           </Form.Item>
           <Form.Item label="Day Care Rate" name="day_care_rate">
@@ -230,9 +243,9 @@ export const RenderGroomerProfile = props => {
           <Form.Item label="Walks" name="walks">
             <Checkbox
               name="walks"
-              onChange={handleChange}
+              onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.walks}
-              value="true"
+              value={profileInfo.walks}
             />
           </Form.Item>
           <Form.Item label="Walk Rate" name="walk_rate">
@@ -245,9 +258,9 @@ export const RenderGroomerProfile = props => {
           <Form.Item label="Vet Visits" name="vet_visits">
             <Checkbox
               name="vet_visits"
-              onChange={handleChange}
+              onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.vet_visits}
-              value="true"
+              value={profileInfo.vet_visits}
             />
           </Form.Item>
           <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
@@ -261,17 +274,17 @@ export const RenderGroomerProfile = props => {
           <Form.Item label="Dogs" name="dogs">
             <Checkbox
               name="dogs"
-              onChange={handleChange}
+              onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.dogs}
-              value="true"
+              value={profileInfo.dogs}
             />
           </Form.Item>
           <Form.Item label="Cats" name="cats">
             <Checkbox
               name="cats"
-              onChange={handleChange}
+              onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.cats}
-              value="true"
+              value={profileInfo.cats}
             />
           </Form.Item>
           <Form.Item label="About Me" name="description">
