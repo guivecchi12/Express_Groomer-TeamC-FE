@@ -51,6 +51,8 @@ export const RenderGroomerProfile = props => {
     vet_visits: false,
     dogs: false,
     cats: false,
+    mobile: false,
+    stationary: false,
   });
   const [message, setMessage] = useState('');
 
@@ -285,6 +287,21 @@ export const RenderGroomerProfile = props => {
               onChange={handleCheckboxChange}
               // placeholder={groomerProfileInfo.cats}
               value={profileInfo.cats}
+            />
+          </Form.Item>
+          <p>Location:</p>
+          <Form.Item label="Mobile" name="mobile">
+            <Checkbox
+              name="mobile"
+              onChange={handleCheckboxChange}
+              value={profileInfo.mobile}
+            />
+          </Form.Item>
+          <Form.Item label="Stationary" name="stationary">
+            <Checkbox
+              name="stationary"
+              onChange={handleCheckboxChange}
+              value={profileInfo.stationary}
             />
           </Form.Item>
           <Form.Item label="About Me" name="description">
