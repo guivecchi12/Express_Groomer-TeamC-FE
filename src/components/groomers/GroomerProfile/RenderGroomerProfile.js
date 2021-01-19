@@ -9,9 +9,12 @@ import {
   Input,
   Checkbox,
   Rate,
+  TimePicker,
 } from 'antd';
 import MyMap from '../../MyMap/MyMap';
 import './style.css';
+
+const { RangePicker } = TimePicker;
 
 const DemoBox = props => (
   <div className={`height-${props.value}`}>{props.children}</div>
@@ -53,6 +56,13 @@ export const RenderGroomerProfile = props => {
     cats: false,
     mobile: false,
     stationary: false,
+    mondayHours: '',
+    tuesdayHours: '',
+    wednesdayHours: '',
+    thursdayHours: '',
+    fridayHours: '',
+    saturdayHours: '',
+    sundayHours: '',
   });
   const [message, setMessage] = useState('');
 
@@ -151,6 +161,7 @@ export const RenderGroomerProfile = props => {
         ]}
       >
         <form>
+          <p>Your Information:</p>
           <Form.Item label="First Name" name="name">
             <Input
               name="name"
@@ -222,6 +233,13 @@ export const RenderGroomerProfile = props => {
               placeholder={props.groomer.photo_url}
             />
           </Form.Item>
+          <Form.Item label="About Me" name="description">
+            <Input
+              name="description"
+              onChange={handleChange}
+              placeholder={props.groomer.description}
+            />
+          </Form.Item>
           {/* Need inputs for availability, which animals, bio, experience, etc */}
           {/* Then add places to display that information in profile */}
           {/* Make sure the backend has tables for the information */}
@@ -289,7 +307,7 @@ export const RenderGroomerProfile = props => {
               value={profileInfo.cats}
             />
           </Form.Item>
-          <p>Location:</p>
+          <p>Grooming Location:</p>
           <Form.Item label="Mobile" name="mobile">
             <Checkbox
               name="mobile"
@@ -304,11 +322,54 @@ export const RenderGroomerProfile = props => {
               value={profileInfo.stationary}
             />
           </Form.Item>
-          <Form.Item label="About Me" name="description">
-            <Input
-              name="description"
+          <p>Hours of Operation:</p>
+          <Form.Item label="Monday" name="mondayHours">
+            <RangePicker
+              name="mondayHours"
               onChange={handleChange}
-              placeholder={props.groomer.description}
+              value={profileInfo.mondayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Tuesday" name="tuesdayHours">
+            <RangePicker
+              name="tuesdayHours"
+              onChange={handleChange}
+              value={profileInfo.tuesdayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Wednesday" name="wednesdayHours">
+            <RangePicker
+              name="wednesdayHours"
+              onChange={handleChange}
+              value={profileInfo.wednesdayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Thursday" name="thursdayHours">
+            <RangePicker
+              name="thursdayHours"
+              onChange={handleChange}
+              value={profileInfo.thursdayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Friday" name="fridayHours">
+            <RangePicker
+              name="fridayHours"
+              onChange={handleChange}
+              value={profileInfo.fridayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Saturday" name="saturdayHours">
+            <RangePicker
+              name="saturdayHours"
+              onChange={handleChange}
+              value={profileInfo.saturdayHours}
+            />
+          </Form.Item>
+          <Form.Item label="Sunday" name="sundayHours">
+            <RangePicker
+              name="sundayHours"
+              onChange={handleChange}
+              value={profileInfo.sundayHours}
             />
           </Form.Item>
         </form>
