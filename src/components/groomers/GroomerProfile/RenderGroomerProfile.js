@@ -422,12 +422,47 @@ export const RenderGroomerProfile = props => {
           </div>
           <div className="groomer-animal-section">
             <h2>Animals I Groom</h2>
+            {props.groomer.dogs === true && <p>Dogs</p>}
+            {props.groomer.cats === true && <p>Cats</p>}
           </div>
           <div className="groomer-services-section">
-            <h2>Service Rates</h2>
-            <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
-            <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
-            <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
+            <h2>Services I Offer:</h2>
+            {props.groomer.day_care === true && (
+              <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
+            )}
+            {props.groomer.vet_visits === true && (
+              <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
+            )}
+            {props.groomer.walks === true && (
+              <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
+            )}
+          </div>
+          <div className="hours-operation">
+            <h2>Hours of Operation:</h2>
+            <ul>
+              <li>Monday: {props.groomer.mondayHours}</li>
+              <li>Tuesday: {props.groomer.tuesdayHours}</li>
+              <li>Wednesday: {props.groomer.wednesdayHours}</li>
+              <li>Thursday: {props.groomer.thursdayHours}</li>
+              <li>Friday: {props.groomer.fridayHours}</li>
+              <li>Saturday: {props.groomer.saturdayHours}</li>
+              <li>Sunday: {props.groomer.sundayHours}</li>
+            </ul>
+          </div>
+          <div className="mobile-or-stationary">
+            <h2>My Business is:</h2>
+            {props.groomer.mobile === true && (
+              <>
+                <p>Mobile</p>
+                <p>I'll groom your pets at your house.</p>
+              </>
+            )}
+            {props.groomer.stationary === true && (
+              <>
+                <p>Stationary</p>
+                <p>I'll groom your pets at my shop.</p>
+              </>
+            )}
           </div>
           <div className="groomer-licenses-section">
             <h2>My Grooming Licenses:</h2>
