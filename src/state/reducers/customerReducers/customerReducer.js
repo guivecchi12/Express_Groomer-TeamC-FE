@@ -2,7 +2,6 @@ import {
   GET_CUSTOMER_INFO_START,
   GET_CUSTOMER_INFO_SUCCESS,
   GET_CUSTOMER_INFO_FAILURE,
-  GET_CUSTOMER_PETS,
   REGISTER_CUSTOMER_INFO_START,
   REGISTER_CUSTOMER_INFO_SUCCESS,
   REGISTER_CUSTOMER_INFO_FAILURE,
@@ -73,13 +72,6 @@ export const customerReducer = (state = initialState, action) => {
         isFetching: false,
         error: action.payload,
         status: 'failure',
-      };
-    case GET_CUSTOMER_PETS:
-      return {
-        ...state,
-        isFetching: false,
-        pets: action.payload,
-        status: 'success',
       };
     default:
       return state;
