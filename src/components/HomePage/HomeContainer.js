@@ -13,6 +13,7 @@ function HomeContainer(props) {
   const [memoAuthService] = useMemo(() => [authService], []);
 
   console.log('auth state', authState);
+  console.log('props', props);
 
   useEffect(() => {
     props.getUserData(memoAuthService);
@@ -31,8 +32,7 @@ function HomeContainer(props) {
     props.groomer.length === 1
   ) {
     localStorage.setItem('groomerId', props.groomer[0].id);
-    console.log('oktaUser', props.oktaUser);
-    console.log('props.groomer', props.groomer);
+
     return (
       <>
         <Home authButton="groomer" />
@@ -63,8 +63,12 @@ function HomeContainer(props) {
       <>
         <Home authButton="register" />
       </>
+      // <Redirect to="/register" />
     );
   }
+
+  // Need conditional for user that is not authenticated
+  // brand new user should go to landing page, not register form
 
   // server error
   else {
