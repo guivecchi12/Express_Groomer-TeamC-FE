@@ -36,8 +36,8 @@ import CustomerDashboardContainer from './components/customers/CustomerDashboard
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
@@ -78,7 +78,7 @@ function App() {
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
-          <SecureRoute path="/register" component={Registration} />
+          <SecureRoute exact path="/register" component={Registration} />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
             render={props => (
@@ -107,10 +107,12 @@ function App() {
             render={props => <CustomerDashboard {...props} />}
           />
           <SecureRoute
+            exact
             path="/register/groomers"
             component={GroomerRegistration}
           />
           <SecureRoute
+            exact
             path="/register/customers"
             component={CustomerRegistration}
           />

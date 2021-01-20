@@ -7,7 +7,7 @@ const Registration = props => {
       <h2>Are you a...</h2>
       <Link
         to={{
-          pathname: 'groomers',
+          pathname: '/register/groomers',
           state: {
             email: props.email,
           },
@@ -17,7 +17,7 @@ const Registration = props => {
       </Link>
       <Link
         to={{
-          pathname: 'customers',
+          pathname: '/register/customers',
           state: {
             email: props.email,
           },
