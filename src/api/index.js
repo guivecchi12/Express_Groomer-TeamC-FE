@@ -273,6 +273,23 @@ const updatePet = (data, id) => dispatch => {
     });
 };
 
+const deletePet = id => dispatch => {
+  dispatch({ type: DELETE_PET_START });
+
+  axios
+    .delete(`${process.env.REACT_APP_API_URI}/pets/${id}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_PET_SUCCESS,
+        payload: res,
+      });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PET_FAILURE });
+      console.log(err);
+    });
+};
+
 export {
   sleep,
   getExampleData,
@@ -290,4 +307,5 @@ export {
   getPet,
   registerPet,
   updatePet,
+  deletePet,
 };
