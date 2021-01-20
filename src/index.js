@@ -32,7 +32,7 @@ import Home from './components/Home';
 import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 //import pet component
-
+import Schedule from './components/customers/CustomerSchedule/CustomerScheduleModal';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
@@ -62,7 +62,7 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginPage} />
           <Route path="/home" component={Home} />
-          <Route path="/SearchForm" component={SearchForm} />
+          <Route path="/SearchForm" component={Schedule} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <SecureRoute
