@@ -1,6 +1,6 @@
 import {
   GET_ALL_PETS_START,
-  GET_ALL_PETS_SUCESS,
+  GET_ALL_PETS_SUCCESS,
   GET_ALL_PETS_FAILURE,
   GET_PET_INFO_START,
   GET_PET_INFO_SUCCESS,
@@ -17,7 +17,7 @@ import {
 } from '../types';
 
 const initialState = {
-  PET: {},
+  pets: {},
   isFetching: false,
   error: '',
   status: '',
@@ -30,7 +30,7 @@ export const petReducer = (state = initialState, action) => {
         ...state,
         isFetching: true,
       };
-    case GET_ALL_PETS_SUCESS:
+    case GET_ALL_PETS_SUCCESS:
       return {
         ...state,
         isFetching: false,

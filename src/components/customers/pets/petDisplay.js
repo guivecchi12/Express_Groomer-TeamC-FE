@@ -1,5 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useffect, useEffect } from 'react';
 import { Button, Card, Modal, Form, Input } from 'antd';
+import {
+  registerPet,
+  getAllPets,
+  getPet,
+  updatePet,
+  deletePet,
+} from '../../../api/index';
+import { connect } from 'react-redux';
 
 const AddPet = {
   margin: '10px',
@@ -10,39 +18,16 @@ const CardStyle = {
   margin: '10px',
 };
 
-const pets = [
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-];
-
-const PetDisplay = () => {
+const PetDisplay = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [petInfo, setPetInfo] = useState({});
+  const [pets, setPets] = useState([]);
+  console.log(props.customer);
+
+  // useEffect(() => {
+  //   props.getAllPets()
+
+  // }, [])
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -149,4 +134,17 @@ const PetDisplay = () => {
   );
 };
 
-export default PetDisplay;
+const mapStateToProps = state => {
+  return {
+    pets: state.petReducer.pets,
+    customer: state.customerReducer.customer,
+  };
+};
+
+export default connect(mapStateToProps, {
+  registerPet,
+  getAllPets,
+  getPet,
+  updatePet,
+  deletePet,
+})(PetDisplay);
