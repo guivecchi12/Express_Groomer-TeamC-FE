@@ -21,7 +21,21 @@ import {
   UPDATE_GROOMER_START,
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
-  GET_CUSTOMER_PETS,
+  GET_ALL_PETS_START,
+  GET_ALL_PETS_SUCCESS,
+  GET_ALL_PETS_FAILURE,
+  GET_PET_INFO_START,
+  GET_PET_INFO_SUCCESS,
+  GET_PET_INFO_FAILURE,
+  REGISTER_PET_INFO_START,
+  REGISTER_PET_INFO_SUCCESS,
+  REGISTER_PET_INFO_FAILURE,
+  UPDATE_PET_START,
+  UPDATE_PET_SUCCESS,
+  UPDATE_PET_FAILURE,
+  DELETE_PET_START,
+  DELETE_PET_SUCCESS,
+  DELETE_PET_FAILURE,
 } from '../state/reducers/types';
 
 let groomersReq = `${process.env.REACT_APP_API_URI}/groomers`;
@@ -198,16 +212,19 @@ const updateCustomer = (data, id) => dispatch => {
     });
 };
 
-const getPets = id => dispatch => {
+const getAllPets = id => dispatch => {
+  dispatch({ type: GET_ALL_PETS_START });
+
   axios
-    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
+    .get(`${process.env.REACT_APP_API_URI}/pets/get-all-pets/${id}`)
     .then(pets => {
       dispatch({
-        type: GET_CUSTOMER_PETS,
+        type: GET_ALL_PETS_SUCCESS,
         payload: pets.data,
       });
     })
     .catch(err => {
+      dispatch({ type: GET_ALL_PETS_FAILURE });
       console.log(err);
     });
 };
@@ -225,5 +242,5 @@ export {
   registerGroomer,
   updateCustomer,
   updateGroomer,
-  getPets,
+  getAllPets,
 };

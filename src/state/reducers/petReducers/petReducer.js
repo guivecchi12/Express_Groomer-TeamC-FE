@@ -1,4 +1,7 @@
 import {
+  GET_ALL_PETS_START,
+  GET_ALL_PETS_SUCESS,
+  GET_ALL_PETS_FAILURE,
   GET_PET_INFO_START,
   GET_PET_INFO_SUCCESS,
   GET_PET_INFO_FAILURE,
@@ -20,8 +23,25 @@ const initialState = {
   status: '',
 };
 
-export const PETReducer = (state = initialState, action) => {
+export const petReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_PETS_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case GET_ALL_PETS_SUCESS:
+      return {
+        ...state,
+        isFetching: false,
+        PET: action.payload,
+      };
+    case GET_ALL_PETS_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
     case GET_PET_INFO_START:
       return {
         ...state,
