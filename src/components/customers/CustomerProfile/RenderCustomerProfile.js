@@ -10,7 +10,7 @@ import {
   Card,
   Calendar,
 } from 'antd';
-import { getGroomerData } from '../../../api/index';
+import { getGroomerData, updateCustomer } from '../../../api/index';
 
 const { Meta } = Card;
 const cardDescription = {
@@ -24,6 +24,9 @@ export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
   const [groomers, setGroomers] = useState([]);
+  const [fav, setFav] = useState(props.customer.favorite_groomers);
+  let customer = props.customer;
+  let id = customer.id;
 
   const handleChange = e => {
     setProfileInfo({
@@ -48,6 +51,7 @@ export const RenderCustomerProfile = props => {
   const handleSubmit = () => {
     if (validateForm()) {
       props.updateProfile(profileInfo);
+      console.log(props.customer);
     } else {
       setMessage('This field is required');
     }
@@ -71,16 +75,12 @@ export const RenderCustomerProfile = props => {
   function onPanelChange(value, mode) {
     console.log(value, mode);
   }
-
-  console.log(props.customer);
   const getFavGroomers = () => {
-    const favs = props.customer.favorite_groomers;
-    console.log('My favs: ', favs);
-    if (favs == null) {
+    if (customer.favorite_groomers == null) {
       return <h5>You have not saved any Groomers yet</h5>;
     } else {
       groomers.forEach(groomer => {
-        if (favs.includes(groomer.id)) {
+        if (props.customer.favorite_groomers.includes(groomer.id)) {
           return (
             <Col key={groomer.id}>
               <Card
@@ -125,6 +125,50 @@ export const RenderCustomerProfile = props => {
         }
       });
     }
+  };
+
+  async function changeFav(e) {
+    if (fav == null) {
+      await setFav([parseInt(e.target.value)]);
+    } else {
+      await setFav(parseInt(e.target.value));
+    }
+  }
+
+  const removeFav = () => {
+    if (customer.favorite_groomers == null) {
+      console.log('NULL');
+    } else {
+      if (!customer.favorite_groomers.includes(fav)) {
+        console.log('fav does not exist');
+      } else {
+        var i;
+        for (i = 0; i < customer.favorite_groomers.length; i++) {
+          if (customer.favorite_groomers[i] === fav) {
+            customer.favorite_groomers.splice(i, 1);
+            // console.log(customer);
+            updateCustomer(customer, id);
+          }
+        }
+      }
+      // console.log("customer: ", props.customer);
+    }
+  };
+  const addFav = () => {
+    if (customer.favorite_groomers == null) {
+      customer.favorite_groomers = fav;
+      updateCustomer(customer, id);
+    } else {
+      // console.log(customer, fav);
+      if (!customer.favorite_groomers.includes(fav) && !Array.isArray(fav)) {
+        const newFavs = [...props.customer.favorite_groomers, fav];
+        customer.favorite_groomers = newFavs;
+        updateCustomer(customer, id);
+      } else {
+        console.log('you already have this groomer');
+      }
+    }
+    // console.log(props.customer);
   };
 
   return (
@@ -298,7 +342,14 @@ export const RenderCustomerProfile = props => {
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
-
+      <div>
+        <input type="number" id="remove" name="remove" onChange={changeFav} />
+        <Button onClick={removeFav}>Remove Favorite</Button>
+      </div>
+      <div>
+        <input type="number" id="add" name="add" onChange={changeFav} />
+        <Button onClick={addFav}>Add Favorite</Button>
+      </div>
       <div className="favorite-groomers">
         <h2>Favorite Groomers</h2>
         <Row>{getFavGroomers()}</Row>

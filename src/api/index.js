@@ -22,7 +22,6 @@ import {
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
   GET_CUSTOMER_PETS,
-  GET_FAVORITE_GROOMERS,
 } from '../state/reducers/types';
 
 let groomersReq = `${process.env.REACT_APP_API_URI}/groomers`;
@@ -188,7 +187,6 @@ const updateGroomer = (data, id) => dispatch => {
 
 const updateCustomer = (data, id) => dispatch => {
   dispatch({ type: UPDATE_CUSTOMER_START });
-
   axios
     .put(`${process.env.REACT_APP_API_URI}/customers/${id}`, data)
     .then(res => {
@@ -213,20 +211,6 @@ const getPets = id => dispatch => {
     });
 };
 
-const getFavoriteGroomers = id => dispatch => {
-  axios
-    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
-    .then(fav => {
-      dispatch({
-        type: GET_FAVORITE_GROOMERS,
-        payload: fav.getFavoriteGroomers,
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
 export {
   sleep,
   getExampleData,
@@ -241,5 +225,4 @@ export {
   updateCustomer,
   updateGroomer,
   getPets,
-  getFavoriteGroomers,
 };

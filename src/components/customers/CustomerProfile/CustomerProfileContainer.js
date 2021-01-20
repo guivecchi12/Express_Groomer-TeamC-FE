@@ -8,7 +8,7 @@ const CustomerProfileContainer = props => {
   const [contactModalVisible, setContactModalVisible] = useState(false);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   const { getCustomerInfo } = props;
-  const customerId = localStorage.getItem('customerId');
+  const customerId = localStorage.getItem('customerId') || 18;
 
   useEffect(() => {
     getCustomerInfo(customerId);

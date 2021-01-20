@@ -103,7 +103,7 @@ function App() {
             )}
           />
           <SecureRoute
-            path="/customer-dashboard"
+            path="/customer-dashboard/"
             render={props => <CustomerDashboard {...props} />}
           />
           <SecureRoute
