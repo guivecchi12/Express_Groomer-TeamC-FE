@@ -229,6 +229,50 @@ const getAllPets = id => dispatch => {
     });
 };
 
+const getPet = id => dispatch => {
+  dispatch({ type: GET_PET_INFO_START });
+
+  axios
+    .get(`${process.env.REACT_APP_API_URI}/pets/${id}`)
+    .then(pet => {
+      dispatch({
+        type: GET_PET_INFO_SUCCESS,
+        payload: pet.data,
+      });
+    })
+    .catch(err => {
+      dispatch({ type: GET_PET_INFO_FAILURE });
+      console.log(err);
+    });
+};
+
+const registerPet = (data, props) => dispatch => {
+  dispatch({ type: REGISTER_PET_INFO_START });
+
+  axios
+    .post(`${process.env.REACT_APP_API_URI}/pets`, data)
+    .then(res => {
+      dispatch({ type: REGISTER_PET_INFO_SUCCESS, payload: res.data });
+      props.history.push('/customer-dashboard');
+    })
+    .catch(err => {
+      dispatch({ type: REGISTER_PET_INFO_FAILURE, payload: err.message });
+    });
+};
+
+const updatePet = (data, id) => dispatch => {
+  dispatch({ type: UPDATE_PET_START });
+
+  axios
+    .put(`${process.env.REACT_APP_API_URI}/pets/${id}`, data)
+    .then(res => {
+      dispatch({ type: UPDATE_PET_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_PET_FAILURE, payload: err.message });
+    });
+};
+
 export {
   sleep,
   getExampleData,
@@ -243,4 +287,7 @@ export {
   updateCustomer,
   updateGroomer,
   getAllPets,
+  getPet,
+  registerPet,
+  updatePet,
 };
