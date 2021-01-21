@@ -77,7 +77,7 @@ const changeCatFilter = () => {
   catFilter = !catFilter;
 };
 
-const groomersPerPage = 3;
+const groomersPerPage = 12;
 const SearchForm = props => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
@@ -153,7 +153,7 @@ const SearchForm = props => {
       (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
     );
 
-    setGroomers(sorted);
+    setGroomers(sorted.slice(0, 10));
   };
   const onFormFinish = values => {
     setZipcode(values.zip);
