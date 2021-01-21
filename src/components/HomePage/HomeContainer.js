@@ -12,8 +12,6 @@ function HomeContainer(props) {
   // eslint-disable-next-line
   const [memoAuthService] = useMemo(() => [authService], []);
 
-  console.log('auth state', authState);
-
   useEffect(() => {
     props.getUserData(memoAuthService);
     // eslint-disable-next-line
@@ -31,8 +29,7 @@ function HomeContainer(props) {
     props.groomer.length === 1
   ) {
     localStorage.setItem('groomerId', props.groomer[0].id);
-    console.log('oktaUser', props.oktaUser);
-    console.log('props.groomer', props.groomer);
+
     return (
       <>
         <Home authButton="groomer" />
@@ -47,8 +44,6 @@ function HomeContainer(props) {
     props.customer.length === 1
   ) {
     localStorage.setItem('customerId', props.customer[0].id);
-    console.log('oktaUser', props.oktaUser);
-    console.log('props.customer', props.customer);
     return (
       <>
         <Home authButton="customer" />
@@ -58,13 +53,16 @@ function HomeContainer(props) {
 
   // okta user found but has not created a profile
   else if (props.oktaUser) {
-    console.log('oktaUser', props.oktaUser);
     return (
       <>
         <Home authButton="register" />
       </>
+      // <Redirect to="/register" />
     );
   }
+
+  // Need conditional for user that is not authenticated
+  // brand new user should go to landing page, not register form
 
   // server error
   else {
