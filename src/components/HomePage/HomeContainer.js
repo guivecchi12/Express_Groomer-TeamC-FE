@@ -13,7 +13,7 @@ function HomeContainer(props) {
   const [memoAuthService] = useMemo(() => [authService], []);
 
   console.log('auth state', authState);
-  console.log('props', props);
+  console.log('homeContainer props', props);
 
   useEffect(() => {
     props.getUserData(memoAuthService);

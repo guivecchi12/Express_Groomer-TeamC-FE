@@ -19,6 +19,7 @@ const CustomerRegistration = props => {
     country: '',
     photo_url: 'https://images.unsplash.com/photo-1586057710892-4f30aed09a20',
   };
+  console.log('props', props);
 
   const { register, handleSubmit, errors } = useForm();
   const [user, setUser] = useState(defaultUser);
