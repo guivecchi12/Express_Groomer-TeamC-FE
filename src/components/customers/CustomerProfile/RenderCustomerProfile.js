@@ -10,7 +10,7 @@ import {
   Card,
   Calendar,
 } from 'antd';
-import { getGroomerData, updateCustomer } from '../../../api/index';
+import { getGroomerData } from '../../../api/index';
 
 const { Meta } = Card;
 const cardDescription = {
@@ -24,9 +24,8 @@ export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
   const [groomers, setGroomers] = useState([]);
-  const [fav, setFav] = useState(props.customer.favorite_groomers);
-  let customer = props.customer;
-  let id = customer.id;
+  const [fav, setFav] = useState();
+  const [customer, setCustomer] = useState(props.customer);
 
   const handleChange = e => {
     setProfileInfo({
@@ -51,7 +50,7 @@ export const RenderCustomerProfile = props => {
   const handleSubmit = () => {
     if (validateForm()) {
       props.updateProfile(profileInfo);
-      console.log(props.customer);
+      // console.log(props.customer);
     } else {
       setMessage('This field is required');
     }
@@ -70,17 +69,16 @@ export const RenderCustomerProfile = props => {
     if (props.status === 'failure') {
       setMessage(props.error);
     }
-  }, [props.customer, props.error, props.status]);
+  }, [props]);
 
   function onPanelChange(value, mode) {
     console.log(value, mode);
   }
   const getFavGroomers = () => {
-    if (customer.favorite_groomers == null) {
-      return <h5>You have not saved any Groomers yet</h5>;
-    } else {
+    if (Array.isArray(customer.favorite_groomers)) {
       groomers.forEach(groomer => {
-        if (props.customer.favorite_groomers.includes(groomer.id)) {
+        if (customer.favorite_groomers.includes(groomer.id)) {
+          console.log(groomer);
           return (
             <Col key={groomer.id}>
               <Card
@@ -124,16 +122,14 @@ export const RenderCustomerProfile = props => {
           );
         }
       });
+    } else {
+      return <h5>You have not saved any Groomers yet</h5>;
     }
   };
 
-  async function changeFav(e) {
-    if (fav == null) {
-      await setFav([parseInt(e.target.value)]);
-    } else {
-      await setFav(parseInt(e.target.value));
-    }
-  }
+  const changeFav = e => {
+    setFav(parseInt(e.target.value));
+  };
 
   const removeFav = () => {
     if (customer.favorite_groomers == null) {
@@ -145,31 +141,50 @@ export const RenderCustomerProfile = props => {
         var i;
         for (i = 0; i < customer.favorite_groomers.length; i++) {
           if (customer.favorite_groomers[i] === fav) {
-            customer.favorite_groomers.splice(i, 1);
+            let newFav = customer.favorite_groomers;
+            newFav.favorite_groomers.splice(i, 1);
+            setCustomer({
+              ...customer,
+              favorite_groomers: newFav,
+            });
             // console.log(customer);
-            updateCustomer(customer, id);
+            props.updateProfile(customer);
           }
         }
       }
       // console.log("customer: ", props.customer);
     }
   };
-  const addFav = () => {
-    if (customer.favorite_groomers == null) {
-      customer.favorite_groomers = fav;
-      updateCustomer(customer, id);
+  async function addFav() {
+    if (
+      customer.favorite_groomers == null ||
+      !Array.isArray(customer.favorite_groomers)
+    ) {
+      setCustomer({
+        ...customer,
+        favorite_groomers: fav,
+      });
+      await props.updateProfile(customer);
+      console.log(customer);
     } else {
       // console.log(customer, fav);
-      if (!customer.favorite_groomers.includes(fav) && !Array.isArray(fav)) {
-        const newFavs = [...props.customer.favorite_groomers, fav];
-        customer.favorite_groomers = newFavs;
-        updateCustomer(customer, id);
+      if (!customer.favorite_groomers.includes(fav)) {
+        const newFavs = [...customer.favorite_groomers, fav];
+        setCustomer({
+          ...customer,
+          favorite_groomers: newFavs,
+        });
+        await props.updateProfile(customer);
+        console.log(customer);
       } else {
         console.log('you already have this groomer');
+        console.log(customer);
       }
     }
     // console.log(props.customer);
-  };
+  }
+  // console.log("customer: ", customer);
+  // console.log("Profile: ", profileInfo);
 
   return (
     <>
