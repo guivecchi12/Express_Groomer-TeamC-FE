@@ -5,7 +5,6 @@ import { registerGroomer } from '../../../api/index';
 import './GroomerRegistration.css';
 
 const GroomerRegistration = props => {
-  console.log('groomer props', props);
   const defaultUser = {
     name: '',
     lastname: '',

@@ -4,7 +4,6 @@ import { getUserData } from '../../api/index.js';
 import { Link } from 'react-router-dom';
 
 const Registration = props => {
-  console.log('registration props', props);
   return (
     <div>
       <h2>Are you a...</h2>
