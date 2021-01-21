@@ -35,6 +35,11 @@ const PetDisplay = props => {
     setIsModalVisible(false);
   };
 
+  const deletePet = id => {
+    props.deletePet(id);
+    props.getAllPets(props.customer.id);
+  };
+
   const handleChange = e => {
     setPetInfo({
       ...petInfo,
@@ -115,7 +120,9 @@ const PetDisplay = props => {
                 <p>Weight: {pet.weight}</p>
                 <p>Personality: {pet.description}</p>
                 <p>Vaccinations: {pet.vaccinations}</p>
-                <Button danger>Delete</Button>
+                <Button onClick={() => deletePet(pet.id)} danger>
+                  Delete
+                </Button>
               </Card>
             );
           })
