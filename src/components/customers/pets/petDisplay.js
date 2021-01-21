@@ -24,10 +24,9 @@ const PetDisplay = props => {
   const [pets, setPets] = useState([]);
   console.log(props.customer);
 
-  // useEffect(() => {
-  //   props.getAllPets()
-
-  // }, [])
+  useEffect(() => {
+    props.getAllPets(props.customer.id);
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -66,52 +65,44 @@ const PetDisplay = props => {
         >
           <form>
             <Form.Item label="First Name" name="name">
-              <Input
-                name="name"
-                onChange={handleChange}
-                placeholder={pets[0].name}
-              />
+              <Input name="name" onChange={handleChange} placeholder={'name'} />
             </Form.Item>
             <Form.Item label="Species" name="species">
               <Input
                 name="species"
                 onChange={handleChange}
-                placeholder={pets[0].species}
+                placeholder={'species'}
               />
             </Form.Item>
             <Form.Item label="Breed" name="breed">
               <Input
                 name="breed"
                 onChange={handleChange}
-                placeholder={pets[0].breed}
+                placeholder={'breed'}
               />
             </Form.Item>
             <Form.Item label="Age" name="age">
-              <Input
-                name="age"
-                onChange={handleChange}
-                placeholder={pets[0].age}
-              />
+              <Input name="age" onChange={handleChange} placeholder={'age'} />
             </Form.Item>
             <Form.Item label="Weight" name="weight">
               <Input
                 name="weight"
                 onChange={handleChange}
-                placeholder={pets[0].weight}
+                placeholder={'weight'}
               />
             </Form.Item>
             <Form.Item label="Personality or quirks" name="personality">
               <Input
                 name="personality"
                 onChange={handleChange}
-                placeholder={pets[0].personality}
+                placeholder={'personality'}
               />
             </Form.Item>
-            <Form.Item label="vaccinations" name="vaccinations">
+            <Form.Item label="Vaccinations" name="vaccinations">
               <Input
                 name="vaccinations"
                 onChange={handleChange}
-                placeholder={pets[0].vaccinations}
+                placeholder={'vaccinations'}
               />
             </Form.Item>
           </form>
