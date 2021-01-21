@@ -36,8 +36,8 @@ import CustomerDashboardContainer from './components/customers/CustomerDashboard
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 
@@ -67,10 +67,8 @@ function App() {
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          {/* <Route path="/home" component={Home} /> */}
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
-          {/* <Route path="/" exact component={Home} /> */}
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <Route
             path="/"
@@ -78,7 +76,7 @@ function App() {
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
-          <SecureRoute path="/register" component={Registration} />
+          <SecureRoute exact path="/register" component={Registration} />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
             render={props => (
@@ -107,10 +105,12 @@ function App() {
             render={props => <CustomerDashboard {...props} />}
           />
           <SecureRoute
+            exact
             path="/register/groomers"
             component={GroomerRegistration}
           />
           <SecureRoute
+            exact
             path="/register/customers"
             component={CustomerRegistration}
           />
