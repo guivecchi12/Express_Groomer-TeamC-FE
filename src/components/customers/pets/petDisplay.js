@@ -20,9 +20,11 @@ const CardStyle = {
 
 const PetDisplay = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [petInfo, setPetInfo] = useState({});
+  const [petInfo, setPetInfo] = useState({
+    customer_id: props.customer.id,
+  });
   const [pets, setPets] = useState([]);
-  console.log(props.customer);
+  console.log(props);
 
   useEffect(() => {
     props.getAllPets(props.customer.id);
@@ -34,6 +36,7 @@ const PetDisplay = props => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    props.registerPet(petInfo);
   };
 
   const handleCancel = () => {
@@ -46,6 +49,7 @@ const PetDisplay = props => {
       [e.target.name]: e.target.value,
     });
   };
+
   return (
     <div className="pet-display">
       <>
@@ -91,9 +95,9 @@ const PetDisplay = props => {
                 placeholder={'weight'}
               />
             </Form.Item>
-            <Form.Item label="Personality or quirks" name="personality">
+            <Form.Item label="Personality or quirks" name="description">
               <Input
-                name="personality"
+                name="description"
                 onChange={handleChange}
                 placeholder={'personality'}
               />
@@ -108,19 +112,21 @@ const PetDisplay = props => {
           </form>
         </Modal>
       </>
-      {pets.map(pet => {
-        return (
-          <Card style={CardStyle}>
-            <h1>{pet.name}</h1>
-            <p>{pet.animal}</p>
-            <p>{pet.breed}</p>
-            <p>{pet.age}</p>
-            <p>{pet.weight}</p>
-            <p>{pet.personality}</p>
-            <p>{pet.vaccinations}</p>
-          </Card>
-        );
-      })}
+      {props.pets
+        ? props.pets.map(pet => {
+            return (
+              <Card style={CardStyle}>
+                <h1>{pet.name}</h1>
+                <p>{pet.animal}</p>
+                <p>{pet.breed}</p>
+                <p>{pet.age}</p>
+                <p>{pet.weight}</p>
+                <p>{pet.description}</p>
+                <p>{pet.vaccinations}</p>
+              </Card>
+            );
+          })
+        : null}
     </div>
   );
 };

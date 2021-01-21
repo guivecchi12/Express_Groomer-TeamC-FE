@@ -249,6 +249,7 @@ const getPet = id => dispatch => {
 
 const registerPet = (data, props) => dispatch => {
   dispatch({ type: REGISTER_PET_INFO_START });
+  console.log(data);
 
   axios
     .post(`${process.env.REACT_APP_API_URI}/pets`, data)

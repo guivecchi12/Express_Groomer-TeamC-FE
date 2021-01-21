@@ -17,7 +17,7 @@ import {
 } from '../types';
 
 const initialState = {
-  pets: {},
+  pets: [],
   isFetching: false,
   error: '',
   status: '',
@@ -34,7 +34,7 @@ export const petReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        PET: action.payload,
+        pets: [...state.pets, action.payload],
       };
     case GET_ALL_PETS_FAILURE:
       return {
@@ -51,7 +51,7 @@ export const petReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        PET: action.payload,
+        pets: [...state.pets, action.payload],
       };
     case GET_PET_INFO_FAILURE:
       return {
@@ -68,7 +68,7 @@ export const petReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        PET: action.payload,
+        pets: [...state.pets, action.payload],
       };
     case REGISTER_PET_INFO_FAILURE:
       return {
@@ -85,7 +85,7 @@ export const petReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        PET: action.payload,
+        pets: [...state.pets, action.payload],
         status: 'success',
       };
     case UPDATE_PET_FAILURE:
@@ -104,7 +104,6 @@ export const petReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        PET: action.payload,
         status: 'success',
       };
     case DELETE_PET_FAILURE:
