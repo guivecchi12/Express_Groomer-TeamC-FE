@@ -1,12 +1,6 @@
 import React, { useState, useffect, useEffect } from 'react';
 import { Button, Card, Modal, Form, Input } from 'antd';
-import {
-  registerPet,
-  getAllPets,
-  getPet,
-  updatePet,
-  deletePet,
-} from '../../../api/index';
+import { registerPet, getAllPets, deletePet } from '../../../api/index';
 import { connect } from 'react-redux';
 
 const AddPet = {
@@ -23,8 +17,6 @@ const PetDisplay = props => {
   const [petInfo, setPetInfo] = useState({
     customer_id: props.customer.id,
   });
-  const [pets, setPets] = useState([]);
-  console.log(props);
 
   useEffect(() => {
     props.getAllPets(props.customer.id);
@@ -112,17 +104,18 @@ const PetDisplay = props => {
           </form>
         </Modal>
       </>
-      {props.pets
+      {props.pets && props.pets.length > 0
         ? props.pets.map(pet => {
             return (
               <Card style={CardStyle}>
-                <h1>{pet.name}</h1>
-                <p>{pet.animal}</p>
-                <p>{pet.breed}</p>
-                <p>{pet.age}</p>
-                <p>{pet.weight}</p>
-                <p>{pet.description}</p>
-                <p>{pet.vaccinations}</p>
+                <p>Name: {pet.name}</p>
+                <p>Animal: {pet.animal}</p>
+                <p>Breed: {pet.breed}</p>
+                <p>Age: {pet.age}</p>
+                <p>Weight: {pet.weight}</p>
+                <p>Personality: {pet.description}</p>
+                <p>Vaccinations: {pet.vaccinations}</p>
+                <Button danger>Delete</Button>
               </Card>
             );
           })
@@ -141,7 +134,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   registerPet,
   getAllPets,
-  getPet,
-  updatePet,
   deletePet,
 })(PetDisplay);
