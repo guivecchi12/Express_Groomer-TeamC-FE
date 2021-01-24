@@ -74,6 +74,7 @@ const getUserData = memoAuthService => dispatch => {
     });
 };
 
+// Updated to Async to prevent delayed/failed loading on useEffect invoke
 const getGroomerData = async () => {
   return await axios
     .get(`${process.env.REACT_APP_API_URI}/groomers`)
