@@ -74,8 +74,8 @@ const getUserData = memoAuthService => dispatch => {
     });
 };
 
-const getGroomerData = () => {
-  return axios
+const getGroomerData = async () => {
+  return await axios
     .get(`${process.env.REACT_APP_API_URI}/groomers`)
     .then(response => response.data)
     .catch(err => console.log(err));
