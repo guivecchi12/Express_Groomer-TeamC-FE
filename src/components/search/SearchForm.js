@@ -120,32 +120,30 @@ const SearchForm = props => {
 
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
-      filtered.push(groomer);
-      // if dogFilter === true
+      // filtered.push(groomer);
+      // console.log(filtered)
+      console.log(dogFilter, catFilter);
 
-      // if catFilter === true
-
-      // if the animal filter is in place
-      // need to verify if the resulting groomer list has groomers that match
-      // and filter out the ones that don't
-      // probably after sorting the results, but before slicing ?
-
-      switch (dogFilter || catFilter) {
+      switch (dogFilter && catFilter) {
         case dogFilter && catFilter:
           if (groomer.cats === true && groomer.dogs === true) {
             filtered.push(groomer);
             break;
           }
 
-        case dogFilter === true:
+        case dogFilter:
           if (groomer.dogs === true) {
             filtered.push(groomer);
             break;
           }
 
-        case catFilter === true:
+        case catFilter:
           filtered.push(groomer);
           break;
+
+        case !dogFilter && !catFilter:
+          filtered.push(groomer);
+          console.log('CATCH ALL BABY');
       }
 
       return filtered;
