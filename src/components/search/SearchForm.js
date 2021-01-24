@@ -130,22 +130,23 @@ const SearchForm = props => {
       // and filter out the ones that don't
       // probably after sorting the results, but before slicing ?
 
-      // switch(expression) {
-      //   case dogFilter === true && catFilter === true:
-      //     if (groomer.cats === true && groomer.dogs === true)
-      //  {   filtered.push(groomer)}
+      switch (dogFilter || catFilter) {
+        case dogFilter && catFilter:
+          if (groomer.cats === true && groomer.dogs === true) {
+            filtered.push(groomer);
+            break;
+          }
 
-      //     case dogFilter === true:
-      //       if (groomer.dogs === true) {
-      //     filtered.push(groomer)
-      //     }
+        case dogFilter === true:
+          if (groomer.dogs === true) {
+            filtered.push(groomer);
+            break;
+          }
 
-      //       case catFilter === true:
-      //         filtered.push(groomer)
-
-      //       default:
-      //        break
-      //     }
+        case catFilter === true:
+          filtered.push(groomer);
+          break;
+      }
 
       return filtered;
     });
@@ -303,6 +304,19 @@ const SearchForm = props => {
                   <p style={cardDescription}>
                     Vet Visit Rate: ${groomer.vet_visit_rate}
                   </p>
+                  {/* Conditional Render if the Groomer grooms Dogs */}
+                  {groomer.dogs ? (
+                    <p style={cardDescription}>We Groom Dogs!</p>
+                  ) : (
+                    ''
+                  )}
+                  {/* Conditional Render if the Groomer grooms Cats */}
+                  {groomer.cats ? (
+                    <p style={cardDescription}>We Groom Cats!</p>
+                  ) : (
+                    ''
+                  )}
+
                   <p style={cardDescription}>
                     Day Care Rate: ${groomer.day_care_rate}
                   </p>
