@@ -124,26 +124,27 @@ const SearchForm = props => {
       // console.log(filtered)
       console.log(dogFilter, catFilter);
 
-      switch (dogFilter && catFilter) {
+      switch (true) {
         case dogFilter && catFilter:
           if (groomer.cats === true && groomer.dogs === true) {
             filtered.push(groomer);
-            break;
           }
+          break;
 
         case dogFilter:
           if (groomer.dogs === true) {
             filtered.push(groomer);
-            break;
           }
+          break;
 
         case catFilter:
-          filtered.push(groomer);
+          if (groomer.cats === true) {
+            filtered.push(groomer);
+          }
           break;
 
         case !dogFilter && !catFilter:
           filtered.push(groomer);
-          console.log('CATCH ALL BABY');
       }
 
       return filtered;
