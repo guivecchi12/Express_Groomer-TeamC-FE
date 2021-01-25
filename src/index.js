@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './state/reducers/rootReducer';
@@ -32,8 +32,14 @@ import Home from './components/Home';
 import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 //import pet component
-import Schedule from './components/customers/CustomerSchedule/CustomerScheduleModal';
-const store = createStore(rootReducer, applyMiddleware(thunk));
+
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -61,17 +67,16 @@ function App() {
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/home" component={Home} />
-          <Route path="/SearchForm" component={Schedule} />
+          <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
-          <SecureRoute
+          <Route
             path="/"
             exact
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
-          <SecureRoute path="/register" component={Registration} />
+          <SecureRoute exact path="/register" component={Registration} />
           <SecureRoute
             path="/customer-dashboard/groomers/:id"
             render={props => (
@@ -81,6 +86,7 @@ function App() {
             )}
           />
           <SecureRoute
+            exact
             path="/customer-dashboard/groomers"
             render={props => (
               <CustomerDashboardContainer>
@@ -99,10 +105,12 @@ function App() {
             render={props => <CustomerDashboard {...props} />}
           />
           <SecureRoute
+            exact
             path="/register/groomers"
             component={GroomerRegistration}
           />
           <SecureRoute
+            exact
             path="/register/customers"
             component={CustomerRegistration}
           />

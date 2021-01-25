@@ -4,50 +4,57 @@ import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
 import Parallax from 'rc-scroll-anim/lib/ScrollParallax';
 import QueueAnim from 'rc-queue-anim';
 import TweenOne from 'rc-tween-one';
+import { FaDog, FaHome, FaSearch, FaRegCalendarAlt } from 'react-icons/fa';
+import { RiSecurePaymentLine, RiScissorsFill } from 'react-icons/ri';
+
+// import SearchForm
+import { SearchForm } from '../search';
+// import FormInput as a test to see if it will render on the page correctly
+import { FormInput } from '../common';
 
 const { TweenOneGroup } = TweenOne;
 
 const featuresCN = [
   {
-    title: 'Grooming',
-    content: 'Customer Grooming',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/VriUmzNjDnjoFoFFZvuh.svg',
-    color: '#13C2C2',
+    title: 'In-Shop Dog Grooming',
+    content: 'Drop your dog off at the groomer!',
+    icon: <FaDog style={{ color: '#50C9CE', fontSize: '2em' }} />,
+    color: '#50C9CE',
     shadowColor: 'rgba(19,194,194,.12)',
   },
   {
-    title: 'Dogs',
-    content: 'K-9 Friends',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/smwQOoxCjXVbNAKMqvWk.svg',
-    color: '#2F54EB',
+    title: 'In-Home Dog Grooming',
+    content: 'Groomers come to you!',
+    icon: <FaHome style={{ color: '#7EE081', fontSize: '2em' }} />,
+    color: '#7EE081',
     shadowColor: 'rgba(47,84,235,.12)',
   },
   {
-    title: 'Cats',
-    content: 'Feline Friends',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/hBbIHzUsSbSxrhoRFYzi.svg',
-    color: '#F5222D',
+    title: 'Search Groomers',
+    content: 'Find the perfect groomer for you!',
+    icon: <FaSearch style={{ color: '#50723C', fontSize: '2em' }} />,
+    color: '#50723C',
     shadowColor: 'rgba(245,34,45,.12)',
   },
   {
-    title: 'Immunizations',
-    content: 'Annual Immunization Checkups',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/BISfzKcCNCYFmTYcUygW.svg',
-    color: '#1AC44D',
+    title: 'Appointment Scheduling',
+    content: 'Make appointments that fit your schedule!',
+    icon: <FaRegCalendarAlt style={{ color: '#AC92A6', fontSize: '2em' }} />,
+    color: '#AC92A6',
     shadowColor: 'rgba(26,196,77,.12)',
   },
   {
-    title: 'Dental Exams',
-    content: '5 Start Dental Exams',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/XxqEexmShHOofjMYOCHi.svg',
-    color: '#FAAD14',
+    title: 'Secure Checkout',
+    content: 'Pay securely through the app!',
+    icon: <RiSecurePaymentLine style={{ color: '#F07605', fontSize: '2em' }} />,
+    color: '#F07605',
     shadowColor: 'rgba(250,173,20,.12)',
   },
   {
-    title: 'Universal Care',
-    content: 'Universal Pet Insurance Accepted',
-    src: 'https://gw.alipayobjects.com/zos/rmsportal/JsixxWSViARJnQbAAPkI.svg',
-    color: '#722ED1',
+    title: 'Join as a Groomer',
+    content: 'Reach new customers near you!',
+    icon: <RiScissorsFill style={{ color: '#6247AA', fontSize: '2em' }} />,
+    color: '#6247AA',
     shadowColor: 'rgba(114,46,209,.12)',
   },
 ];
@@ -63,7 +70,7 @@ const pointPos = [
 
 class Page1 extends React.PureComponent {
   static propTypes = {
-    isMobile: PropTypes.bool.isRequired,
+    isMobile: PropTypes.bool /* .isRequired */,
   };
   constructor(props) {
     super(props);
@@ -156,11 +163,7 @@ class Page1 extends React.PureComponent {
                 }`,
               }}
             >
-              <img
-                src={item.src}
-                alt="img"
-                style={i === 4 ? { marginLeft: -15 } : {}}
-              />
+              <div>{item.icon}</div>
             </div>
             <h3>{item.title}</h3>
             <p>{item.content}</p>
@@ -194,17 +197,16 @@ class Page1 extends React.PureComponent {
                 playScale: [0, 1.65],
               }}
               location="page1-wrapper"
-            >
-              Feature
-            </Parallax>
+            ></Parallax>
           )}
           <h2>
-            What can <span>Groomers Express</span> do for you{' '}
+            What can <span>Express Groomers</span> do for you{' '}
           </h2>
-          <div className="title-line-wrapper page1-line">
-            <div className="title-line" />
-          </div>
           <OverPack>{children}</OverPack>
+          {/* render SearchForm - it just renders groomer cards right now */}
+          {/* <SearchForm /> */}
+          {/* render FormInput as a test to see if it will render correctly */}
+          {/* <FormInput /> */}
         </div>
       </div>
     );

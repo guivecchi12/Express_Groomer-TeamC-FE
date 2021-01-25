@@ -15,7 +15,7 @@ enquireScreen(b => {
   isMobile = b;
 });
 
-class Home extends React.PureComponent {
+class Home extends React.Component {
   state = {
     isMobile,
   };
@@ -28,9 +28,12 @@ class Home extends React.PureComponent {
   }
   render() {
     return (
-      <DocumentTitle title="Ant Design - pro">
+      <DocumentTitle title="Express Groomer">
         <div>
-          <Header isMobile={this.state.isMobile} />
+          <Header
+            isMobile={this.state.isMobile}
+            authButton={this.props.authButton}
+          />
           <div className="home-wrapper">
             <Banner isMobile={this.state.isMobile} />
             <Page1 isMobile={this.state.isMobile} />

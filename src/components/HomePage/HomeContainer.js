@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { useOktaAuth } from '@okta/okta-react';
 import { getUserData } from '../../api/index.js';
 import { RegistrationForm } from '../Registration';
+
+import Home from '../Home/index';
 
 function HomeContainer(props) {
   const { authState, authService } = useOktaAuth();
@@ -27,7 +29,12 @@ function HomeContainer(props) {
     props.groomer.length === 1
   ) {
     localStorage.setItem('groomerId', props.groomer[0].id);
-    return <Redirect to={'/groomer-dashboard'} />;
+
+    return (
+      <>
+        <Home authButton="groomer" />
+      </>
+    );
   }
 
   // okta user has been found and has a customer profile
@@ -37,17 +44,34 @@ function HomeContainer(props) {
     props.customer.length === 1
   ) {
     localStorage.setItem('customerId', props.customer[0].id);
-    return <Redirect to={'/customer-dashboard'} />;
+    return (
+      <>
+        <Home authButton="customer" />
+      </>
+    );
   }
 
   // okta user found but has not created a profile
   else if (props.oktaUser) {
-    return <RegistrationForm email={props.oktaUser.email} />;
+    return (
+      <>
+        <Home authButton="register" />
+      </>
+      // <Redirect to="/register" />
+    );
   }
+
+  // Need conditional for user that is not authenticated
+  // brand new user should go to landing page, not register form
 
   // server error
   else {
-    return <h1>Something went wrong</h1>;
+    return (
+      <>
+        <h1>Something went wrong</h1>
+        <Home />
+      </>
+    );
   }
 }
 
