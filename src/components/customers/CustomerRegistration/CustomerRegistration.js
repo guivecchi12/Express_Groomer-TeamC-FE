@@ -8,11 +8,12 @@ import './CustomerRegistration.css';
 const StyledRegDiv = styled.div`
   width: 100%;
   height: 100vh;
+  padding-bottom: 2%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: #1d2d44;
-  color: #f0f9f9;
+  color: #c5e8e8;
 `;
 
 const StyledH1 = styled.h1`

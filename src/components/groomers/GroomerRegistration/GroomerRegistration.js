@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { registerGroomer } from '../../../api/index';
 import styled from 'styled-components';
-import './GroomerRegistration.css';
 
 const StyledRegDiv = styled.div`
   width: 100%;
