@@ -37,7 +37,6 @@ const PetDisplay = props => {
 
   const deletePet = id => {
     props.deletePet(id);
-    props.getAllPets(props.customer.id);
   };
 
   const handleChange = e => {
@@ -109,8 +108,8 @@ const PetDisplay = props => {
           </form>
         </Modal>
       </>
-      {props.pets && props.pets.length > 0
-        ? props.pets.map(pet => {
+      {props.pets[0] && props.pets.length[0] > 0
+        ? props.pets[0].map(pet => {
             return (
               <Card style={CardStyle}>
                 <p>Name: {pet.name}</p>
