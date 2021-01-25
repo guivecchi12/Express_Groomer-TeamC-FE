@@ -15,6 +15,20 @@ const StyledRegDiv = styled.div`
   color: #f0f9f9;
 `;
 
+const StyledH1 = styled.h1`
+  margin: 0% 0% 2% 0%;
+  padding: 4% 0% 1% 0%;
+  font-size: 2.5em;
+  color: #f0f9f9;
+  width: 100%;
+  background-color: #3e5c76;
+  text-align: center;
+`;
+
+const StyledSubmit = styled.button`
+  background-color: #3e5c76;
+`;
+
 const CustomerRegistration = props => {
   const defaultUser = {
     name: '',
@@ -48,7 +62,7 @@ const CustomerRegistration = props => {
 
   return (
     <StyledRegDiv className="registration-container">
-      <h1>Customer Registration</h1>
+      <StyledH1>Customer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">Name: </label>
@@ -235,7 +249,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <button type="submit">Submit</button>
+        <StyledSubmit type="submit">Submit</StyledSubmit>
       </form>
     </StyledRegDiv>
   );
