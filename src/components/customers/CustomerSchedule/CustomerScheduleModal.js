@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'antd';
 import ScheduleForm from './CustomerScheduleForm';
 
-const Schedule = () => {
+const ScheduleModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
 
   const handleOk = () => {
+    //Once schedule backend is setup, use this to push up appointment
     setIsModalVisible(false);
   };
 
@@ -33,4 +34,4 @@ const Schedule = () => {
   );
 };
 
-export default Schedule;
+export default ScheduleModal;

@@ -30,6 +30,7 @@ const config = {
 };
 const petChoose = {
   display: 'flex',
+  flexDirection: 'row',
 };
 
 const ScheduleForm = () => {
@@ -51,10 +52,10 @@ const ScheduleForm = () => {
         <DatePicker />
       </Form.Item>
       <Form.Item name="time-picker" label="Time" {...config}>
-        <TimePicker />
+        <TimePicker format={'HH:mm'} minuteStep={15} />
       </Form.Item>
-      <div name="petChoose">
-        <p>Pet:</p>
+      <div className="petChoose">
+        <p style={{ width: '50px', color: '#314659' }}>Pet:</p>
         <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
         <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
       </div>
