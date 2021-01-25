@@ -7,7 +7,7 @@ import './CustomerRegistration.css';
 
 const StyledRegDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,8 +65,6 @@ const CustomerRegistration = props => {
       <StyledH1>Customer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Name: </label>
-
         <input
           type="text"
           id="name"
@@ -84,7 +82,6 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="lastname">Last Name: </label>
         <input
           type="text"
           id="lastname"
@@ -101,8 +98,6 @@ const CustomerRegistration = props => {
         {errors.lastname && errors.lastname.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-
-        <label htmlFor="phone">Phone: </label>
 
         <input
           type="text"
@@ -121,8 +116,6 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="address">Address: </label>
-
         <input
           type="text"
           id="address"
@@ -139,8 +132,6 @@ const CustomerRegistration = props => {
         {errors.address && errors.address.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-
-        <label htmlFor="city">City: </label>
 
         <input
           type="text"
@@ -159,8 +150,6 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="state">State: </label>
-
         <input
           type="text"
           id="state"
@@ -178,7 +167,6 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="country">Country: </label>
         <input
           type="text"
           id="country"
@@ -195,8 +183,6 @@ const CustomerRegistration = props => {
         {errors.country && errors.country.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-
-        <label htmlFor="zipcode">Zipcode: </label>
 
         <input
           type="text"
@@ -215,8 +201,6 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="description">Description: </label>
-
         <input
           type="text"
           id="description"
@@ -233,7 +217,6 @@ const CustomerRegistration = props => {
         {errors.description && errors.description.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-        <label htmlFor="photoUrl">Photo URL: </label>
 
         <input
           type="text"
