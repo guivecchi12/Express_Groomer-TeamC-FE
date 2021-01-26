@@ -69,24 +69,31 @@ function distance(lat1, lon1, lat2, lon2, unit) {
 let dogFilter = false;
 let catFilter = false;
 
-const changeDogFilter = () => {
-  dogFilter = !dogFilter;
-};
-
-const changeCatFilter = () => {
-  catFilter = !catFilter;
-};
-
 const groomersPerPage = 12;
 const SearchForm = props => {
   const [name, setName] = useState('');
   const [zipcode, setZipcode] = useState('');
+  // dogState is the dog checkbox, catState is the cat checkbox
+  const [dogState, setDogState] = useState(false);
+  const [catState, setCatState] = useState(false);
   const [groomers, setGroomers] = useState([]);
   const [form] = Form.useForm();
   const [pageVals, setpageVals] = useState({
     minVal: 0,
     maxVal: groomersPerPage,
   });
+
+  // OnChange for the dog checkbox
+  const changeDogFilter = () => {
+    dogFilter = !dogFilter;
+    setDogState(!dogState);
+  };
+  // OnChange for the cat checkbox
+  const changeCatFilter = () => {
+    catFilter = !catFilter;
+    setCatState(!catState);
+  };
+
   // Are these needed or can we remove? VVVVV
   const onFinish = values => {
     console.log('Success: groomers displayed', values);
@@ -120,9 +127,6 @@ const SearchForm = props => {
 
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
-      // filtered.push(groomer);
-      // console.log(filtered)
-      console.log(dogFilter, catFilter);
 
       switch (true) {
         case dogFilter && catFilter:
@@ -183,6 +187,10 @@ const SearchForm = props => {
   const onReset = e => {
     form.resetFields();
     e.preventDefault();
+    // Updates the states used for the independent checkboxes
+    setCatState(false);
+    setDogState(false);
+
     // added function from original useEffect hook to reset the groomers list upon button reset
     getGroomerData()
       .then(response => {
@@ -265,8 +273,13 @@ const SearchForm = props => {
             >
               Use My Location
             </Button>
-            <Checkbox onChange={changeDogFilter}>Dog</Checkbox>
-            <Checkbox onChange={changeCatFilter}>Cat</Checkbox>
+
+            <Checkbox onChange={changeDogFilter} checked={dogState}>
+              Dog
+            </Checkbox>
+            <Checkbox onChange={changeCatFilter} checked={catState}>
+              Cat
+            </Checkbox>
           </Form.Item>
         </Form>
       </div>
