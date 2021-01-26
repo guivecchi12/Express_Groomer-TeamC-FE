@@ -94,19 +94,6 @@ const SearchForm = props => {
     setCatState(!catState);
   };
 
-  // Are these needed or can we remove? VVVVV
-  const onFinish = values => {
-    console.log('Success: groomers displayed', values);
-  };
-  const onFinishFailed = errorInfo => {
-    console.log('Unable to retrieve data:', errorInfo);
-  };
-  const handleName = e => setName(e.target.value);
-  const handleZipCode = e => setZipcode(e.target.value);
-  const onSubmit = e => {
-    e.preventDefault();
-    console.log(name, zipcode);
-  };
   useEffect(() => {
     getGroomerData()
       .then(response => {
