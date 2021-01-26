@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Modal, Form, Input } from 'antd';
+import { Button, Card, Modal, Form, Input, Row, Col } from 'antd';
 import { registerPet, getAllPets, deletePet } from '../../../api/index';
 import { connect } from 'react-redux';
 import { Component } from 'react';
@@ -111,24 +111,28 @@ const PetDisplay = props => {
           </form>
         </Modal>
       </>
-      {props.pets[0] && props.pets[0].length > 0
-        ? props.pets[0].map(pet => {
-            return (
-              <Card style={CardStyle}>
-                <p>Name: {pet.name}</p>
-                <p>Animal: {pet.animal}</p>
-                <p>Breed: {pet.breed}</p>
-                <p>Age: {pet.age}</p>
-                <p>Weight: {pet.weight}</p>
-                <p>Personality: {pet.description}</p>
-                <p>Vaccinations: {pet.vaccinations}</p>
-                <Button onClick={() => deletePet(pet.id)} danger>
-                  Delete
-                </Button>
-              </Card>
-            );
-          })
-        : null}
+      <Row>
+        {props.pets[0] && props.pets[0].length > 0
+          ? props.pets[0].map(pet => {
+              return (
+                <Col>
+                  <Card style={CardStyle}>
+                    <p>Name: {pet.name}</p>
+                    <p>Animal: {pet.animal}</p>
+                    <p>Breed: {pet.breed}</p>
+                    <p>Age: {pet.age}</p>
+                    <p>Weight: {pet.weight}</p>
+                    <p>Personality: {pet.description}</p>
+                    <p>Vaccinations: {pet.vaccinations}</p>
+                    <Button onClick={() => deletePet(pet.id)} danger>
+                      Delete
+                    </Button>
+                  </Card>
+                </Col>
+              );
+            })
+          : null}
+      </Row>
     </div>
   );
 };
