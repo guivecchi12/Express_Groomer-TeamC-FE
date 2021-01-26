@@ -7,11 +7,11 @@ import './CustomerRegistration.css';
 
 const StyledRegDiv = styled.div`
   width: 100%;
-  height: 100vh;
-  padding-bottom: 2%;
+  height: 100%;
+  padding-bottom: 30%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  // align-items: flex-start;
   background-color: #1d2d44;
   color: #c5e8e8;
 `;
