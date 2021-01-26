@@ -1,7 +1,8 @@
-import React, { useState, useffect, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, Input } from 'antd';
 import { registerPet, getAllPets, deletePet } from '../../../api/index';
 import { connect } from 'react-redux';
+import { Component } from 'react';
 
 const AddPet = {
   margin: '10px',
@@ -18,10 +19,6 @@ const PetDisplay = props => {
     customer_id: props.customer.id,
   });
 
-  useEffect(() => {
-    props.getAllPets(props.customer.id);
-  }, []);
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -29,6 +26,9 @@ const PetDisplay = props => {
   const handleOk = () => {
     setIsModalVisible(false);
     props.registerPet(petInfo);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
   const handleCancel = () => {
@@ -37,6 +37,9 @@ const PetDisplay = props => {
 
   const deletePet = id => {
     props.deletePet(id);
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
   const handleChange = e => {
@@ -108,7 +111,7 @@ const PetDisplay = props => {
           </form>
         </Modal>
       </>
-      {props.pets[0] && props.pets.length[0] > 0
+      {props.pets[0] && props.pets[0].length > 0
         ? props.pets[0].map(pet => {
             return (
               <Card style={CardStyle}>
