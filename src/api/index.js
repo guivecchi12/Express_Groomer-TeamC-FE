@@ -135,7 +135,7 @@ const getCustomerInfo = id => dispatch => {
 
   // I hard coded the id here and I should be changing it back and deleting this comment before pushing
   axios
-    .get(`${process.env.REACT_APP_API_URI}/customers/${18}`)
+    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
     .then(res => {
       dispatch({ type: GET_CUSTOMER_INFO_SUCCESS, payload: res.data });
     })
