@@ -15,9 +15,15 @@ const CardStyle = {
 
 const PetDisplay = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pets, setPets] = useState();
   const [petInfo, setPetInfo] = useState({
     customer_id: props.customer.id,
   });
+
+  useEffect(() => {
+    console.log(props.pets);
+    setPets(props.pets[0]);
+  }, [props.pets[0]]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -112,10 +118,10 @@ const PetDisplay = props => {
         </Modal>
       </>
       <Row>
-        {props.pets[0] && props.pets[0].length > 0
-          ? props.pets[0].map(pet => {
+        {pets && pets.length > 0
+          ? pets.map(pet => {
               return (
-                <Col>
+                <Col key={pet.id}>
                   <Card style={CardStyle}>
                     <p>Name: {pet.name}</p>
                     <p>Animal: {pet.animal}</p>
