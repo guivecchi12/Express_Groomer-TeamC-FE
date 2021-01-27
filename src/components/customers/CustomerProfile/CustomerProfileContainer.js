@@ -15,7 +15,7 @@ const CustomerProfileContainer = props => {
   }, [getCustomerInfo, customerId]);
 
   const updateProfile = data => {
-    props.updateCustomer(data, customerId);
+    updateCustomer(data, customerId);
   };
 
   const showContactModal = () => {

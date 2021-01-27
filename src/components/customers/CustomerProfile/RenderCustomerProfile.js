@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -11,6 +12,7 @@ import {
   Calendar,
 } from 'antd';
 import { getGroomerData } from '../../../api/index';
+import './CustomerProfile.css';
 
 const { Meta } = Card;
 const cardDescription = {
@@ -26,6 +28,9 @@ export const RenderCustomerProfile = props => {
   const [groomers, setGroomers] = useState([]);
   const [fav, setFav] = useState();
   const [customer, setCustomer] = useState(props.customer);
+  const [display, setDisplay] = useState(false);
+
+  // console.log(props.customer);
 
   const handleChange = e => {
     setProfileInfo({
@@ -49,6 +54,7 @@ export const RenderCustomerProfile = props => {
 
   const handleSubmit = () => {
     if (validateForm()) {
+      console.log(profileInfo);
       props.updateProfile(profileInfo);
       // console.log(props.customer);
     } else {
@@ -74,64 +80,63 @@ export const RenderCustomerProfile = props => {
   function onPanelChange(value, mode) {
     console.log(value, mode);
   }
-  const getFavGroomers = () => {
-    if (Array.isArray(customer.favorite_groomers)) {
-      groomers.forEach(groomer => {
-        if (customer.favorite_groomers.includes(groomer.id)) {
-          console.log(groomer);
-          return (
-            <Col key={groomer.id}>
-              <Card
-                onClick={props.viewGroomer}
-                hoverable
-                style={{
-                  width: 240,
-                  margin: '10px',
-                }}
-                cover={<img alt="example" src={groomer.photo_url} />}
-              >
-                <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
-                <div
-                  style={{
-                    marginBottom: '1px',
-                  }}
-                >
-                  <p style={cardDescription}>
-                    Vet Visit Rate: ${groomer.vet_visit_rate}
-                  </p>
-                  <p style={cardDescription}>
-                    Day Care Rate: ${groomer.day_care_rate}
-                  </p>
-                  <p style={cardDescription}>Walk Rate: ${groomer.walk_rate}</p>
-                  <p style={cardDescription}>Address: {groomer.address}</p>
-                  {/* Conditional Render - when Distance is calculated, show the distance in miles */}
-                  {groomer.distance ? (
-                    <p style={cardDescription}>
-                      Distance (Miles): {Math.floor(groomer.distance)}
-                    </p>
-                  ) : (
-                    ''
-                  )}
-                  <p style={cardDescription}>
-                    {groomer.city}, {groomer.state} {groomer.zip}
-                  </p>
-                  <p style={cardDescription}>{groomer.country}</p>
-                </div>
-              </Card>
-            </Col>
-          );
-        }
-      });
-    } else {
-      return <h5>You have not saved any Groomers yet</h5>;
-    }
+
+  const card = groomerCard => {
+    return (
+      <Card
+        hoverable
+        style={{
+          width: 240,
+          margin: '10px',
+        }}
+        cover={<img alt="example" src={groomerCard.photo_url} />}
+      >
+        <Meta title={groomerCard.name + ' ' + groomerCard.lastname}></Meta>
+        <div
+          style={{
+            marginBottom: '1px',
+          }}
+        >
+          <p style={cardDescription}>
+            Vet Visit Rate: ${groomerCard.vet_visit_rate}
+          </p>
+          <p style={cardDescription}>
+            Day Care Rate: ${groomerCard.day_care_rate}
+          </p>
+          <p style={cardDescription}>Walk Rate: ${groomerCard.walk_rate}</p>
+          <p style={cardDescription}>Address: {groomerCard.address}</p>
+          {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+          {groomerCard.distance ? (
+            <p style={cardDescription}>
+              Distance (Miles): {Math.floor(groomerCard.distance)}
+            </p>
+          ) : (
+            ''
+          )}
+          <p style={cardDescription}>
+            {groomerCard.city}, {groomerCard.state} {groomerCard.zip}
+          </p>
+          <p style={cardDescription}>{groomerCard.country}</p>
+        </div>
+        <span
+          className="delete"
+          onClick={e => {
+            e.stopPropagation();
+            removeFav(groomerCard.id);
+          }}
+          color="red"
+        >
+          Remove
+        </span>
+      </Card>
+    );
   };
 
   const changeFav = e => {
     setFav(parseInt(e.target.value));
   };
 
-  const removeFav = () => {
+  const removeFav = id => {
     if (customer.favorite_groomers == null) {
       console.log('NULL');
     } else {
@@ -140,19 +145,17 @@ export const RenderCustomerProfile = props => {
       } else {
         var i;
         for (i = 0; i < customer.favorite_groomers.length; i++) {
-          if (customer.favorite_groomers[i] === fav) {
+          if (customer.favorite_groomers[i] === id) {
             let newFav = customer.favorite_groomers;
-            newFav.favorite_groomers.splice(i, 1);
+            newFav.splice(i, 1);
             setCustomer({
               ...customer,
               favorite_groomers: newFav,
             });
-            // console.log(customer);
             props.updateProfile(customer);
           }
         }
       }
-      // console.log("customer: ", props.customer);
     }
   };
   async function addFav() {
@@ -167,7 +170,6 @@ export const RenderCustomerProfile = props => {
       await props.updateProfile(customer);
       console.log(customer);
     } else {
-      // console.log(customer, fav);
       if (!customer.favorite_groomers.includes(fav)) {
         const newFavs = [...customer.favorite_groomers, fav];
         setCustomer({
@@ -175,16 +177,12 @@ export const RenderCustomerProfile = props => {
           favorite_groomers: newFavs,
         });
         await props.updateProfile(customer);
-        console.log(customer);
       } else {
         console.log('you already have this groomer');
-        console.log(customer);
       }
     }
-    // console.log(props.customer);
+    console.log(customer);
   }
-  // console.log("customer: ", customer);
-  // console.log("Profile: ", profileInfo);
 
   return (
     <>
@@ -358,17 +356,21 @@ export const RenderCustomerProfile = props => {
         </Col>
       </Row>
       <div>
-        <input type="number" id="remove" name="remove" onChange={changeFav} />
-        <Button onClick={removeFav}>Remove Favorite</Button>
-      </div>
-      <div>
         <input type="number" id="add" name="add" onChange={changeFav} />
         <Button onClick={addFav}>Add Favorite</Button>
       </div>
-      <div className="favorite-groomers">
-        <h2>Favorite Groomers</h2>
-        <Row>{getFavGroomers()}</Row>
-      </div>
+      <Button onClick={() => setDisplay(!display)}>Favorite Groomers</Button>
+      <Row className="favorite-groomers">
+        {display === true ? (
+          groomers.map((groomer, index) => {
+            if (customer.favorite_groomers.includes(groomer.id)) {
+              return <Col key={index}>{card(groomer)}</Col>;
+            }
+          })
+        ) : (
+          <h1>Not displaying</h1>
+        )}
+      </Row>
     </>
   );
 };
