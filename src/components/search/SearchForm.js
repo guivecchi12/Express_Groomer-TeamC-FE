@@ -342,7 +342,9 @@ const SearchForm = props => {
       <Pagination
         defaultCurrent={1}
         total={groomers.length}
-        pageSize={groomersPerPage}
+        defaultPageSize={groomersPerPage}
+        showSizeChanger={false}
+        showQuickJumper={true}
         onChange={onPageChange}
       />
     </div>
