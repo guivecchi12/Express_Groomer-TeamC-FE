@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getUserData } from '../../api/index.js';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import groomerPic from './images/female-dog-groomer-brushing.jpg';
@@ -72,7 +74,7 @@ const Registration = props => {
           to={{
             pathname: '/register/groomers',
             state: {
-              email: props.email,
+              email: props.oktaUser.email,
             },
           }}
         >
@@ -82,7 +84,7 @@ const Registration = props => {
           to={{
             pathname: '/register/customers',
             state: {
-              email: props.email,
+              email: props.oktaUser.email,
             },
           }}
         >
@@ -93,4 +95,13 @@ const Registration = props => {
   );
 };
 
-export default Registration;
+const mapStateToProps = state => {
+  return {
+    isFetching: state.usersReducer.isFetching,
+    oktaUser: state.usersReducer.oktaUser,
+    groomer: state.usersReducer.groomer,
+    customer: state.usersReducer.customer,
+  };
+};
+
+export default connect(mapStateToProps, { getUserData })(Registration);

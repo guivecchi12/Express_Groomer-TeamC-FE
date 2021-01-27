@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { rootReducer } from './state/reducers/rootReducer';
@@ -31,7 +31,13 @@ import Home from './components/Home';
 import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -54,11 +60,10 @@ function App() {
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/home" component={Home} />
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
-
-          <SecureRoute
+          {/* any of the routes you need secured should be registered as SecureRoutes */}
+          <Route
             path="/"
             exact
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
@@ -76,6 +81,7 @@ function App() {
             )}
           />
           <SecureRoute
+            exact
             path="/customer-dashboard/groomers"
             render={props => (
               <CustomerDashboardContainer>
@@ -93,8 +99,16 @@ function App() {
             path="/customer-dashboard"
             render={props => <CustomerDashboard {...props} />}
           />
-          <Route path="/register/groomers" component={GroomerRegistration} />
-          <Route path="/register/customers" component={CustomerRegistration} />
+          <SecureRoute
+            exact
+            path="/register/groomers"
+            component={GroomerRegistration}
+          />
+          <SecureRoute
+            exact
+            path="/register/customers"
+            component={CustomerRegistration}
+          />
           <SecureRoute path="/groomer-dashboard" component={GroomerDashboard} />
           <Route path="/404" component={NotFoundPage} />
           <Redirect to="/404" />

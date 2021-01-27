@@ -32,7 +32,9 @@ const GroomerRegistration = props => {
   const defaultUser = {
     name: '',
     lastname: '',
-    email: '',
+    email: props.location.state.email,
+    latitude: '',
+    longitude: '',
     phone: '',
     zip: '',
     address: '',
