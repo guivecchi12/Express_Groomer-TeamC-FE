@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #1d2d44;
+  background-color: #3e5c76;
 `;
 
 const StyledDiv2 = styled.div`
@@ -54,21 +54,20 @@ const CustomerLink = styled(Link)`
   border-radius: 5px;
 `;
 
-const StyledH2 = styled.h2`
+const StyledH1 = styled.h1`
   margin: 0% 0% 3% 0%;
   padding: 4% 0% 1% 0%;
-  font-size: 2.5em;
   color: #f0f9f9;
   width: 100%;
   height: 4%;
-  background-color: #3e5c76;
+  background-color: #1d2d44;
   text-align: center;
 `;
 
 const Registration = props => {
   return (
     <StyledDiv>
-      <StyledH2>Are you a...</StyledH2>
+      <StyledH1>Are you a...</StyledH1>
       <StyledDiv2>
         <GroomerLink
           to={{

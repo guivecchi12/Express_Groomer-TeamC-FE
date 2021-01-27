@@ -12,7 +12,7 @@ const StyledRegDiv = styled.div`
   display: flex;
   justify-content: center;
   // align-items: flex-start;
-  background-color: #1d2d44;
+  background-color: #3e5c76;
   color: #c5e8e8;
 `;
 
@@ -22,12 +22,12 @@ const StyledH1 = styled.h1`
   font-size: 2.5em;
   color: #f0f9f9;
   width: 100%;
-  background-color: #3e5c76;
+  background-color: #1d2d44;
   text-align: center;
 `;
 
 const StyledSubmit = styled.button`
-  background-color: #3e5c76;
+  background-color: #1d2d44;
 `;
 
 const CustomerRegistration = props => {
