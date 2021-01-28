@@ -24,10 +24,6 @@ export const RenderGroomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
 
-  console.log('RenderGroomerProfile props', props);
-  console.log('RenderGroomerProfile state profileInfo', profileInfo);
-  console.log('RenderGroomerProfile state message', message);
-
   const handleChange = e => {
     setProfileInfo({
       ...profileInfo,
@@ -36,12 +32,6 @@ export const RenderGroomerProfile = props => {
   };
 
   const handleCheckboxChange = e => {
-    console.log(
-      'Checkbox Change detected',
-      e.target.name,
-      e.target.value,
-      e.target.checked
-    );
     setProfileInfo({
       ...profileInfo,
       [e.target.name]: e.target.checked,
