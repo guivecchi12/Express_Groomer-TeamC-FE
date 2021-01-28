@@ -25,6 +25,10 @@ const StyledH1 = styled.h1`
   text-align: center;
 `;
 
+const StyledInput = styled.input`
+  color: #3e5c76;
+`;
+
 const StyledSubmit = styled.button`
   background-color: #1d2d44;
 `;
@@ -65,7 +69,7 @@ const CustomerRegistration = props => {
       <StyledH1>Customer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <StyledInput
           type="text"
           id="name"
           name="name"
@@ -82,7 +86,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="lastname"
           name="lastname"
@@ -99,7 +103,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="phone"
           name="phone"
@@ -116,7 +120,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="address"
           name="address"
@@ -133,7 +137,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="city"
           name="city"
@@ -150,7 +154,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="state"
           name="state"
@@ -167,7 +171,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="country"
           name="country"
@@ -184,7 +188,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="zipcode"
           name="zip"
@@ -201,7 +205,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="description"
           name="description"
@@ -218,7 +222,7 @@ const CustomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="photoUrl"
           name="photo_url"

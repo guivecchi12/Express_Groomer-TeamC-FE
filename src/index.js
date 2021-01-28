@@ -74,9 +74,7 @@ function App() {
             path="/customer-dashboard/groomers/:id"
             render={props => (
               <CustomerDashboardContainer>
-                <SearchForm>
-                  <GroomerDisplay />
-                </SearchForm>
+                <GroomerDisplay />
               </CustomerDashboardContainer>
             )}
           />

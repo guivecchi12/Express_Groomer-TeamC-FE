@@ -24,6 +24,10 @@ const StyledH1 = styled.h1`
   text-align: center;
 `;
 
+const StyledInput = styled.input`
+  color: #3e5c76;
+`;
+
 const StyledSubmit = styled.button`
   background-color: #1d2d44;
 `;
@@ -68,7 +72,7 @@ const GroomerRegistration = props => {
       <StyledH1>Groomer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <StyledInput
           type="text"
           id="name"
           name="name"
@@ -85,7 +89,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="lastname"
           name="lastname"
@@ -95,7 +99,7 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <input
+        <StyledInput
           type="text"
           id="email"
           name="email"
@@ -112,7 +116,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="phone"
           name="phone"
@@ -129,7 +133,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="address"
           name="address"
@@ -146,7 +150,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="city"
           name="city"
@@ -163,7 +167,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="state"
           name="state"
@@ -180,7 +184,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="country"
           name="country"
@@ -197,7 +201,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="zipcode"
           name="zip"
@@ -214,7 +218,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="description"
           name="description"
@@ -231,7 +235,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="photoUrl"
           name="photo_url"
@@ -247,7 +251,7 @@ const GroomerRegistration = props => {
 
         <p>Do you groom: </p>
         <div>
-          <input
+          <StyledInput
             type="checkbox"
             id="grooms_dogs"
             name="grooms_dogs"
@@ -257,7 +261,7 @@ const GroomerRegistration = props => {
         </div>
 
         <div>
-          <input
+          <StyledInput
             type="checkbox"
             id="grooms_cats"
             name="grooms_cats"
@@ -266,7 +270,7 @@ const GroomerRegistration = props => {
           <label htmlFor="grooms_cats"> Cats </label>
         </div>
 
-        <input
+        <StyledInput
           type="text"
           id="walk_rate"
           name="walk_rate"
@@ -283,7 +287,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="day_care_rate"
           name="day_care_rate"
@@ -300,7 +304,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <input
+        <StyledInput
           type="text"
           id="vet_visit_rate"
           name="vet_visit_rate"
