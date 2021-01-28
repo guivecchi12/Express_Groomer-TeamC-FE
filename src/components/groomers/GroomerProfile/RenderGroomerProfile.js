@@ -21,62 +21,12 @@ const DemoBox = props => (
 );
 
 export const RenderGroomerProfile = props => {
-  // const [groomerProfileInfo, setGroomerProfileInfo] = useState({
-  //   address: "",
-  //   city: "",
-  //   country: "",
-  //   created_at: "",
-  //   day_care_rate: 0,
-  //   description: "",
-  //   email: "",
-  //   id: null,
-  //   lastname: "",
-  //   latitude: "",
-  //   longitude: "",
-  //   name: "",
-  //   oktaId: null,
-  //   phone: "",
-  //   photo_url: "",
-  //   state: "",
-  //   updated_at: "",
-  //   vet_visit_rate: 0,
-  //   walk_rate: 0,
-  //   zip: "",
-  //   walks: false,
-  //   day_care: false,
-  //   vet_visits: false,
-  //   cats: false,
-  //   dogs: false,
-  // });
-  const [profileInfo, setProfileInfo] = useState({
-    day_care: false,
-    walks: false,
-    vet_visits: false,
-    dogs: false,
-    cats: false,
-    mobile: false,
-    stationary: false,
-    mondayHours: '',
-    tuesdayHours: '',
-    wednesdayHours: '',
-    thursdayHours: '',
-    fridayHours: '',
-    saturdayHours: '',
-    sundayHours: '',
-  });
+  const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
 
   console.log('RenderGroomerProfile props', props);
   console.log('RenderGroomerProfile state profileInfo', profileInfo);
   console.log('RenderGroomerProfile state message', message);
-  // console.log("groomerProfileInfo", groomerProfileInfo)
-
-  // useEffect(() => {
-  //   setGroomerProfileInfo({
-  //     ...props.groomer,
-  //     groomerProfileInfo
-  //   })
-  // }, [props.groomer])
 
   const handleChange = e => {
     setProfileInfo({
@@ -86,6 +36,7 @@ export const RenderGroomerProfile = props => {
   };
 
   const handleCheckboxChange = e => {
+    console.log('Checkbox Change detected', e.target.name, e.target.value);
     setProfileInfo({
       ...profileInfo,
       [e.target.name]: !e.target.value,
@@ -96,7 +47,6 @@ export const RenderGroomerProfile = props => {
     for (let input in profileInfo) {
       if (input !== 'photo_url') {
         let value = profileInfo[input];
-        value = value.replace(/^\s+/, '').replace(/\s+$/, '');
         if (value === '') {
           return false;
         }
@@ -108,10 +58,6 @@ export const RenderGroomerProfile = props => {
   const handleSubmit = () => {
     if (validateForm()) {
       props.updateProfile(profileInfo);
-      // setGroomerProfileInfo({
-      //   groomerProfileInfo,
-      //   profileInfo
-      // })
     } else {
       setMessage('This field is required');
     }
@@ -240,16 +186,12 @@ export const RenderGroomerProfile = props => {
               placeholder={props.groomer.description}
             />
           </Form.Item>
-          {/* Need inputs for availability, which animals, bio, experience, etc */}
-          {/* Then add places to display that information in profile */}
-          {/* Make sure the backend has tables for the information */}
-          {/* Set up backend locally */}
           <p>Services Offered:</p>
           <Form.Item label="Day Care" name="day_care">
             <Checkbox
               name="day_care"
               onChange={handleCheckboxChange}
-              // placeholder={groomerProfileInfo.day_care}
+              placeholder={props.groomer.doesDayCare}
               value={profileInfo.day_care}
             />
           </Form.Item>
@@ -264,7 +206,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="walks"
               onChange={handleCheckboxChange}
-              // placeholder={groomerProfileInfo.walks}
+              placeholder={props.groomer.doesWalks}
               value={profileInfo.walks}
             />
           </Form.Item>
@@ -279,7 +221,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="vet_visits"
               onChange={handleCheckboxChange}
-              // placeholder={groomerProfileInfo.vet_visits}
+              placeholder={props.groomer.doesVetVisits}
               value={profileInfo.vet_visits}
             />
           </Form.Item>
@@ -295,7 +237,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="dogs"
               onChange={handleCheckboxChange}
-              // placeholder={groomerProfileInfo.dogs}
+              placeholder={props.groomer.dogs}
               value={profileInfo.dogs}
             />
           </Form.Item>
@@ -303,7 +245,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="cats"
               onChange={handleCheckboxChange}
-              // placeholder={groomerProfileInfo.cats}
+              placeholder={props.groomer.cats}
               value={profileInfo.cats}
             />
           </Form.Item>
@@ -312,6 +254,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="mobile"
               onChange={handleCheckboxChange}
+              placeholder={props.groomer.isMobile}
               value={profileInfo.mobile}
             />
           </Form.Item>
@@ -319,6 +262,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="stationary"
               onChange={handleCheckboxChange}
+              placeholder={props.groomer.isStationary}
               value={profileInfo.stationary}
             />
           </Form.Item>
@@ -424,6 +368,9 @@ export const RenderGroomerProfile = props => {
             <h2>Animals I Groom</h2>
             {props.groomer.dogs === true && <p>Dogs</p>}
             {props.groomer.cats === true && <p>Cats</p>}
+            {props.groomer.cats === false && props.groomer.dogs === false && (
+              <p>I haven't filled out this section of my profile yet</p>
+            )}
           </div>
           <div className="groomer-services-section">
             <h2>Services I Offer:</h2>
