@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { RenderCustomerDashboard } from './RenderCustomerDashboard';
+import { connect } from 'react-redux';
+import { getAllPets } from '../../../api/index';
 import { useOktaAuth } from '@okta/okta-react';
 
-const CustomerDashboardContainer = () => {
+const CustomerDashboardContainer = props => {
   const [collapsed, setCollapsed] = useState(false);
   const [home, setHome] = useState(true);
   const [profile, setProfile] = useState(false);
@@ -57,6 +59,9 @@ const CustomerDashboardContainer = () => {
     setGroomers(false);
     setGroomer(false);
     setPets(true);
+    if (props.customer.id) {
+      props.getAllPets(props.customer.id);
+    }
   };
 
   return (
@@ -77,4 +82,12 @@ const CustomerDashboardContainer = () => {
   );
 };
 
-export default CustomerDashboardContainer;
+const mapStateToProps = state => {
+  return {
+    customer: state.customerReducer.customer,
+  };
+};
+
+export default connect(mapStateToProps, { getAllPets })(
+  CustomerDashboardContainer
+);
