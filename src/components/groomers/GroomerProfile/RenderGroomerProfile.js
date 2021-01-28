@@ -36,10 +36,15 @@ export const RenderGroomerProfile = props => {
   };
 
   const handleCheckboxChange = e => {
-    console.log('Checkbox Change detected', e.target.name, e.target.value);
+    console.log(
+      'Checkbox Change detected',
+      e.target.name,
+      e.target.value,
+      e.target.checked
+    );
     setProfileInfo({
       ...profileInfo,
-      [e.target.name]: !e.target.value,
+      [e.target.name]: e.target.checked,
     });
   };
 
@@ -164,7 +169,6 @@ export const RenderGroomerProfile = props => {
               placeholder={props.groomer.phone}
             />
           </Form.Item>
-          {/* don't update the email, it causes issues */}
           <Form.Item label="Email" name="email">
             <Input
               name="email"
@@ -192,7 +196,6 @@ export const RenderGroomerProfile = props => {
               name="day_care"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesDayCare}
-              value={profileInfo.day_care}
             />
           </Form.Item>
           <Form.Item label="Day Care Rate" name="day_care_rate">
@@ -207,7 +210,6 @@ export const RenderGroomerProfile = props => {
               name="walks"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesWalks}
-              value={profileInfo.walks}
             />
           </Form.Item>
           <Form.Item label="Walk Rate" name="walk_rate">
@@ -222,7 +224,6 @@ export const RenderGroomerProfile = props => {
               name="vet_visits"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesVetVisits}
-              value={profileInfo.vet_visits}
             />
           </Form.Item>
           <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
@@ -238,7 +239,6 @@ export const RenderGroomerProfile = props => {
               name="dogs"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.dogs}
-              value={profileInfo.dogs}
             />
           </Form.Item>
           <Form.Item label="Cats" name="cats">
@@ -246,7 +246,6 @@ export const RenderGroomerProfile = props => {
               name="cats"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.cats}
-              value={profileInfo.cats}
             />
           </Form.Item>
           <p>Grooming Location:</p>
@@ -255,7 +254,6 @@ export const RenderGroomerProfile = props => {
               name="mobile"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.isMobile}
-              value={profileInfo.mobile}
             />
           </Form.Item>
           <Form.Item label="Stationary" name="stationary">
@@ -263,58 +261,29 @@ export const RenderGroomerProfile = props => {
               name="stationary"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.isStationary}
-              value={profileInfo.stationary}
             />
           </Form.Item>
           <p>Hours of Operation:</p>
           <Form.Item label="Monday" name="mondayHours">
-            <RangePicker
-              name="mondayHours"
-              onChange={handleChange}
-              value={profileInfo.mondayHours}
-            />
+            <RangePicker name="mondayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Tuesday" name="tuesdayHours">
-            <RangePicker
-              name="tuesdayHours"
-              onChange={handleChange}
-              value={profileInfo.tuesdayHours}
-            />
+            <RangePicker name="tuesdayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Wednesday" name="wednesdayHours">
-            <RangePicker
-              name="wednesdayHours"
-              onChange={handleChange}
-              value={profileInfo.wednesdayHours}
-            />
+            <RangePicker name="wednesdayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Thursday" name="thursdayHours">
-            <RangePicker
-              name="thursdayHours"
-              onChange={handleChange}
-              value={profileInfo.thursdayHours}
-            />
+            <RangePicker name="thursdayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Friday" name="fridayHours">
-            <RangePicker
-              name="fridayHours"
-              onChange={handleChange}
-              value={profileInfo.fridayHours}
-            />
+            <RangePicker name="fridayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Saturday" name="saturdayHours">
-            <RangePicker
-              name="saturdayHours"
-              onChange={handleChange}
-              value={profileInfo.saturdayHours}
-            />
+            <RangePicker name="saturdayHours" onChange={handleChange} />
           </Form.Item>
           <Form.Item label="Sunday" name="sundayHours">
-            <RangePicker
-              name="sundayHours"
-              onChange={handleChange}
-              value={profileInfo.sundayHours}
-            />
+            <RangePicker name="sundayHours" onChange={handleChange} />
           </Form.Item>
         </form>
       </Modal>
