@@ -11,14 +11,13 @@ const StyledRegDiv = styled.div`
   padding-bottom: 30%;
   display: flex;
   justify-content: center;
-  // align-items: flex-start;
   background-color: #3e5c76;
   color: #c5e8e8;
 `;
 
 const StyledH1 = styled.h1`
   margin: 0% 0% 2% 0%;
-  padding: 4% 0% 1% 0%;
+  padding: 2% 0% 1% 0%;
   font-size: 2.5em;
   color: #f0f9f9;
   width: 100%;

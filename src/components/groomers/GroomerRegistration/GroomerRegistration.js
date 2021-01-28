@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 const StyledRegDiv = styled.div`
   width: 100%;
-  height: 100vh;
-  padding-bottom: 2%;
+  height: 100%;
+  padding-bottom: 10%;
   display: flex;
   justify-content: center;
   background-color: #3e5c76;
@@ -16,7 +16,7 @@ const StyledRegDiv = styled.div`
 
 const StyledH1 = styled.h1`
   margin: 0% 0% 2% 0%;
-  padding: 4% 0% 1% 0%;
+  padding: 2% 0% 1% 0%;
   font-size: 2.5em;
   color: #f0f9f9;
   width: 100%;
@@ -26,8 +26,6 @@ const StyledH1 = styled.h1`
 
 const StyledSubmit = styled.button`
   background-color: #1d2d44;
-  border-radius: 30px;
-  padding: 5%;
 `;
 
 const GroomerRegistration = props => {
