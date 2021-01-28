@@ -19,7 +19,6 @@ import { ProfileListPage } from './components/ProfileList';
 import { LoginPage } from './components/Login';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
-// new imports
 import Registration from './components/Registration/Registration';
 import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration';
 import CustomerRegistration from './components/customers/CustomerRegistration/CustomerRegistration';
@@ -31,7 +30,6 @@ import GroomerDisplay from './components/groomers/GroomerDisplay';
 import Home from './components/Home';
 import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
-//import pet component
 
 const store = createStore(
   rootReducer,
@@ -53,17 +51,12 @@ ReactDOM.render(
 );
 
 function App() {
-  // The reason to declare App this way is so that we can use any helper functions we'd need for business logic, in our case auth.
-  // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
   const history = useHistory();
   const authHandler = () => {
-    // We pass this to our <Security /> component that wraps our routes.
-    // It'll automatically check if userToken is available and push back to login if not :)
     history.push('/login');
   };
   return (
     <div className="index-container">
-      {/* Added features */}
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
           <Route path="/login" component={LoginPage} />
