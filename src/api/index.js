@@ -21,7 +21,21 @@ import {
   UPDATE_GROOMER_START,
   UPDATE_GROOMER_SUCCESS,
   UPDATE_GROOMER_FAILURE,
-  GET_CUSTOMER_PETS,
+  GET_ALL_PETS_START,
+  GET_ALL_PETS_SUCCESS,
+  GET_ALL_PETS_FAILURE,
+  GET_PET_INFO_START,
+  GET_PET_INFO_SUCCESS,
+  GET_PET_INFO_FAILURE,
+  REGISTER_PET_INFO_START,
+  REGISTER_PET_INFO_SUCCESS,
+  REGISTER_PET_INFO_FAILURE,
+  UPDATE_PET_START,
+  UPDATE_PET_SUCCESS,
+  UPDATE_PET_FAILURE,
+  DELETE_PET_START,
+  DELETE_PET_SUCCESS,
+  DELETE_PET_FAILURE,
 } from '../state/reducers/types';
 
 let groomersReq = `${process.env.REACT_APP_API_URI}/groomers`;
@@ -119,6 +133,7 @@ const getProfileData = authState => {
 const getCustomerInfo = id => dispatch => {
   dispatch({ type: GET_CUSTOMER_INFO_START });
 
+  // I hard coded the id here and I should be changing it back and deleting this comment before pushing
   axios
     .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
     .then(res => {
@@ -198,16 +213,81 @@ const updateCustomer = (data, id) => dispatch => {
     });
 };
 
-const getPets = id => dispatch => {
+const getAllPets = id => dispatch => {
+  dispatch({ type: GET_ALL_PETS_START });
+
   axios
-    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
+    .get(`${process.env.REACT_APP_API_URI}/pets/get-all-pets/${id}`)
     .then(pets => {
       dispatch({
-        type: GET_CUSTOMER_PETS,
+        type: GET_ALL_PETS_SUCCESS,
         payload: pets.data,
       });
     })
     .catch(err => {
+      dispatch({ type: GET_ALL_PETS_FAILURE });
+      console.log(err);
+    });
+};
+
+const getPet = id => dispatch => {
+  dispatch({ type: GET_PET_INFO_START });
+
+  axios
+    .get(`${process.env.REACT_APP_API_URI}/pets/${id}`)
+    .then(pet => {
+      dispatch({
+        type: GET_PET_INFO_SUCCESS,
+        payload: pet.data,
+      });
+    })
+    .catch(err => {
+      dispatch({ type: GET_PET_INFO_FAILURE });
+      console.log(err);
+    });
+};
+
+const registerPet = (data, props) => dispatch => {
+  dispatch({ type: REGISTER_PET_INFO_START });
+  console.log(data);
+
+  axios
+    .post(`${process.env.REACT_APP_API_URI}/pets`, data)
+    .then(res => {
+      dispatch({ type: REGISTER_PET_INFO_SUCCESS, payload: res.data });
+      props.history.push('/customer-dashboard');
+    })
+    .catch(err => {
+      dispatch({ type: REGISTER_PET_INFO_FAILURE, payload: err.message });
+    });
+};
+
+const updatePet = (data, id) => dispatch => {
+  dispatch({ type: UPDATE_PET_START });
+
+  axios
+    .put(`${process.env.REACT_APP_API_URI}/pets/${id}`, data)
+    .then(res => {
+      dispatch({ type: UPDATE_PET_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_PET_FAILURE, payload: err.message });
+    });
+};
+
+const deletePet = id => dispatch => {
+  dispatch({ type: DELETE_PET_START });
+
+  axios
+    .delete(`${process.env.REACT_APP_API_URI}/pets/${id}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_PET_SUCCESS,
+        payload: res,
+      });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PET_FAILURE });
       console.log(err);
     });
 };
@@ -225,5 +305,9 @@ export {
   registerGroomer,
   updateCustomer,
   updateGroomer,
-  getPets,
+  getAllPets,
+  getPet,
+  registerPet,
+  updatePet,
+  deletePet,
 };

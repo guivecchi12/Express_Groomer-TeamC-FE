@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { Button, Card, Modal, Form, Input } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Card, Modal, Form, Input, Row, Col } from 'antd';
+import { registerPet, getAllPets, deletePet } from '../../../api/index';
+import { connect } from 'react-redux';
+import { Component } from 'react';
 
 const AddPet = {
   margin: '10px',
@@ -10,39 +13,17 @@ const CardStyle = {
   margin: '10px',
 };
 
-const pets = [
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-  {
-    name: 'name',
-    species: 'species',
-    breed: 'breed',
-    age: 'age',
-    weight: 'lbs',
-    personality: 'personality',
-    vaccinations: 'vaccinations',
-  },
-];
-
-const PetDisplay = () => {
+const PetDisplay = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [petInfo, setPetInfo] = useState({});
+  const [pets, setPets] = useState();
+  const [petInfo, setPetInfo] = useState({
+    customer_id: props.customer.id,
+  });
+
+  useEffect(() => {
+    console.log(props.pets);
+    setPets(props.pets[0]);
+  }, [props.pets[0]]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -50,10 +31,21 @@ const PetDisplay = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    props.registerPet(petInfo);
+    setPets([...pets, petInfo]);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const deletePet = id => {
+    props.deletePet(id);
+    setPets(
+      pets.filter(pet => {
+        return pet.id != id;
+      })
+    );
   };
 
   const handleChange = e => {
@@ -62,6 +54,7 @@ const PetDisplay = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   return (
     <div className="pet-display">
       <>
@@ -81,72 +74,84 @@ const PetDisplay = () => {
         >
           <form>
             <Form.Item label="First Name" name="name">
-              <Input
-                name="name"
-                onChange={handleChange}
-                placeholder={pets[0].name}
-              />
+              <Input name="name" onChange={handleChange} placeholder={'name'} />
             </Form.Item>
             <Form.Item label="Species" name="species">
               <Input
                 name="species"
                 onChange={handleChange}
-                placeholder={pets[0].species}
+                placeholder={'species'}
               />
             </Form.Item>
             <Form.Item label="Breed" name="breed">
               <Input
                 name="breed"
                 onChange={handleChange}
-                placeholder={pets[0].breed}
+                placeholder={'breed'}
               />
             </Form.Item>
             <Form.Item label="Age" name="age">
-              <Input
-                name="age"
-                onChange={handleChange}
-                placeholder={pets[0].age}
-              />
+              <Input name="age" onChange={handleChange} placeholder={'age'} />
             </Form.Item>
             <Form.Item label="Weight" name="weight">
               <Input
                 name="weight"
                 onChange={handleChange}
-                placeholder={pets[0].weight}
+                placeholder={'weight'}
               />
             </Form.Item>
-            <Form.Item label="Personality or quirks" name="personality">
+            <Form.Item label="Personality or quirks" name="description">
               <Input
-                name="personality"
+                name="description"
                 onChange={handleChange}
-                placeholder={pets[0].personality}
+                placeholder={'personality'}
               />
             </Form.Item>
-            <Form.Item label="vaccinations" name="vaccinations">
+            <Form.Item label="Vaccinations" name="vaccinations">
               <Input
                 name="vaccinations"
                 onChange={handleChange}
-                placeholder={pets[0].vaccinations}
+                placeholder={'vaccinations'}
               />
             </Form.Item>
           </form>
         </Modal>
       </>
-      {pets.map(pet => {
-        return (
-          <Card style={CardStyle}>
-            <h1>{pet.name}</h1>
-            <p>{pet.animal}</p>
-            <p>{pet.breed}</p>
-            <p>{pet.age}</p>
-            <p>{pet.weight}</p>
-            <p>{pet.personality}</p>
-            <p>{pet.vaccinations}</p>
-          </Card>
-        );
-      })}
+      <Row>
+        {pets && pets.length > 0
+          ? pets.map(pet => {
+              return (
+                <Col key={pet.id}>
+                  <Card style={CardStyle}>
+                    <p>Name: {pet.name}</p>
+                    <p>Animal: {pet.animal}</p>
+                    <p>Breed: {pet.breed}</p>
+                    <p>Age: {pet.age}</p>
+                    <p>Weight: {pet.weight}</p>
+                    <p>Personality: {pet.description}</p>
+                    <p>Vaccinations: {pet.vaccinations}</p>
+                    <Button onClick={() => deletePet(pet.id)} danger>
+                      Delete
+                    </Button>
+                  </Card>
+                </Col>
+              );
+            })
+          : null}
+      </Row>
     </div>
   );
 };
 
-export default PetDisplay;
+const mapStateToProps = state => {
+  return {
+    pets: state.petReducer.pets,
+    customer: state.customerReducer.customer,
+  };
+};
+
+export default connect(mapStateToProps, {
+  registerPet,
+  getAllPets,
+  deletePet,
+})(PetDisplay);
