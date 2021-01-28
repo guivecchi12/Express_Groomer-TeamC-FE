@@ -13,14 +13,7 @@ const submitButtons = {
   margin: '10px',
   //Gotta decide if we want the buttons together or apart, have them apart rn and I personally like it
 };
-const demo = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
+
 const tailLayout = {
   wrapperCol: {
     offset: 8,
@@ -35,19 +28,12 @@ const layoutForm = {
     span: 16,
   },
 };
-const tailLayoutForm = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+
 const { Meta } = Card;
 // Haversine Algorithm for Distance Mapping via Long/Lat
 function distance(lat1, lon1, lat2, lon2, unit) {
   var radlat1 = (Math.PI * lat1) / 180;
   var radlat2 = (Math.PI * lat2) / 180;
-  var radlon1 = (Math.PI * lon1) / 180;
-  var radlon2 = (Math.PI * lon2) / 180;
   var theta = lon1 - lon2;
   var radtheta = (Math.PI * theta) / 180;
   var dist =
@@ -56,37 +42,42 @@ function distance(lat1, lon1, lat2, lon2, unit) {
   dist = Math.acos(dist);
   dist = (dist * 180) / Math.PI;
   dist = dist * 60 * 1.1515;
-  if (unit == 'K') {
+  if (unit === 'K') {
     dist = dist * 1.609344;
   }
-  if (unit == 'N') {
+  if (unit === 'N') {
     dist = dist * 0.8684;
   }
   return dist;
 }
-const groomersPerPage = 3;
+
+// Filter variables for animal checkbox
+let dogFilter = false;
+let catFilter = false;
+
+const groomersPerPage = 12;
 const SearchForm = props => {
-  const [name, setName] = useState('');
-  const [zipcode, setZipcode] = useState('');
+  // dogState is the dog checkbox, catState is the cat checkbox
+  const [dogState, setDogState] = useState(false);
+  const [catState, setCatState] = useState(false);
   const [groomers, setGroomers] = useState([]);
   const [form] = Form.useForm();
   const [pageVals, setpageVals] = useState({
     minVal: 0,
     maxVal: groomersPerPage,
   });
-  // Are these needed or can we remove? VVVVV
-  const onFinish = values => {
-    console.log('Success: groomers displayed', values);
+
+  // OnChange for the dog checkbox
+  const changeDogFilter = () => {
+    dogFilter = !dogFilter;
+    setDogState(!dogState);
   };
-  const onFinishFailed = errorInfo => {
-    console.log('Unable to retrieve data:', errorInfo);
+  // OnChange for the cat checkbox
+  const changeCatFilter = () => {
+    catFilter = !catFilter;
+    setCatState(!catState);
   };
-  const handleName = e => setName(e.target.value);
-  const handleZipCode = e => setZipcode(e.target.value);
-  const onSubmit = e => {
-    e.preventDefault();
-    console.log(name, zipcode);
-  };
+
   useEffect(() => {
     getGroomerData()
       .then(response => {
@@ -101,23 +92,46 @@ const SearchForm = props => {
         groomer.latitude = -44.74325;
         groomer.longitude = 168.550333;
       }
+      // This sets the long and lat for the given groomer from the backend
       const groomLng = parseFloat(groomer.longitude);
       const groomLat = parseFloat(groomer.latitude);
-      // const distance = (lng - groomLng + (lat - groomLat)) / 2;
+
       let dist = distance(lng, lat, groomLng, groomLat, 'N');
       groomer.distance = dist;
-      filtered.push(groomer);
+
+      switch (true) {
+        case dogFilter && catFilter:
+          if (groomer.cats === true && groomer.dogs === true) {
+            filtered.push(groomer);
+          }
+          break;
+
+        case dogFilter:
+          if (groomer.dogs === true) {
+            filtered.push(groomer);
+          }
+          break;
+
+        case catFilter:
+          if (groomer.cats === true) {
+            filtered.push(groomer);
+          }
+          break;
+
+        default:
+          filtered.push(groomer);
+          break;
+      }
+
       return filtered;
-      // check if dog and/or cat
-      // if not, filter to remove
     });
     const sorted = filtered.sort(
       (a, b) => Math.abs(a.distance) - Math.abs(b.distance)
     );
-    setGroomers(sorted.slice(0, 3));
+
+    setGroomers(sorted.slice(0, 10));
   };
   const onFormFinish = values => {
-    setZipcode(values.zip);
     Geocode.fromAddress(values.zip).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
@@ -144,6 +158,10 @@ const SearchForm = props => {
   const onReset = e => {
     form.resetFields();
     e.preventDefault();
+    // Updates the states used for the independent checkboxes
+    setCatState(false);
+    setDogState(false);
+
     // added function from original useEffect hook to reset the groomers list upon button reset
     getGroomerData()
       .then(response => {
@@ -151,11 +169,7 @@ const SearchForm = props => {
       })
       .catch(error => console.log(error));
   };
-  const onFill = () => {
-    form.setFieldsValue({
-      zip: '44101',
-    });
-  };
+
   // Pagination handler and base settings
   // Variables can be adjusted for more items per page, etc.
   const onPageChange = value => {
@@ -226,8 +240,13 @@ const SearchForm = props => {
             >
               Use My Location
             </Button>
-            <Checkbox onChange={() => console.log('check')}>Dog</Checkbox>
-            <Checkbox onChange={() => console.log('check 2.0')}>Cat</Checkbox>
+
+            <Checkbox onChange={changeDogFilter} checked={dogState}>
+              Dog
+            </Checkbox>
+            <Checkbox onChange={changeCatFilter} checked={catState}>
+              Cat
+            </Checkbox>
           </Form.Item>
         </Form>
       </div>
@@ -264,6 +283,19 @@ const SearchForm = props => {
                   <p style={cardDescription}>
                     Vet Visit Rate: ${groomer.vet_visit_rate}
                   </p>
+                  {/* Conditional Render if the Groomer grooms Dogs */}
+                  {groomer.dogs ? (
+                    <p style={cardDescription}>We Groom Dogs!</p>
+                  ) : (
+                    ''
+                  )}
+                  {/* Conditional Render if the Groomer grooms Cats */}
+                  {groomer.cats ? (
+                    <p style={cardDescription}>We Groom Cats!</p>
+                  ) : (
+                    ''
+                  )}
+
                   <p style={cardDescription}>
                     Day Care Rate: ${groomer.day_care_rate}
                   </p>
@@ -290,7 +322,9 @@ const SearchForm = props => {
       <Pagination
         defaultCurrent={1}
         total={groomers.length}
-        pageSize={groomersPerPage}
+        defaultPageSize={groomersPerPage}
+        showSizeChanger={false}
+        showQuickJumper={true}
         onChange={onPageChange}
       />
     </div>
