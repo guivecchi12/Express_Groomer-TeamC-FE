@@ -81,7 +81,6 @@ const SearchForm = props => {
   useEffect(() => {
     getGroomerData()
       .then(response => {
-        console.log('RESPONSE', response);
         setGroomers(response);
       })
       .catch(error => console.log(error));
