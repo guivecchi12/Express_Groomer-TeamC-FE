@@ -32,9 +32,7 @@ const PetDisplay = props => {
   const handleOk = () => {
     setIsModalVisible(false);
     props.registerPet(petInfo);
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    setPets([...pets, petInfo]);
   };
 
   const handleCancel = () => {
@@ -43,9 +41,11 @@ const PetDisplay = props => {
 
   const deletePet = id => {
     props.deletePet(id);
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+    setPets(
+      pets.filter(pet => {
+        return pet.id != id;
+      })
+    );
   };
 
   const handleChange = e => {
