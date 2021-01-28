@@ -191,48 +191,54 @@ export const RenderGroomerProfile = props => {
             />
           </Form.Item>
           <p>Services Offered:</p>
-          <Form.Item label="Day Care" name="day_care">
+          <Form.Item label="Day Care" name="doesDayCare">
             <Checkbox
-              name="day_care"
+              name="doesDayCare"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesDayCare}
             />
           </Form.Item>
-          <Form.Item label="Day Care Rate" name="day_care_rate">
-            <Input
-              name="day_care_rate"
-              onChange={handleChange}
-              placeholder={props.groomer.day_care_rate}
-            />
-          </Form.Item>
-          <Form.Item label="Walks" name="walks">
+          {profileInfo.doesDayCare === true && (
+            <Form.Item label="Day Care Rate" name="day_care_rate">
+              <Input
+                name="day_care_rate"
+                onChange={handleChange}
+                placeholder={props.groomer.day_care_rate}
+              />
+            </Form.Item>
+          )}
+          <Form.Item label="Walks" name="doesWalks">
             <Checkbox
-              name="walks"
+              name="doesWalks"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesWalks}
             />
           </Form.Item>
-          <Form.Item label="Walk Rate" name="walk_rate">
-            <Input
-              name="walk_rate"
-              onChange={handleChange}
-              placeholder={props.groomer.walk_rate}
-            />
-          </Form.Item>
-          <Form.Item label="Vet Visits" name="vet_visits">
+          {profileInfo.doesWalks === true && (
+            <Form.Item label="Walk Rate" name="walk_rate">
+              <Input
+                name="walk_rate"
+                onChange={handleChange}
+                placeholder={props.groomer.walk_rate}
+              />
+            </Form.Item>
+          )}
+          <Form.Item label="Vet Visits" name="doesVetVisits">
             <Checkbox
-              name="vet_visits"
+              name="doesVetVisits"
               onChange={handleCheckboxChange}
               placeholder={props.groomer.doesVetVisits}
             />
           </Form.Item>
-          <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
-            <Input
-              name="vet_visit_rate"
-              onChange={handleChange}
-              placeholder={props.groomer.vet_visit_rate}
-            />
-          </Form.Item>
+          {profileInfo.doesVetVisits === true && (
+            <Form.Item label="Vet Visit Rate" name="vet_visit_rate">
+              <Input
+                name="vet_visit_rate"
+                onChange={handleChange}
+                placeholder={props.groomer.vet_visit_rate}
+              />
+            </Form.Item>
+          )}
           <p>Animals you groom:</p>
           <Form.Item label="Dogs" name="dogs">
             <Checkbox
@@ -353,6 +359,21 @@ export const RenderGroomerProfile = props => {
               <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
             )}
           </div>
+          <div className="mobile-or-stationary">
+            <h2>My Business is:</h2>
+            {props.groomer.isMobile === true && (
+              <>
+                <p>Mobile</p>
+                <p>I'll groom your pets at your house.</p>
+              </>
+            )}
+            {props.groomer.isStationary === true && (
+              <>
+                <p>Stationary</p>
+                <p>I'll groom your pets at my shop.</p>
+              </>
+            )}
+          </div>
           <div className="hours-operation">
             <h2>Hours of Operation:</h2>
             <ul>
@@ -364,21 +385,6 @@ export const RenderGroomerProfile = props => {
               <li>Saturday: {props.groomer.saturdayHours}</li>
               <li>Sunday: {props.groomer.sundayHours}</li>
             </ul>
-          </div>
-          <div className="mobile-or-stationary">
-            <h2>My Business is:</h2>
-            {props.groomer.mobile === true && (
-              <>
-                <p>Mobile</p>
-                <p>I'll groom your pets at your house.</p>
-              </>
-            )}
-            {props.groomer.stationary === true && (
-              <>
-                <p>Stationary</p>
-                <p>I'll groom your pets at my shop.</p>
-              </>
-            )}
           </div>
           <div className="groomer-licenses-section">
             <h2>My Grooming Licenses:</h2>
