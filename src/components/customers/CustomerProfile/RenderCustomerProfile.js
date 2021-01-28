@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -75,7 +74,7 @@ export const RenderCustomerProfile = props => {
     if (props.status === 'failure') {
       setMessage(props.error);
     }
-  }, [props]);
+  }, [props, props.updateProfile]);
 
   function onPanelChange(value, mode) {
     console.log(value, mode);
@@ -137,23 +136,19 @@ export const RenderCustomerProfile = props => {
   };
 
   const removeFav = id => {
-    if (customer.favorite_groomers == null) {
-      console.log('NULL');
+    if (!customer.favorite_groomers.includes(fav)) {
+      console.log('fav does not exist');
     } else {
-      if (!customer.favorite_groomers.includes(fav)) {
-        console.log('fav does not exist');
-      } else {
-        var i;
-        for (i = 0; i < customer.favorite_groomers.length; i++) {
-          if (customer.favorite_groomers[i] === id) {
-            let newFav = customer.favorite_groomers;
-            newFav.splice(i, 1);
-            setCustomer({
-              ...customer,
-              favorite_groomers: newFav,
-            });
-            props.updateProfile(customer);
-          }
+      var i;
+      for (i = 0; i < customer.favorite_groomers.length; i++) {
+        if (customer.favorite_groomers[i] === id) {
+          let newFav = customer.favorite_groomers;
+          newFav.splice(i, 1);
+          setCustomer({
+            ...customer,
+            favorite_groomers: newFav,
+          });
+          props.updateProfile(customer);
         }
       }
     }
@@ -168,7 +163,6 @@ export const RenderCustomerProfile = props => {
         favorite_groomers: fav,
       });
       await props.updateProfile(customer);
-      console.log(customer);
     } else {
       if (!customer.favorite_groomers.includes(fav)) {
         const newFavs = [...customer.favorite_groomers, fav];
@@ -177,11 +171,11 @@ export const RenderCustomerProfile = props => {
           favorite_groomers: newFavs,
         });
         await props.updateProfile(customer);
+        console.log(props.customer);
       } else {
         console.log('you already have this groomer');
       }
     }
-    console.log(customer);
   }
 
   return (
@@ -195,7 +189,7 @@ export const RenderCustomerProfile = props => {
           <Button key="back" onClick={props.handleContactModalClose}>
             Close
           </Button>,
-          <Button key="submit" type="primary" onClick={handleSubmit}>
+          <Button key="submit" type="primary" onClick={() => handleSubmit()}>
             Update
           </Button>,
         ]}
@@ -229,7 +223,7 @@ export const RenderCustomerProfile = props => {
           <Button key="back" onClick={props.handleProfileModalClose}>
             Close
           </Button>,
-          <Button key="submit" type="primary" onClick={handleSubmit}>
+          <Button key="submit" type="primary" onClick={() => handleSubmit()}>
             Update
           </Button>,
         ]}

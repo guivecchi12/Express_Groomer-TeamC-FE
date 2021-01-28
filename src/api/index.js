@@ -125,6 +125,7 @@ const getCustomerInfo = id => dispatch => {
       dispatch({ type: GET_CUSTOMER_INFO_SUCCESS, payload: res.data });
     })
     .catch(err => {
+      console.log(err);
       dispatch({ type: GET_CUSTOMER_INFO_FAILURE, payload: err.message });
     });
 };
