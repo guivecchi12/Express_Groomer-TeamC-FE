@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, Input, Row, Col } from 'antd';
+import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import { registerPet, getAllPets, deletePet } from '../../../api/index';
 import { connect } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
@@ -14,10 +15,18 @@ const CardStyle = {
 };
 
 const ImageInput = {
-  width: '90%',
+  width: '100%',
   margin: '1% auto',
-  padding: '16%',
   border: '1px solid lightgrey',
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const ImageIcon = {
+  fontSize: '3.5rem',
+  margin: '2% auto',
+  textAlign: 'center',
+  cursor: 'pointer',
 };
 
 const PetDisplay = props => {
@@ -105,7 +114,6 @@ const PetDisplay = props => {
               <Input name="name" onChange={handleChange} placeholder={'name'} />
             </Form.Item>
             <Form.Item label="Species" name="species">
-              rgba(0, 0, 0, 0.65)
               <Input
                 name="species"
                 onChange={handleChange}
@@ -145,8 +153,10 @@ const PetDisplay = props => {
             </Form.Item>
             <Form.Item label="Image" name="image">
               <div style={ImageInput} {...getRootProps()}>
-                <Input {...getInputProps()} />
+                <input {...getInputProps()} />
+                <VerticalAlignBottomOutlined style={ImageIcon} />
               </div>
+              <p>Drop in an image file or click the input icon</p>
             </Form.Item>
           </form>
         </Modal>
@@ -156,7 +166,15 @@ const PetDisplay = props => {
           ? pets.map(pet => {
               return (
                 <Col key={pet.id}>
-                  <Card style={CardStyle}>
+                  <Card
+                    style={CardStyle}
+                    cover={
+                      <img
+                        alt="example"
+                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.udlI-fXxKhOYoDQ66M3O5wHaE9%26pid%3DApi&f=1"
+                      />
+                    }
+                  >
                     <p>Name: {pet.name}</p>
                     <p>Animal: {pet.animal}</p>
                     <p>Breed: {pet.breed}</p>
