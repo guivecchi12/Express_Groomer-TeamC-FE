@@ -67,6 +67,16 @@ const GroomerRegistration = props => {
     });
   };
 
+  const handleCheckboxChange = event => {
+    event.preventDefault();
+    console.log(user);
+
+    setUser({
+      ...user,
+      [event.target.name]: event.target.checked,
+    });
+  };
+
   return (
     <StyledRegDiv className="registration-container">
       <StyledH1>Groomer Registration</StyledH1>
@@ -253,21 +263,21 @@ const GroomerRegistration = props => {
         <div>
           <StyledInput
             type="checkbox"
-            id="grooms_dogs"
-            name="grooms_dogs"
-            value="Dogs"
+            id="dogs"
+            name="dogs"
+            onChange={handleCheckboxChange}
           />
-          <label htmlFor="grooms_dogs"> Dogs </label>
+          <label htmlFor="dogs"> Dogs </label>
         </div>
 
         <div>
           <StyledInput
             type="checkbox"
-            id="grooms_cats"
-            name="grooms_cats"
-            value="Cats"
+            id="cats"
+            name="cats"
+            onChange={handleCheckboxChange}
           />
-          <label htmlFor="grooms_cats"> Cats </label>
+          <label htmlFor="cats"> Cats </label>
         </div>
 
         <StyledInput
