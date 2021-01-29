@@ -33,6 +33,7 @@ const StyledSubmit = styled.button`
 `;
 
 const GroomerRegistration = props => {
+  console.log('email', props.location.state.email);
   const defaultUser = {
     name: '',
     lastname: '',
@@ -69,7 +70,6 @@ const GroomerRegistration = props => {
 
   const handleCheckboxChange = event => {
     event.preventDefault();
-    console.log(user);
 
     setUser({
       ...user,
@@ -114,6 +114,7 @@ const GroomerRegistration = props => {
           id="email"
           name="email"
           placeholder="email"
+          value={props.location.state.email}
           onChange={handleInputChange}
           aria-invalid={errors.email ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
