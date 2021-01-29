@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Card, Modal, Form, Input, Row, Col } from 'antd';
 import { registerPet, getAllPets, deletePet } from '../../../api/index';
 import { connect } from 'react-redux';
-import { Component } from 'react';
+import { useDropzone } from 'react-dropzone';
 
 const AddPet = {
   margin: '10px',
@@ -11,6 +11,13 @@ const AddPet = {
 const CardStyle = {
   width: 240,
   margin: '10px',
+};
+
+const ImageInput = {
+  width: '90%',
+  margin: '1% auto',
+  padding: '16%',
+  border: '1px solid lightgrey',
 };
 
 const PetDisplay = props => {
@@ -55,6 +62,27 @@ const PetDisplay = props => {
     });
   };
 
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: acceptedFiles => {
+      acceptedFiles.map(file => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          if (file.type === 'image/jpeg' || file.type === 'image/png') {
+            console.log(file);
+            console.log(event.target.result);
+          } else {
+            console.log('Possible alert message');
+          }
+        };
+        reader.readAsText(file);
+
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        });
+      });
+    },
+  });
+
   return (
     <div className="pet-display">
       <>
@@ -77,6 +105,7 @@ const PetDisplay = props => {
               <Input name="name" onChange={handleChange} placeholder={'name'} />
             </Form.Item>
             <Form.Item label="Species" name="species">
+              rgba(0, 0, 0, 0.65)
               <Input
                 name="species"
                 onChange={handleChange}
@@ -113,6 +142,11 @@ const PetDisplay = props => {
                 onChange={handleChange}
                 placeholder={'vaccinations'}
               />
+            </Form.Item>
+            <Form.Item label="Image" name="image">
+              <div style={ImageInput} {...getRootProps()}>
+                <Input {...getInputProps()} />
+              </div>
             </Form.Item>
           </form>
         </Modal>
