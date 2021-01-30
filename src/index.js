@@ -59,13 +59,17 @@ function App() {
     <div className="index-container">
       <Security {...config} onAuthRequired={authHandler}>
         <Switch>
+          {/* <Route
+            exact path="/register/customers"
+            component={CustomerRegistration}
+          /> */}
           <Route path="/login" component={LoginPage} />
           <Route path="/SearchForm" component={SearchForm} />
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <Route
-            path="/"
             exact
+            path="/"
             component={() => <HomePage LoadingComponent={LoadingComponent} />}
           />
           <SecureRoute path="/profile-list" component={ProfileListPage} />
