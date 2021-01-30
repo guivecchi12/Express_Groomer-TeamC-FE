@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CustomerProfile } from '../CustomerProfile';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import GroomerDisplay from '../../groomers/GroomerDisplay';
+import PetDisplay from '../../customers/pets/petDisplay';
 import {
   PieChartOutlined,
   FileOutlined,
@@ -108,7 +109,7 @@ export const RenderCustomerDashboard = props => {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              Users pets displayed here
+              <PetDisplay />
             </div>
           </Content>
         </Layout>

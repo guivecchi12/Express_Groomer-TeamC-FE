@@ -2,13 +2,41 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { registerGroomer } from '../../../api/index';
-import './GroomerRegistration.css';
+import styled from 'styled-components';
+
+const StyledRegDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  padding-bottom: 10%;
+  display: flex;
+  justify-content: center;
+  background-color: #3e5c76;
+  color: #c5e8e8;
+`;
+
+const StyledH1 = styled.h1`
+  margin: 0% 0% 2% 0%;
+  padding: 2% 0% 1% 0%;
+  font-size: 2.5em;
+  color: #f0f9f9;
+  width: 100%;
+  background-color: #1d2d44;
+  text-align: center;
+`;
+
+const StyledInput = styled.input`
+  color: #3e5c76;
+`;
+
+const StyledSubmit = styled.button`
+  background-color: #1d2d44;
+`;
 
 const GroomerRegistration = props => {
   const defaultUser = {
     name: '',
     lastname: '',
-    email: '',
+    email: props.location.state.email,
     latitude: '',
     longitude: '',
     phone: '',
@@ -32,26 +60,19 @@ const GroomerRegistration = props => {
 
   const handleInputChange = event => {
     event.preventDefault();
-    //   getting name of input and value
 
     setUser({
       ...user,
-      // seting key to key-value pair
       [event.target.name]: event.target.value,
     });
   };
 
   return (
-    //   change user.state based on whats coming in input
-
-    <div className="registration-container">
-      <h1>Groomer Registration</h1>
+    <StyledRegDiv className="registration-container">
+      <StyledH1>Groomer Registration</StyledH1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="name">Name: </label>
-
-        {/* use aria-invalid to indicate field contain error */}
-        <input
+        <StyledInput
           type="text"
           id="name"
           name="name"
@@ -61,7 +82,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.name && errors.name.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -69,8 +89,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="lastname">Last Name: </label>
-        <input
+        <StyledInput
           type="text"
           id="lastname"
           name="lastname"
@@ -80,8 +99,7 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <label htmlFor="email">Email: </label>
-        <input
+        <StyledInput
           type="text"
           id="email"
           name="email"
@@ -91,29 +109,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        <label htmlFor="latitude">latitude: </label>
-        <input
-          type="text"
-          id="latitude"
-          name="latitude"
-          placeholder="latitude"
-          onChange={handleInputChange}
-          aria-invalid={errors.latitude ? 'true' : 'false'}
-          ref={register({ required: true, maxLength: 30 })}
-        />
-
-        <label htmlFor="longitude">longitude: </label>
-        <input
-          type="text"
-          id="longitude"
-          name="longitude"
-          placeholder="longitude"
-          onChange={handleInputChange}
-          aria-invalid={errors.longitude ? 'true' : 'false'}
-          ref={register({ required: true, maxLength: 30 })}
-        />
-
-        {/* use role="alert" to announce the error message */}
         {errors.lastname && errors.lastname.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -121,8 +116,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="phone">Phone: </label>
-        <input
+        <StyledInput
           type="text"
           id="phone"
           name="phone"
@@ -132,7 +126,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.phone && errors.phone.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -140,8 +133,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="address">Address: </label>
-        <input
+        <StyledInput
           type="text"
           id="address"
           name="address"
@@ -151,7 +143,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.address && errors.address.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -159,8 +150,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="city">City: </label>
-        <input
+        <StyledInput
           type="text"
           id="city"
           name="city"
@@ -170,7 +160,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.city && errors.city.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -178,8 +167,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="state">State: </label>
-        <input
+        <StyledInput
           type="text"
           id="state"
           name="state"
@@ -189,7 +177,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.state && errors.state.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -197,8 +184,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="country">Country: </label>
-        <input
+        <StyledInput
           type="text"
           id="country"
           name="country"
@@ -208,7 +194,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.country && errors.country.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -216,18 +201,16 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="zipcode">ZIP Code: </label>
-        <input
+        <StyledInput
           type="text"
           id="zipcode"
           name="zip"
-          placeholder="zipcode"
+          placeholder="Zip code"
           onChange={handleInputChange}
           aria-invalid={errors.zipcode ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 30 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.zipcode && errors.zipcode.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -235,18 +218,16 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="description">Description: </label>
-        <input
+        <StyledInput
           type="text"
           id="description"
           name="description"
-          placeholder="description"
+          placeholder="Description"
           onChange={handleInputChange}
           aria-invalid={errors.description ? 'true' : 'false'}
           ref={register({ required: true, maxLength: 300 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.description && errors.description.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -254,8 +235,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="photoUrl">Photo URL: </label>
-        <input
+        <StyledInput
           type="text"
           id="photoUrl"
           name="photo_url"
@@ -265,13 +245,32 @@ const GroomerRegistration = props => {
           ref={register({ required: false, maxLength: 300 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.photoUrl && errors.photoUrl.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="walk_rate">Walk rate: </label>
-        <input
+        <p>Do you groom: </p>
+        <div>
+          <StyledInput
+            type="checkbox"
+            id="grooms_dogs"
+            name="grooms_dogs"
+            value="Dogs"
+          />
+          <label htmlFor="grooms_dogs"> Dogs </label>
+        </div>
+
+        <div>
+          <StyledInput
+            type="checkbox"
+            id="grooms_cats"
+            name="grooms_cats"
+            value="Cats"
+          />
+          <label htmlFor="grooms_cats"> Cats </label>
+        </div>
+
+        <StyledInput
           type="text"
           id="walk_rate"
           name="walk_rate"
@@ -281,7 +280,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 100 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.walk_rate && errors.walk_rate.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -289,8 +287,7 @@ const GroomerRegistration = props => {
           <span role="alert">Max length exceeded</span>
         )}
 
-        <label htmlFor="day_care_rate">Day care rate: </label>
-        <input
+        <StyledInput
           type="text"
           id="day_care_rate"
           name="day_care_rate"
@@ -300,16 +297,14 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 100 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.day_care_rate && errors.day_care_rate.type === 'required' && (
           <span role="alert">This is required</span>
         )}
         {errors.day_care_rate && errors.day_care_rate.type === 'maxLength' && (
           <span role="alert">Max length exceeded</span>
         )}
-        <label htmlFor="vet_visit_rate">Vet visit rate: </label>
 
-        <input
+        <StyledInput
           type="text"
           id="vet_visit_rate"
           name="vet_visit_rate"
@@ -319,7 +314,6 @@ const GroomerRegistration = props => {
           ref={register({ required: true, maxLength: 100 })}
         />
 
-        {/* use role="alert" to announce the error message */}
         {errors.vet_visit_rate && errors.vet_visit_rate.type === 'required' && (
           <span role="alert">This is required</span>
         )}
@@ -328,9 +322,9 @@ const GroomerRegistration = props => {
             <span role="alert">Max length exceeded</span>
           )}
 
-        <button type="submit">Submit</button>
+        <StyledSubmit type="submit">Submit</StyledSubmit>
       </form>
-    </div>
+    </StyledRegDiv>
   );
 };
 
