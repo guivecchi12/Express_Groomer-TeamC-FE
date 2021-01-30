@@ -20,7 +20,7 @@ import { LoginPage } from './components/Login';
 import { config } from './utils/oktaConfig';
 import { LoadingComponent } from './components/common';
 import Registration from './components/Registration/Registration';
-import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration.js';
+import GroomerRegistration from './components/groomers/GroomerRegistration/GroomerRegistration';
 import CustomerRegistration from './components/customers/CustomerRegistration/CustomerRegistration';
 import CustomerDashboard from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 import GroomerDashboard from './components/groomers/GroomerDashboard/GroomerDashboardContainer';
@@ -68,7 +68,6 @@ function App() {
           <Route path="/implicit/callback" component={LoginCallback} />
           {/* any of the routes you need secured should be registered as SecureRoutes */}
           <Route
-            path="/"
             exact
             path="/"
             component={() => <HomePage LoadingComponent={LoadingComponent} />}

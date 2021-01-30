@@ -37,7 +37,7 @@ const CustomerRegistration = props => {
   const defaultUser = {
     name: '',
     lastname: '',
-    email: '',
+    email: props.location.state.email,
     phone: '',
     zip: '',
     address: '',
@@ -248,8 +248,6 @@ const mapStateToProps = state => {
   };
 };
 
-// export default connect(mapStateToProps, { registerCustomer })(
-//   CustomerRegistration
-// );
-
-export default CustomerRegistration;
+export default connect(mapStateToProps, { registerCustomer })(
+  CustomerRegistration
+);
