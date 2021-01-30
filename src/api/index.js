@@ -96,6 +96,13 @@ const getGroomerData = async () => {
     .catch(err => console.log(err));
 };
 
+const getCustomerData = async id => {
+  return await axios
+    .get(`${process.env.REACT_APP_API_URI}/customers/${id}`)
+    .then(res => res.data)
+    .catch(err => console.log(err));
+};
+
 const getAuthHeader = authState => {
   if (!authState.isAuthenticated) {
     throw new Error('Not authenticated');
@@ -214,6 +221,21 @@ const updateCustomer = (data, id) => dispatch => {
       dispatch({ type: UPDATE_CUSTOMER_FAILURE, payload: err.message });
     });
 };
+const removeFavoriteGroomer = (data, id) => dispatch => {
+  dispatch({ type: UPDATE_CUSTOMER_START });
+  console.log(typeof id, data);
+  axios
+    .put(
+      `${process.env.REACT_APP_API_URI}/customers/remove_favorite-groomer/${id}`,
+      data
+    )
+    .then(res => {
+      dispatch({ type: UPDATE_CUSTOMER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_CUSTOMER_FAILURE, payload: err.message });
+    });
+};
 
 const getAllPets = id => dispatch => {
   dispatch({ type: GET_ALL_PETS_START });
@@ -300,12 +322,14 @@ export {
   getProfileData,
   getDSData,
   getCustomerInfo,
+  getCustomerData,
   getGroomerInfo,
   getGroomerData,
   getUserData,
   registerCustomer,
   registerGroomer,
   updateCustomer,
+  removeFavoriteGroomer,
   updateGroomer,
   getAllPets,
   getPet,

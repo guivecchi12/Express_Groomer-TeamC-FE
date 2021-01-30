@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Card, Pagination } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import Geocode from 'react-geocode';
-import { getGroomerData } from '../../api/index';
+import {
+  getGroomerData,
+  getCustomerData,
+  removeFavoriteGroomer,
+  updateCustomer,
+} from '../../api/index';
+
 Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
 Geocode.setLanguage('en');
 Geocode.setRegion('us');
@@ -66,6 +73,8 @@ const SearchForm = props => {
     minVal: 0,
     maxVal: groomersPerPage,
   });
+  const [favorites, setFavorites] = useState([]);
+  const customerId = localStorage.getItem('customerId');
 
   // OnChange for the dog checkbox
   const changeDogFilter = () => {
@@ -84,6 +93,10 @@ const SearchForm = props => {
         setGroomers(response);
       })
       .catch(error => console.log(error));
+
+    getCustomerData(customerId)
+      .then(res => setFavorites(res.favorite_groomers))
+      .catch(err => console.log(err));
   }, []);
   const filterDist = (lng, lat) => {
     let filtered = [];
@@ -178,6 +191,18 @@ const SearchForm = props => {
       maxVal: value * groomersPerPage,
     });
   };
+
+  const addFavGroomer = id => {
+    setFavorites(oldFavorites => [...oldFavorites, id]);
+    updateCustomer({ favorite_groomers: id }, customerId);
+  };
+
+  const removeFavGroomer = id => {
+    const newFavs = favorites.filter(groomer => groomer !== id);
+    setFavorites(newFavs);
+    removeFavoriteGroomer({ favorite_groomers: id }, customerId);
+  };
+
   return (
     <div>
       <div>
@@ -261,10 +286,11 @@ const SearchForm = props => {
         {/* Slice on initial state, Paginate onChange updates the state and shifts the slice based on the page */}
         {groomers.slice(pageVals.minVal, pageVals.maxVal).map(groomer => {
           return (
-            <Link
-              key={groomer.id}
-              to={`/customer-dashboard/groomers/${groomer.id}`}
-            >
+            // <Link
+            //   key={groomer.id}
+            //   to={`/customer-dashboard/groomers/${groomer.id}`}
+            // >
+            <div>
               <Card
                 onClick={props.viewGroomer}
                 hoverable
@@ -274,6 +300,22 @@ const SearchForm = props => {
                 }}
                 cover={<img alt="example" src={groomer.photo_url} />}
               >
+                {favorites.includes(groomer.id) ? (
+                  <HeartFilled
+                    onClick={e => {
+                      e.stopPropagation();
+                      removeFavGroomer(groomer.id);
+                    }}
+                  />
+                ) : (
+                  <HeartOutlined
+                    onClick={e => {
+                      e.stopPropagation();
+                      addFavGroomer(groomer.id);
+                    }}
+                  />
+                )}
+
                 <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
                 <div
                   style={{
@@ -315,7 +357,8 @@ const SearchForm = props => {
                   <p style={cardDescription}>{groomer.country}</p>
                 </div>
               </Card>
-            </Link>
+            </div>
+            // </Link>
           );
         })}
       </div>
@@ -330,4 +373,5 @@ const SearchForm = props => {
     </div>
   );
 };
+
 export default SearchForm;

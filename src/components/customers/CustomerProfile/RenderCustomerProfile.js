@@ -24,8 +24,6 @@ const DemoBox = props => (
 export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
-  const [groomers, setGroomers] = useState([]);
-  const [fav, setFav] = useState();
   const [customer, setCustomer] = useState(props.customer);
   const [favorites, setFavorites] = useState([]);
 
@@ -51,9 +49,7 @@ export const RenderCustomerProfile = props => {
 
   const handleSubmit = () => {
     if (validateForm()) {
-      // console.log(profileInfo);
       props.updateProfile(profileInfo);
-      // console.log(props.customer);
     } else {
       setMessage('This field is required');
     }
@@ -62,11 +58,8 @@ export const RenderCustomerProfile = props => {
   useEffect(() => {
     getGroomerData()
       .then(response => {
-        setGroomers(response);
-        // console.log("response", response);
         response.forEach(groomer => {
           if (customer.favorite_groomers.includes(groomer.id)) {
-            console.log(groomer.id);
             setFavorites(oldArray => [...oldArray, groomer]);
           }
         });
@@ -137,30 +130,10 @@ export const RenderCustomerProfile = props => {
     );
   };
 
-  const changeFav = e => {
-    setFav(parseInt(e.target.value));
-  };
-
   const removeFav = id => {
     const newFavs = favorites.filter(groomer => groomer.id !== id);
     setFavorites(newFavs);
-    props.updateProfile(customer.favorite_groomers);
-  };
-  const addFav = () => {
-    if (
-      customer.favorite_groomers === null ||
-      !Array.isArray(customer.favorite_groomers)
-    ) {
-      // setFavorites([...favorites, fav]);
-      props.updateProfile({ favorite_groomers: fav });
-    } else {
-      if (!customer.favorite_groomers.includes(fav)) {
-        // setFavorites([...favorites, fav]);
-        props.updateProfile({ favorite_groomers: fav });
-      } else {
-        console.log('you already have this groomer');
-      }
-    }
+    props.removeFavoriteGroomer({ favorite_groomers: id });
   };
 
   return (
@@ -334,17 +307,6 @@ export const RenderCustomerProfile = props => {
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
-      <div>
-        <input type="number" id="add" name="add" onChange={changeFav} />
-        <Button onClick={addFav}>Add Favorite</Button>
-      </div>
-      <Button
-        onClick={() => {
-          console.log(favorites);
-        }}
-      >
-        Favorite Groomers
-      </Button>
       <Row className="favorite-groomers">
         {favorites.map((groomer, index) => {
           // console.log(favorites);

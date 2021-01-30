@@ -3,6 +3,7 @@ import { RenderCustomerProfile } from './RenderCustomerProfile';
 import { connect } from 'react-redux';
 import { getCustomerInfo } from '../../../api/index';
 import { updateCustomer } from '../../../api/index';
+import { removeFavoriteGroomer } from '../../../api/index';
 
 const CustomerProfileContainer = props => {
   const [contactModalVisible, setContactModalVisible] = useState(false);
@@ -33,6 +34,9 @@ const CustomerProfileContainer = props => {
   const handleProfileModalClose = e => {
     setProfileModalVisible(false);
   };
+  const removeFavGroomer = data => {
+    props.removeFavoriteGroomer(data, customerId);
+  };
 
   if (props.customer && props.customer.hasOwnProperty('name')) {
     return (
@@ -45,6 +49,7 @@ const CustomerProfileContainer = props => {
         handleProfileModalClose={handleProfileModalClose}
         customer={props.customer}
         updateProfile={updateProfile}
+        removeFavoriteGroomer={removeFavGroomer}
         error={props.error}
         status={props.status}
       />
@@ -65,6 +70,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getCustomerInfo, updateCustomer })(
-  CustomerProfileContainer
-);
+export default connect(mapStateToProps, {
+  getCustomerInfo,
+  updateCustomer,
+  removeFavoriteGroomer,
+})(CustomerProfileContainer);
