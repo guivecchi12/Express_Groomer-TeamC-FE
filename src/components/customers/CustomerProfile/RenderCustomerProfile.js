@@ -27,7 +27,7 @@ export const RenderCustomerProfile = props => {
   const [groomers, setGroomers] = useState([]);
   const [fav, setFav] = useState();
   const [customer, setCustomer] = useState(props.customer);
-  const [display, setDisplay] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const handleChange = e => {
     setProfileInfo({
@@ -63,6 +63,13 @@ export const RenderCustomerProfile = props => {
     getGroomerData()
       .then(response => {
         setGroomers(response);
+        // console.log("response", response);
+        response.forEach(groomer => {
+          if (customer.favorite_groomers.includes(groomer.id)) {
+            console.log(groomer.id);
+            setFavorites(oldArray => [...oldArray, groomer]);
+          }
+        });
       })
       .catch(error => console.log(error));
 
@@ -73,7 +80,7 @@ export const RenderCustomerProfile = props => {
       setMessage(props.error);
     }
     setCustomer(props.customer);
-  }, [props, props.updateProfile]);
+  }, []);
 
   function onPanelChange(value, mode) {
     console.log(value, mode);
@@ -135,42 +142,21 @@ export const RenderCustomerProfile = props => {
   };
 
   const removeFav = id => {
-    if (!customer.favorite_groomers.includes(id)) {
-      console.log('fav does not exist', id);
-    } else {
-      var i;
-      for (i = 0; i < customer.favorite_groomers.length; i++) {
-        if (customer.favorite_groomers[i] === id) {
-          let newFav = customer.favorite_groomers;
-          newFav.splice(i, 1);
-          setCustomer({
-            ...customer,
-            favorite_groomers: newFav,
-          });
-          props.updateProfile(customer.favorite_groomers);
-        }
-      }
-    }
+    const newFavs = favorites.filter(groomer => groomer.id !== id);
+    setFavorites(newFavs);
+    props.updateProfile(customer.favorite_groomers);
   };
   const addFav = () => {
     if (
       customer.favorite_groomers === null ||
       !Array.isArray(customer.favorite_groomers)
     ) {
-      setCustomer({
-        ...customer,
-        favorite_groomers: fav,
-      });
-      props.updateProfile(customer.favorite_groomers);
+      // setFavorites([...favorites, fav]);
+      props.updateProfile({ favorite_groomers: fav });
     } else {
       if (!customer.favorite_groomers.includes(fav)) {
-        const newFavs = [...customer.favorite_groomers, fav];
-        setCustomer({
-          ...customer,
-          favorite_groomers: newFavs,
-        });
+        // setFavorites([...favorites, fav]);
         props.updateProfile({ favorite_groomers: fav });
-        console.log(props.customer);
       } else {
         console.log('you already have this groomer');
       }
@@ -352,17 +338,18 @@ export const RenderCustomerProfile = props => {
         <input type="number" id="add" name="add" onChange={changeFav} />
         <Button onClick={addFav}>Add Favorite</Button>
       </div>
-      <Button onClick={() => setDisplay(!display)}>Favorite Groomers</Button>
+      <Button
+        onClick={() => {
+          console.log(favorites);
+        }}
+      >
+        Favorite Groomers
+      </Button>
       <Row className="favorite-groomers">
-        {display === true ? (
-          groomers.map((groomer, index) => {
-            if (customer.favorite_groomers.includes(groomer.id)) {
-              return <Col key={index}>{card(groomer)}</Col>;
-            }
-          })
-        ) : (
-          <h1>Not displaying</h1>
-        )}
+        {favorites.map((groomer, index) => {
+          // console.log(favorites);
+          return <Col key={index}>{card(groomer)}</Col>;
+        })}
       </Row>
     </>
   );
