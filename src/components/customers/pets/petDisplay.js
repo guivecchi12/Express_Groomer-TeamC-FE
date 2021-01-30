@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button, Card, Modal, Form, Input, Row, Col } from 'antd';
 import { VerticalAlignBottomOutlined } from '@ant-design/icons';
 import { registerPet, getAllPets, deletePet } from '../../../api/index';
@@ -32,6 +33,7 @@ const ImageIcon = {
 const PetDisplay = props => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [pets, setPets] = useState();
+  const [imageUpload, setImageUpload] = useState();
   const [petInfo, setPetInfo] = useState({
     customer_id: props.customer.id,
   });
@@ -47,6 +49,7 @@ const PetDisplay = props => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    console.log(petInfo);
     props.registerPet(petInfo);
     setPets([...pets, petInfo]);
   };
@@ -77,8 +80,7 @@ const PetDisplay = props => {
         const reader = new FileReader();
         reader.onload = function(event) {
           if (file.type === 'image/jpeg' || file.type === 'image/png') {
-            console.log(file);
-            console.log(event.target.result);
+            setPetInfo({ ...petInfo, image: file });
           } else {
             console.log('Possible alert message');
           }
