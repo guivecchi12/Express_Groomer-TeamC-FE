@@ -13,12 +13,25 @@ import {
 } from 'antd';
 import MyMap from '../../MyMap/MyMap';
 import './style.css';
+import styled from 'styled-components';
 
 const { RangePicker } = TimePicker;
 
 const DemoBox = props => (
   <div className={`height-${props.value}`}>{props.children}</div>
 );
+
+// styled components here
+const StyledButton = styled.button`
+  background-color: #3e5c76;
+  min-width: 110px;
+  height: 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #3e5c76;
+  border-color: #3e5c76;
+  color: #f0f9f9;
+`;
 
 export const RenderGroomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
@@ -74,9 +87,9 @@ export const RenderGroomerProfile = props => {
         onOk={props.handleContactModalClose}
         onCancel={props.handleContactModalClose}
         footer={[
-          <Button key="back" onClick={props.handleContactModalClose}>
+          <StyledButton key="back" onClick={props.handleContactModalClose}>
             Close
-          </Button>,
+          </StyledButton>,
         ]}
       >
         <p>Phone number: {props.groomer.phone}</p>
@@ -93,12 +106,12 @@ export const RenderGroomerProfile = props => {
           >
             {message}
           </p>,
-          <Button key="back" onClick={props.handleProfileModalClose}>
+          <StyledButton key="back" onClick={props.handleProfileModalClose}>
             Close
-          </Button>,
-          <Button key="submit" type="primary" onClick={handleSubmit}>
+          </StyledButton>,
+          <StyledButton key="submit" type="primary" onClick={handleSubmit}>
             Update
-          </Button>,
+          </StyledButton>,
         ]}
       >
         <form>
@@ -283,14 +296,24 @@ export const RenderGroomerProfile = props => {
           </Form.Item>
         </form>
       </Modal>
-      <Breadcrumb style={{ margin: '16px 0', marginBottom: '24px' }}>
-        <Breadcrumb.Item
-          onClick={props.showProfileModal}
-          style={{ cursor: 'pointer' }}
-        >
-          Edit profile
-        </Breadcrumb.Item>
-      </Breadcrumb>
+      {/* <Breadcrumb style={{ margin: '16px 0', marginBottom: '24px' }}> */}
+      {/* <Breadcrumb.Item */}
+      <StyledButton
+        onClick={props.showProfileModal}
+        type="primary"
+        // style={{ cursor: 'pointer' }}
+      >
+        Edit profile
+      </StyledButton>
+      {/* min-width: 110px;
+height: 40px;
+border-radius: 20px;
+font-size: 16px;
+background-color: #3E5C76;
+border-color: #3E5C76;
+color: #F0F9F9; */}
+      {/* </Breadcrumb.Item> */}
+      {/* </Breadcrumb> */}
       <Row id="about" justify="start" align="middle">
         <Col xs={24} sm={24} md={24} lg={10} xl={10}>
           <DemoBox value={100}>
@@ -304,10 +327,12 @@ export const RenderGroomerProfile = props => {
                 height: '150px',
               }}
             />
-            <h2 style={{ textTransform: 'capitalize' }}>
-              {props.groomer.name} {props.groomer.lastname}
-            </h2>
-            <Rate />
+            <div style={{ display: 'flex' }}>
+              <h2 style={{ textTransform: 'capitalize' }}>
+                {props.groomer.name} {props.groomer.lastname}
+              </h2>
+              <Rate style={{ marginLeft: '20px' }} />
+            </div>
             <div style={{ display: 'flex' }}>
               <p style={{ textTransform: 'capitalize' }}>
                 {props.groomer.city}, {props.groomer.state},{' '}
