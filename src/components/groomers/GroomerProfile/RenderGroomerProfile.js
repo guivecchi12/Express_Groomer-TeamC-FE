@@ -18,7 +18,9 @@ import styled from 'styled-components';
 const { RangePicker } = TimePicker;
 
 const DemoBox = props => (
-  <div className={`height-${props.value}`}>{props.children}</div>
+  <div className={`height-${props.value}`} style={{ border: 'solid yellow' }}>
+    {props.children}
+  </div>
 );
 
 // styled components here
@@ -296,26 +298,20 @@ export const RenderGroomerProfile = props => {
           </Form.Item>
         </form>
       </Modal>
-      {/* <Breadcrumb style={{ margin: '16px 0', marginBottom: '24px' }}> */}
-      {/* <Breadcrumb.Item */}
-      <StyledButton
-        onClick={props.showProfileModal}
-        type="primary"
-        // style={{ cursor: 'pointer' }}
+      <Row
+        id="about"
+        justify="space-between"
+        align="top"
+        style={{ border: 'solid green' }}
       >
-        Edit profile
-      </StyledButton>
-      {/* min-width: 110px;
-height: 40px;
-border-radius: 20px;
-font-size: 16px;
-background-color: #3E5C76;
-border-color: #3E5C76;
-color: #F0F9F9; */}
-      {/* </Breadcrumb.Item> */}
-      {/* </Breadcrumb> */}
-      <Row id="about" justify="start" align="middle">
-        <Col xs={24} sm={24} md={24} lg={10} xl={10}>
+        <Col
+          xs={24}
+          sm={24}
+          md={24}
+          lg={10}
+          xl={10}
+          style={{ border: 'solid purple' }}
+        >
           <DemoBox value={100}>
             <img
               src={props.groomer.photo_url}
@@ -374,6 +370,24 @@ color: #F0F9F9; */}
               <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
             )}
           </div>
+        </Col>
+
+        <Col
+          xs={24}
+          sm={24}
+          md={24}
+          lg={12}
+          xl={12}
+          style={{ border: 'solid purple' }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <StyledButton onClick={props.showProfileModal}>
+              Edit profile
+            </StyledButton>
+          </div>
+          <div id="calendar">
+            <DemoBox value={50}>Calendar Here</DemoBox>
+          </div>
           <div className="mobile-or-stationary">
             <h2>My Business is:</h2>
             {props.groomer.isMobile === true && (
@@ -405,16 +419,22 @@ color: #F0F9F9; */}
             <h2>My Grooming Licenses:</h2>
           </div>
         </Col>
-
-        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
-          <div id="calendar">
-            <DemoBox value={50}>Calendar Here</DemoBox>
-          </div>
-        </Col>
       </Row>
 
-      <Row id="map" justify="start" align="middle">
-        <Col xs={24} sm={24} md={24} lg={10} xl={10}>
+      <Row
+        id="map"
+        justify="start"
+        align="middle"
+        style={{ border: 'solid green' }}
+      >
+        <Col
+          xs={24}
+          sm={24}
+          md={24}
+          lg={10}
+          xl={10}
+          style={{ border: 'solid purple' }}
+        >
           <div id="map">
             <h2>Location</h2>
             <MyMap
