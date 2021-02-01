@@ -354,20 +354,18 @@ export const RenderGroomerProfile = props => {
             <h2>Animals I Groom</h2>
             {props.groomer.dogs === true && <p>Dogs</p>}
             {props.groomer.cats === true && <p>Cats</p>}
-            {props.groomer.cats === false && props.groomer.dogs === false && (
-              <p>I haven't filled out this section of my profile yet</p>
-            )}
           </div>
+          {console.log('props.groomer', props.groomer)}
           <div className="groomer-services-section">
             <h2>Services I Offer:</h2>
-            {props.groomer.day_care === true && (
-              <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
+            {props.groomer.doesDayCare === true && (
+              <p>Day Care: ${props.groomer.day_care_rate} per day</p>
             )}
-            {props.groomer.vet_visits === true && (
-              <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
+            {props.groomer.doesVetVisits === true && (
+              <p>Vet Visit: ${props.groomer.vet_visit_rate} per visit</p>
             )}
-            {props.groomer.walks === true && (
-              <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
+            {props.groomer.doesWalks === true && (
+              <p>Dog Walk: ${props.groomer.walk_rate} per walk</p>
             )}
           </div>
         </Col>
