@@ -9,6 +9,7 @@ import {
   removeFavoriteGroomer,
   updateCustomer,
 } from '../../api/index';
+import { connect } from 'react-redux';
 
 Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
 Geocode.setLanguage('en');
@@ -194,13 +195,13 @@ const SearchForm = props => {
 
   const addFavGroomer = id => {
     setFavorites(oldFavorites => [...oldFavorites, id]);
-    updateCustomer({ favorite_groomers: id }, customerId);
+    props.updateCustomer({ favorite_groomers: id }, customerId);
   };
 
   const removeFavGroomer = id => {
     const newFavs = favorites.filter(groomer => groomer !== id);
     setFavorites(newFavs);
-    removeFavoriteGroomer({ favorite_groomers: id }, customerId);
+    props.removeFavoriteGroomer({ favorite_groomers: id }, customerId);
   };
 
   return (
@@ -374,4 +375,13 @@ const SearchForm = props => {
   );
 };
 
-export default SearchForm;
+const mapStateToProps = state => {
+  return {
+    customer: state.customerReducer.customer,
+  };
+};
+
+export default connect(mapStateToProps, {
+  removeFavoriteGroomer,
+  updateCustomer,
+})(SearchForm);
