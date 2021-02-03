@@ -35,6 +35,10 @@ const StyledButton = styled.button`
   color: #f0f9f9;
 `;
 
+const InfoSection = styled.div`
+  padding: 10px 0;
+`;
+
 export const RenderGroomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
@@ -51,6 +55,9 @@ export const RenderGroomerProfile = props => {
       ...profileInfo,
       [e.target.name]: e.target.checked,
     });
+    {
+      console.log('props.groomer', props.groomer);
+    }
   };
 
   const validateForm = () => {
@@ -200,7 +207,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesDayCare"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesDayCare}
+              defaultChecked={props.groomer.doesDayCare}
             />
           </Form.Item>
           {profileInfo.doesDayCare === true && (
@@ -216,7 +223,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesWalks"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesWalks}
+              defaultChecked={props.groomer.doesWalks}
             />
           </Form.Item>
           {profileInfo.doesWalks === true && (
@@ -232,7 +239,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesVetVisits"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesVetVisits}
+              defaultChecked={props.groomer.doesVetVisits}
             />
           </Form.Item>
           {profileInfo.doesVetVisits === true && (
@@ -249,14 +256,14 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="dogs"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.dogs}
+              defaultChecked={props.groomer.dogs}
             />
           </Form.Item>
           <Form.Item label="Cats" name="cats">
             <Checkbox
               name="cats"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.cats}
+              defaultChecked={props.groomer.cats}
             />
           </Form.Item>
           <p>Grooming Location:</p>
@@ -264,16 +271,17 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="mobile"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.isMobile}
+              defaultChecked={props.groomer.isMobile}
             />
           </Form.Item>
           <Form.Item label="Stationary" name="stationary">
             <Checkbox
               name="stationary"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.isStationary}
+              defaultChecked={props.groomer.isStationary}
             />
           </Form.Item>
+          {/* The hours of operation are not implemented on the backend and are not functional at the moment */}
           <p>Hours of Operation:</p>
           <Form.Item label="Monday" name="mondayHours">
             <RangePicker name="mondayHours" onChange={handleChange} />
@@ -346,18 +354,17 @@ export const RenderGroomerProfile = props => {
               </span>
             </div>
           </DemoBox>
-          <div className="groomer-about-section">
-            <h2>About</h2>
+          <InfoSection className="groomer-about-section">
+            <h2>About Me</h2>
             <p>{props.groomer.description}</p>
-          </div>
-          <div className="groomer-animal-section">
+          </InfoSection>
+          <InfoSection className="groomer-animal-section">
             <h2>Animals I Groom</h2>
             {props.groomer.dogs === true && <p>Dogs</p>}
             {props.groomer.cats === true && <p>Cats</p>}
-          </div>
-          {console.log('props.groomer', props.groomer)}
-          <div className="groomer-services-section">
-            <h2>Services I Offer:</h2>
+          </InfoSection>
+          <InfoSection className="groomer-services-section">
+            <h2>Services I Offer</h2>
             {props.groomer.doesDayCare === true && (
               <p>Day Care: ${props.groomer.day_care_rate} per day</p>
             )}
@@ -367,7 +374,7 @@ export const RenderGroomerProfile = props => {
             {props.groomer.doesWalks === true && (
               <p>Dog Walk: ${props.groomer.walk_rate} per walk</p>
             )}
-          </div>
+          </InfoSection>
         </Col>
 
         <Col
@@ -386,8 +393,9 @@ export const RenderGroomerProfile = props => {
           <div id="calendar">
             <DemoBox value={50}>Calendar Here</DemoBox>
           </div>
-          <div className="mobile-or-stationary">
-            <h2>My Business is:</h2>
+
+          <InfoSection className="mobile-or-stationary">
+            <h2>My Business is</h2>
             {props.groomer.isMobile === true && (
               <>
                 <p>Mobile</p>
@@ -400,22 +408,28 @@ export const RenderGroomerProfile = props => {
                 <p>I'll groom your pets at my shop.</p>
               </>
             )}
-          </div>
-          <div className="hours-operation">
-            <h2>Hours of Operation:</h2>
-            <ul>
-              <li>Monday: {props.groomer.mondayHours}</li>
-              <li>Tuesday: {props.groomer.tuesdayHours}</li>
-              <li>Wednesday: {props.groomer.wednesdayHours}</li>
-              <li>Thursday: {props.groomer.thursdayHours}</li>
-              <li>Friday: {props.groomer.fridayHours}</li>
-              <li>Saturday: {props.groomer.saturdayHours}</li>
-              <li>Sunday: {props.groomer.sundayHours}</li>
-            </ul>
-          </div>
-          <div className="groomer-licenses-section">
-            <h2>My Grooming Licenses:</h2>
-          </div>
+          </InfoSection>
+          {/* Hours of operation will be displayed here once they are set up on the backend and passed in as props */}
+          {props.groomer.hoursOfOperation && (
+            <InfoSection className="hours-operation">
+              <h2>Hours of Operation:</h2>
+              <ul>
+                <li>Monday: </li>
+                <li>Tuesday: </li>
+                <li>Wednesday: </li>
+                <li>Thursday: </li>
+                <li>Friday: </li>
+                <li>Saturday: </li>
+                <li>Sunday: </li>
+              </ul>
+            </InfoSection>
+          )}
+          {/* If the groomer has any licenses being passed in as props they can be displayed here */}
+          {props.groomer.licenses && (
+            <InfoSection className="groomer-licenses-section">
+              <h2>My Grooming Licenses:</h2>
+            </InfoSection>
+          )}
         </Col>
       </Row>
 
