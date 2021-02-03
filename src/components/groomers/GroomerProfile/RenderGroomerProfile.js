@@ -18,9 +18,7 @@ import styled from 'styled-components';
 const { RangePicker } = TimePicker;
 
 const DemoBox = props => (
-  <div className={`height-${props.value}`} style={{ border: 'solid yellow' }}>
-    {props.children}
-  </div>
+  <div className={`height-${props.value}`}>{props.children}</div>
 );
 
 // styled components here
@@ -55,9 +53,6 @@ export const RenderGroomerProfile = props => {
       ...profileInfo,
       [e.target.name]: e.target.checked,
     });
-    {
-      console.log('props.groomer', props.groomer);
-    }
   };
 
   const validateForm = () => {
@@ -306,20 +301,8 @@ export const RenderGroomerProfile = props => {
           </Form.Item>
         </form>
       </Modal>
-      <Row
-        id="about"
-        justify="space-between"
-        align="top"
-        style={{ border: 'solid green' }}
-      >
-        <Col
-          xs={24}
-          sm={24}
-          md={24}
-          lg={10}
-          xl={10}
-          style={{ border: 'solid purple' }}
-        >
+      <Row id="about" justify="space-between" align="top">
+        <Col xs={24} sm={24} md={24} lg={10} xl={10}>
           <DemoBox value={100}>
             <img
               src={props.groomer.photo_url}
@@ -386,14 +369,7 @@ export const RenderGroomerProfile = props => {
           )}
         </Col>
 
-        <Col
-          xs={24}
-          sm={24}
-          md={24}
-          lg={12}
-          xl={12}
-          style={{ border: 'solid purple' }}
-        >
+        <Col xs={24} sm={24} md={24} lg={12} xl={12}>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <StyledButton onClick={props.showProfileModal}>
               Edit profile
@@ -445,20 +421,8 @@ export const RenderGroomerProfile = props => {
         </Col>
       </Row>
 
-      <Row
-        id="map"
-        justify="start"
-        align="middle"
-        style={{ border: 'solid green' }}
-      >
-        <Col
-          xs={24}
-          sm={24}
-          md={24}
-          lg={10}
-          xl={10}
-          style={{ border: 'solid purple' }}
-        >
+      <Row id="map" justify="start" align="middle">
+        <Col xs={24} sm={24} md={24} lg={10} xl={10}>
           <div id="map">
             <h2>Location</h2>
             <MyMap
