@@ -358,23 +358,32 @@ export const RenderGroomerProfile = props => {
             <h2>About Me</h2>
             <p>{props.groomer.description}</p>
           </InfoSection>
-          <InfoSection className="groomer-animal-section">
-            <h2>Animals I Groom</h2>
-            {props.groomer.dogs === true && <p>Dogs</p>}
-            {props.groomer.cats === true && <p>Cats</p>}
-          </InfoSection>
-          <InfoSection className="groomer-services-section">
-            <h2>Services I Offer</h2>
-            {props.groomer.doesDayCare === true && (
-              <p>Day Care: ${props.groomer.day_care_rate} per day</p>
-            )}
-            {props.groomer.doesVetVisits === true && (
-              <p>Vet Visit: ${props.groomer.vet_visit_rate} per visit</p>
-            )}
-            {props.groomer.doesWalks === true && (
-              <p>Dog Walk: ${props.groomer.walk_rate} per walk</p>
-            )}
-          </InfoSection>
+          {/* If the both cats and dogs are false groomer-animal-section will not display */}
+          {(props.groomer.cats === false) &
+          (props.groomer.dogs === false) ? null : (
+            <InfoSection className="groomer-animal-section">
+              <h2>Animals I Groom</h2>
+              {props.groomer.dogs === true && <p>Dogs</p>}
+              {props.groomer.cats === true && <p>Cats</p>}
+            </InfoSection>
+          )}
+          {/* If the both doesDayCare, doesVetVisits, and doesWalks are false groomer-services-section will not display */}
+          {(props.groomer.doesDayCare === false) &
+          (props.groomer.doesVetVisits === false) &
+          (props.groomer.doesWalks === false) ? null : (
+            <InfoSection className="groomer-services-section">
+              <h2>Services I Offer</h2>
+              {props.groomer.doesDayCare === true && (
+                <p>Day Care: ${props.groomer.day_care_rate} per day</p>
+              )}
+              {props.groomer.doesVetVisits === true && (
+                <p>Vet Visit: ${props.groomer.vet_visit_rate} per visit</p>
+              )}
+              {props.groomer.doesWalks === true && (
+                <p>Dog Walk: ${props.groomer.walk_rate} per walk</p>
+              )}
+            </InfoSection>
+          )}
         </Col>
 
         <Col
@@ -393,22 +402,25 @@ export const RenderGroomerProfile = props => {
           <div id="calendar">
             <DemoBox value={50}>Calendar Here</DemoBox>
           </div>
-
-          <InfoSection className="mobile-or-stationary">
-            <h2>My Business is</h2>
-            {props.groomer.isMobile === true && (
-              <>
-                <p>Mobile</p>
-                <p>I'll groom your pets at your house.</p>
-              </>
-            )}
-            {props.groomer.isStationary === true && (
-              <>
-                <p>Stationary</p>
-                <p>I'll groom your pets at my shop.</p>
-              </>
-            )}
-          </InfoSection>
+          {/* If the both isMobile and isStationary are false the mobile-or-stationary section will not display */}
+          {(props.groomer.isMobile === false) &
+          (props.groomer.isStationary === false) ? null : (
+            <InfoSection className="mobile-or-stationary">
+              <h2>My Business is</h2>
+              {props.groomer.isMobile === true && (
+                <>
+                  <p>Mobile</p>
+                  <p>I'll groom your pets at your house.</p>
+                </>
+              )}
+              {props.groomer.isStationary === true && (
+                <>
+                  <p>Stationary</p>
+                  <p>I'll groom your pets at my shop.</p>
+                </>
+              )}
+            </InfoSection>
+          )}
           {/* Hours of operation will be displayed here once they are set up on the backend and passed in as props */}
           {props.groomer.hoursOfOperation && (
             <InfoSection className="hours-operation">
