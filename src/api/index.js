@@ -209,7 +209,6 @@ const updateGroomer = (data, id) => dispatch => {
 };
 
 const updateCustomer = (data, id) => dispatch => {
-  console.log(data);
   dispatch({ type: UPDATE_CUSTOMER_START });
   axios
     .put(`${process.env.REACT_APP_API_URI}/customers/${id}`, data)
@@ -217,7 +216,6 @@ const updateCustomer = (data, id) => dispatch => {
       dispatch({ type: UPDATE_CUSTOMER_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err);
       dispatch({ type: UPDATE_CUSTOMER_FAILURE, payload: err.message });
     });
 };

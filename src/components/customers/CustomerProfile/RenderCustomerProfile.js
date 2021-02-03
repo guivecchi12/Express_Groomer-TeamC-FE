@@ -309,7 +309,6 @@ export const RenderCustomerProfile = props => {
       </Row>
       <Row className="favorite-groomers">
         {favorites.map((groomer, index) => {
-          // console.log(favorites);
           return <Col key={index}>{card(groomer)}</Col>;
         })}
       </Row>
