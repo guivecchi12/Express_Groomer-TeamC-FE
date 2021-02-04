@@ -13,12 +13,29 @@ import {
 } from 'antd';
 import MyMap from '../../MyMap/MyMap';
 import './style.css';
+import styled from 'styled-components';
 
 const { RangePicker } = TimePicker;
 
 const DemoBox = props => (
   <div className={`height-${props.value}`}>{props.children}</div>
 );
+
+// styled components here
+const StyledButton = styled.button`
+  background-color: #3e5c76;
+  min-width: 110px;
+  height: 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  background-color: #3e5c76;
+  border-color: #3e5c76;
+  color: #f0f9f9;
+`;
+
+const InfoSection = styled.div`
+  padding: 10px 0;
+`;
 
 export const RenderGroomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
@@ -74,9 +91,9 @@ export const RenderGroomerProfile = props => {
         onOk={props.handleContactModalClose}
         onCancel={props.handleContactModalClose}
         footer={[
-          <Button key="back" onClick={props.handleContactModalClose}>
+          <StyledButton key="back" onClick={props.handleContactModalClose}>
             Close
-          </Button>,
+          </StyledButton>,
         ]}
       >
         <p>Phone number: {props.groomer.phone}</p>
@@ -93,12 +110,12 @@ export const RenderGroomerProfile = props => {
           >
             {message}
           </p>,
-          <Button key="back" onClick={props.handleProfileModalClose}>
+          <StyledButton key="back" onClick={props.handleProfileModalClose}>
             Close
-          </Button>,
-          <Button key="submit" type="primary" onClick={handleSubmit}>
+          </StyledButton>,
+          <StyledButton key="submit" type="primary" onClick={handleSubmit}>
             Update
-          </Button>,
+          </StyledButton>,
         ]}
       >
         <form>
@@ -185,7 +202,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesDayCare"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesDayCare}
+              defaultChecked={props.groomer.doesDayCare}
             />
           </Form.Item>
           {profileInfo.doesDayCare === true && (
@@ -201,7 +218,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesWalks"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesWalks}
+              defaultChecked={props.groomer.doesWalks}
             />
           </Form.Item>
           {profileInfo.doesWalks === true && (
@@ -217,7 +234,7 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="doesVetVisits"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.doesVetVisits}
+              defaultChecked={props.groomer.doesVetVisits}
             />
           </Form.Item>
           {profileInfo.doesVetVisits === true && (
@@ -234,14 +251,14 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="dogs"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.dogs}
+              defaultChecked={props.groomer.dogs}
             />
           </Form.Item>
           <Form.Item label="Cats" name="cats">
             <Checkbox
               name="cats"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.cats}
+              defaultChecked={props.groomer.cats}
             />
           </Form.Item>
           <p>Grooming Location:</p>
@@ -249,16 +266,17 @@ export const RenderGroomerProfile = props => {
             <Checkbox
               name="mobile"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.isMobile}
+              defaultChecked={props.groomer.isMobile}
             />
           </Form.Item>
           <Form.Item label="Stationary" name="stationary">
             <Checkbox
               name="stationary"
               onChange={handleCheckboxChange}
-              placeholder={props.groomer.isStationary}
+              defaultChecked={props.groomer.isStationary}
             />
           </Form.Item>
+          {/* The hours of operation are not implemented on the backend and are not functional at the moment */}
           <p>Hours of Operation:</p>
           <Form.Item label="Monday" name="mondayHours">
             <RangePicker name="mondayHours" onChange={handleChange} />
@@ -283,15 +301,7 @@ export const RenderGroomerProfile = props => {
           </Form.Item>
         </form>
       </Modal>
-      <Breadcrumb style={{ margin: '16px 0', marginBottom: '24px' }}>
-        <Breadcrumb.Item
-          onClick={props.showProfileModal}
-          style={{ cursor: 'pointer' }}
-        >
-          Edit profile
-        </Breadcrumb.Item>
-      </Breadcrumb>
-      <Row id="about" justify="start" align="middle">
+      <Row id="about" justify="space-between" align="top">
         <Col xs={24} sm={24} md={24} lg={10} xl={10}>
           <DemoBox value={100}>
             <img
@@ -304,10 +314,12 @@ export const RenderGroomerProfile = props => {
                 height: '150px',
               }}
             />
-            <h2 style={{ textTransform: 'capitalize' }}>
-              {props.groomer.name} {props.groomer.lastname}
-            </h2>
-            <Rate />
+            <div style={{ display: 'flex' }}>
+              <h2 style={{ textTransform: 'capitalize' }}>
+                {props.groomer.name} {props.groomer.lastname}
+              </h2>
+              <Rate style={{ marginLeft: '20px' }} />
+            </div>
             <div style={{ display: 'flex' }}>
               <p style={{ textTransform: 'capitalize' }}>
                 {props.groomer.city}, {props.groomer.state},{' '}
@@ -325,66 +337,87 @@ export const RenderGroomerProfile = props => {
               </span>
             </div>
           </DemoBox>
-          <div className="groomer-about-section">
-            <h2>About</h2>
+          <InfoSection className="groomer-about-section">
+            <h2>About Me</h2>
             <p>{props.groomer.description}</p>
-          </div>
-          <div className="groomer-animal-section">
-            <h2>Animals I Groom</h2>
-            {props.groomer.dogs === true && <p>Dogs</p>}
-            {props.groomer.cats === true && <p>Cats</p>}
-            {props.groomer.cats === false && props.groomer.dogs === false && (
-              <p>I haven't filled out this section of my profile yet</p>
-            )}
-          </div>
-          <div className="groomer-services-section">
-            <h2>Services I Offer:</h2>
-            {props.groomer.day_care === true && (
-              <p>Day Care: ${props.groomer.day_care_rate / 100} per day</p>
-            )}
-            {props.groomer.vet_visits === true && (
-              <p>Vet Visit: ${props.groomer.vet_visit_rate / 100} per visit</p>
-            )}
-            {props.groomer.walks === true && (
-              <p>Dog Walk: ${props.groomer.walk_rate / 100} per walk</p>
-            )}
-          </div>
-          <div className="mobile-or-stationary">
-            <h2>My Business is:</h2>
-            {props.groomer.isMobile === true && (
-              <>
-                <p>Mobile</p>
-                <p>I'll groom your pets at your house.</p>
-              </>
-            )}
-            {props.groomer.isStationary === true && (
-              <>
-                <p>Stationary</p>
-                <p>I'll groom your pets at my shop.</p>
-              </>
-            )}
-          </div>
-          <div className="hours-operation">
-            <h2>Hours of Operation:</h2>
-            <ul>
-              <li>Monday: {props.groomer.mondayHours}</li>
-              <li>Tuesday: {props.groomer.tuesdayHours}</li>
-              <li>Wednesday: {props.groomer.wednesdayHours}</li>
-              <li>Thursday: {props.groomer.thursdayHours}</li>
-              <li>Friday: {props.groomer.fridayHours}</li>
-              <li>Saturday: {props.groomer.saturdayHours}</li>
-              <li>Sunday: {props.groomer.sundayHours}</li>
-            </ul>
-          </div>
-          <div className="groomer-licenses-section">
-            <h2>My Grooming Licenses:</h2>
-          </div>
+          </InfoSection>
+          {/* If the both cats and dogs are false groomer-animal-section will not display */}
+          {(props.groomer.cats === false) &
+          (props.groomer.dogs === false) ? null : (
+            <InfoSection className="groomer-animal-section">
+              <h2>Animals I Groom</h2>
+              {props.groomer.dogs === true && <p>Dogs</p>}
+              {props.groomer.cats === true && <p>Cats</p>}
+            </InfoSection>
+          )}
+          {/* If the both doesDayCare, doesVetVisits, and doesWalks are false groomer-services-section will not display */}
+          {(props.groomer.doesDayCare === false) &
+          (props.groomer.doesVetVisits === false) &
+          (props.groomer.doesWalks === false) ? null : (
+            <InfoSection className="groomer-services-section">
+              <h2>Services I Offer</h2>
+              {props.groomer.doesDayCare === true && (
+                <p>Day Care: ${props.groomer.day_care_rate} per day</p>
+              )}
+              {props.groomer.doesVetVisits === true && (
+                <p>Vet Visit: ${props.groomer.vet_visit_rate} per visit</p>
+              )}
+              {props.groomer.doesWalks === true && (
+                <p>Dog Walk: ${props.groomer.walk_rate} per walk</p>
+              )}
+            </InfoSection>
+          )}
         </Col>
 
         <Col xs={24} sm={24} md={24} lg={12} xl={12}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <StyledButton onClick={props.showProfileModal}>
+              Edit profile
+            </StyledButton>
+          </div>
           <div id="calendar">
             <DemoBox value={50}>Calendar Here</DemoBox>
           </div>
+          {/* If the both isMobile and isStationary are false the mobile-or-stationary section will not display */}
+          {(props.groomer.isMobile === false) &
+          (props.groomer.isStationary === false) ? null : (
+            <InfoSection className="mobile-or-stationary">
+              <h2>My Business is</h2>
+              {props.groomer.isMobile === true && (
+                <>
+                  <p>Mobile</p>
+                  <p>I'll groom your pets at your house.</p>
+                </>
+              )}
+              {props.groomer.isStationary === true && (
+                <>
+                  <p>Stationary</p>
+                  <p>I'll groom your pets at my shop.</p>
+                </>
+              )}
+            </InfoSection>
+          )}
+          {/* Hours of operation will be displayed here once they are set up on the backend and passed in as props */}
+          {props.groomer.hoursOfOperation && (
+            <InfoSection className="hours-operation">
+              <h2>Hours of Operation:</h2>
+              <ul>
+                <li>Monday: </li>
+                <li>Tuesday: </li>
+                <li>Wednesday: </li>
+                <li>Thursday: </li>
+                <li>Friday: </li>
+                <li>Saturday: </li>
+                <li>Sunday: </li>
+              </ul>
+            </InfoSection>
+          )}
+          {/* If the groomer has any licenses being passed in as props they can be displayed here */}
+          {props.groomer.licenses && (
+            <InfoSection className="groomer-licenses-section">
+              <h2>My Grooming Licenses:</h2>
+            </InfoSection>
+          )}
         </Col>
       </Row>
 
