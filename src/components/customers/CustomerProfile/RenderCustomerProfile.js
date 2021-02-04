@@ -11,6 +11,7 @@ import {
   Calendar,
 } from 'antd';
 import { getGroomerData } from '../../../api/index';
+import './CustomerProfile.css';
 
 const { Meta } = Card;
 const cardDescription = {
@@ -23,7 +24,8 @@ const DemoBox = props => (
 export const RenderCustomerProfile = props => {
   const [profileInfo, setProfileInfo] = useState({});
   const [message, setMessage] = useState('');
-  const [groomers, setGroomers] = useState([]);
+  const [customer, setCustomer] = useState(props.customer);
+  const [favorites, setFavorites] = useState([]);
 
   const handleChange = e => {
     setProfileInfo({
@@ -56,7 +58,11 @@ export const RenderCustomerProfile = props => {
   useEffect(() => {
     getGroomerData()
       .then(response => {
-        setGroomers(response);
+        response.forEach(groomer => {
+          if (customer.favorite_groomers.includes(groomer.id)) {
+            setFavorites(oldArray => [...oldArray, groomer]);
+          }
+        });
       })
       .catch(error => console.log(error));
 
@@ -66,11 +72,69 @@ export const RenderCustomerProfile = props => {
     if (props.status === 'failure') {
       setMessage(props.error);
     }
-  }, [props.customer, props.error, props.status]);
+    setCustomer(props.customer);
+  }, []);
 
   function onPanelChange(value, mode) {
     console.log(value, mode);
   }
+
+  const card = groomerCard => {
+    return (
+      <Card
+        hoverable
+        style={{
+          width: 240,
+          margin: '10px',
+        }}
+        cover={<img alt="example" src={groomerCard.photo_url} />}
+      >
+        <Meta title={groomerCard.name + ' ' + groomerCard.lastname}></Meta>
+        <div
+          style={{
+            marginBottom: '1px',
+          }}
+        >
+          <p style={cardDescription}>
+            Vet Visit Rate: ${groomerCard.vet_visit_rate}
+          </p>
+          <p style={cardDescription}>
+            Day Care Rate: ${groomerCard.day_care_rate}
+          </p>
+          <p style={cardDescription}>Walk Rate: ${groomerCard.walk_rate}</p>
+          <p style={cardDescription}>Address: {groomerCard.address}</p>
+          {/* Conditional Render - when Distance is calculated, show the distance in miles */}
+          {groomerCard.distance ? (
+            <p style={cardDescription}>
+              Distance (Miles): {Math.floor(groomerCard.distance)}
+            </p>
+          ) : (
+            ''
+          )}
+          <p style={cardDescription}>
+            {groomerCard.city}, {groomerCard.state} {groomerCard.zip}
+          </p>
+          <p style={cardDescription}>{groomerCard.country}</p>
+        </div>
+        <span
+          className="delete"
+          onClick={e => {
+            e.stopPropagation();
+            removeFav(groomerCard.id);
+          }}
+          color="red"
+        >
+          Remove
+        </span>
+      </Card>
+    );
+  };
+
+  const removeFav = id => {
+    const newFavs = favorites.filter(groomer => groomer.id !== id);
+    setFavorites(newFavs);
+    props.removeFavoriteGroomer({ favorite_groomers: id });
+  };
 
   return (
     <>
@@ -243,57 +307,11 @@ export const RenderCustomerProfile = props => {
           <DemoBox value={50}>Map Here</DemoBox>
         </Col>
       </Row>
-
-      <div className="favorite-groomers">
-        <h2>Favorite Groomers</h2>
-        <Row>
-          {groomers.map(groomer => {
-            return (
-              <Col key={groomer.id}>
-                <Card
-                  onClick={props.viewGroomer}
-                  hoverable
-                  style={{
-                    width: 240,
-                    margin: '10px',
-                  }}
-                  cover={<img alt="example" src={groomer.photo_url} />}
-                >
-                  <Meta title={groomer.name + ' ' + groomer.lastname}></Meta>
-                  <div
-                    style={{
-                      marginBottom: '1px',
-                    }}
-                  >
-                    <p style={cardDescription}>
-                      Vet Visit Rate: ${groomer.vet_visit_rate}
-                    </p>
-                    <p style={cardDescription}>
-                      Day Care Rate: ${groomer.day_care_rate}
-                    </p>
-                    <p style={cardDescription}>
-                      Walk Rate: ${groomer.walk_rate}
-                    </p>
-                    <p style={cardDescription}>Address: {groomer.address}</p>
-                    {/* Conditional Render - when Distance is calculated, show the distance in miles */}
-                    {groomer.distance ? (
-                      <p style={cardDescription}>
-                        Distance (Miles): {Math.floor(groomer.distance)}
-                      </p>
-                    ) : (
-                      ''
-                    )}
-                    <p style={cardDescription}>
-                      {groomer.city}, {groomer.state} {groomer.zip}
-                    </p>
-                    <p style={cardDescription}>{groomer.country}</p>
-                  </div>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
-      </div>
+      <Row className="favorite-groomers">
+        {favorites.map((groomer, index) => {
+          return <Col key={index}>{card(groomer)}</Col>;
+        })}
+      </Row>
     </>
   );
 };

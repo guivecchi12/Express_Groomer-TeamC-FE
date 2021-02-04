@@ -31,13 +31,7 @@ import Home from './components/Home';
 import './styles/UserProfile.css';
 import CustomerDashboardContainer from './components/customers/CustomerDashboard/CustomerDashboardContainer';
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk)
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
@@ -98,7 +92,7 @@ function App() {
             )}
           />
           <SecureRoute
-            path="/customer-dashboard"
+            path="/customer-dashboard/"
             render={props => <CustomerDashboard {...props} />}
           />
           <SecureRoute
